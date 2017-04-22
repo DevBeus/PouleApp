@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">PouleApp</string>
+    <string name="edit_button">Edit</string>
+    <string name="add_team_button">Add Team</string>
+    <string name="delete_team_button">Delete Team</string>
+    <string name="show_team_list_button">Teams</string>
+    <string name="show_scheme_button">Scheme</string>
+    <string name="show_ranking_button">Ranking</string>
+
+    <string name="rank">#</string>
+    <string name="team">Team</string>
+    <string name="matches_won">W</string>
+    <string name="matches_draw">D</string>
+    <string name="matches_lost">L</string>
+    <string name="matches">M</string>
+    <string name="points">P</string>
+    <string name="goals_for">GF</string>
+    <string name="goals_against">GA</string>
+
+    <string name="team_text_view">Team:</string>
+    <string name="coach_text_view">Coach:</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="ok_button">OK</string>
+    <string name="home_team_text_view">Home Team</string>
+    <string name="opponent_text_view">Opponent</string>
+    <string name="team_list">Team List</string>
+    <string name="ranking">Ranking</string>
+
 </resources>
