@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <TextView
+        android:text="@string/ranking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/showRanking" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id = "@+id/relativeLayout1"
+            android:layout_width = "fill_parent"
+            android:layout_height = "wrap_content"
+            android:background = "@color/colorAccent" >
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "0.5"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/rank"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "3"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/team"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/matches"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/points"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/matches_won"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/matches_draw"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/matches_lost"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/goals_for"
+                android:textColor = "@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width = "0dp"
+                android:layout_height = "wrap_content"
+                android:layout_weight = "1"
+                android:gravity = "center"
+                android:padding = "5dp"
+                android:text = "@string/goals_against"
+                android:textColor = "@color/colorPrimaryDark" />
+        </LinearLayout>
+
+        <ListView
+            android:id = "@+id/listview"
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:divider = "@null"/>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom|center_horizontal">
+
+            <Button
+                android:text="@string/show_team_list_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button8"
+                android:onClick="showTeamList"/>
+
+            <Button
+                android:text="@string/show_scheme_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button9"
+                android:onClick="showScheme"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

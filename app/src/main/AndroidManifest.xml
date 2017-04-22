@@ -17,6 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".EditTeamActivity"></activity>
+        <activity android:name=".EditMatchActivity"></activity>
+        <activity android:name=".SchemeTableActivity"></activity>
+        <activity android:name=".RankingActivity"></activity>
     </application>
 
 </manifest>
