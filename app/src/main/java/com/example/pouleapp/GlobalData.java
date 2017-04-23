@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class GlobalData extends Application {
 
-    //private Team[] poule = { new Team("Ajax"), new Team("PSV"), new Team("Feyenoord")};
     private ArrayList<Team> poule = new ArrayList<Team>();
     private PouleScheme pouleScheme;
 
