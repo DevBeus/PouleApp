@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PouleApp</string>
+    <string name="cancel_button">Annuleer</string>
+    <string name="coach_text_view">Trainer:</string>
+    <string name="delete_team_button">Verwijder Team</string>
+    <string name="edit_button">Wijzig</string>
+    <string name="goals_against">GT</string>
+    <string name="goals_for">GV</string>
+    <string name="home_team_text_view">Team</string>
+    <string name="matches">W</string>
+    <string name="matches_draw">G</string>
+    <string name="matches_lost">V</string>
+    <string name="matches_won">G</string>
+    <string name="ok_button">OK</string>
+    <string name="opponent_text_view">Tegenstander</string>
+    <string name="points">P</string>
+    <string name="rank">#</string>
+    <string name="ranking">Stand</string>
+    <string name="show_ranking_button">Stand</string>
+    <string name="show_scheme_button">Schema</string>
+    <string name="show_team_list_button">Teams</string>
+    <string name="team">Team</string>
+    <string name="team_list">Teams</string>
+    <string name="team_text_view">Team:</string>
+</resources>

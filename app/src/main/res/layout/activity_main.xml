@@ -55,10 +55,10 @@
             android:onClick="showScheme"/>
 
         <Button
-            android:text="@string/show_ranking_button"
+            android:id="@+id/btnRanking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnRanking"
-            android:onClick="showRanking"/>
+            android:onClick="showRanking"
+            android:text="@string/show_ranking_button" />
     </LinearLayout>
 </LinearLayout>
