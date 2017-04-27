@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">PouleApp</string>
+    <string name="add_poule_button">Add Poule</string>
     <string name="edit_button">Edit</string>
     <string name="add_team_button">Add Team</string>
     <string name="delete_team_button">Delete Team</string>
     <string name="show_team_list_button">Teams</string>
+    <string name="show_poules_button">Poules</string>
     <string name="show_scheme_button">Scheme</string>
     <string name="show_ranking_button">Ranking</string>
+
+    <string name="poule_text_view">Poule:</string>
 
     <string name="rank">#</string>
     <string name="team">Team</string>

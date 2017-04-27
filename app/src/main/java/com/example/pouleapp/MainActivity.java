@@ -1,125 +1,122 @@
 package com.example.pouleapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ExpandableListView;
+import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.example.pouleapp.GlobalData.MY_PREFS_NAME;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String EXTRA_MESSAGE = "com.example.pouleapp.MESSAGE";
-    public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
+    private static final String NAME = "POULE";
+    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
+
+
+    private SimpleExpandableListAdapter mAdapter;
+    ExpandableListView ExpandablePouleListView;
+    // string arrays for group and child items
+    private String groupItems[] = {"Poule A", "Poule B", "Poule C"};
+    //private String[][] childItems = {{"Ajax", "Feyenoord", "PSV"}, {"Heerenveen", "Twente", "Utrecht"}, {"NEC", "Heracles", "GA Eagles"}};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewGroup radioGroup;
-        ArrayList<Team> poule;
+        ArrayList<Poule> pouleList;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        globalVariable.initPoule();
+        globalVariable.initPouleList();
+        pouleList = globalVariable.getPouleList();
 
-        poule = globalVariable.getPoule();
-        radioGroup = (ViewGroup) findViewById(R.id.radio_group);
+        //  initiate the expandable list view
+        ExpandablePouleListView = (ExpandableListView) findViewById(R.id.ExpandablePouleListView);
+        // create lists for group and child items
+        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
+        List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
+        // add data in group and child list
+        for (int i = 0; i < pouleList.size(); i++) {
+            Map<String, String> curGroupMap = new HashMap<String, String>();
+            groupData.add(curGroupMap);
+            curGroupMap.put(NAME, pouleList.get(i).getPouleName());
 
-        for (int i = 0; i < poule.size(); i++) {
-            RadioButton team = new RadioButton(this);
-            team.setId(i);
-            team.setText(poule.get(i).getTeamName());
+            ArrayList<Team> teamList = pouleList.get(i).getTeamList();
 
-            if (globalVariable.getSelectedTeam() == i) {
-                team.setChecked(true);
+            List<Map<String, String>> children = new ArrayList<Map<String, String>>();
+            for (int j = 0; j < teamList.size(); j++) {
+                Map<String, String> curChildMap = new HashMap<String, String>();
+                children.add(curChildMap);
+                curChildMap.put(NAME, teamList.get(j).getTeamName());
             }
-
-            radioGroup.addView(team);
+            childData.add(children);
         }
+        // define arrays for displaying data in Expandable list view
+        String groupFrom[] = {NAME};
+        int groupTo[] = {R.id.heading};
+        String childFrom[] = {NAME};
+        int childTo[] = {R.id.childItem};
+
+
+        // Set up the adapter
+        mAdapter = new SimpleExpandableListAdapter(this, groupData,
+                R.layout.group_items,
+                groupFrom, groupTo,
+                childData, R.layout.child_items,
+                childFrom, childTo);
+        ExpandablePouleListView.setAdapter(mAdapter);
+
+        // perform set on group click listener event
+        ExpandablePouleListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+
+                // display a toast with group name whenever a user clicks on a group item
+                Toast.makeText(getApplicationContext(), "Group Name Is :" + groupItems[groupPosition], Toast.LENGTH_LONG).show();
+
+                return false;
+            }
+        });
+        // perform set on child click listener event
+        ExpandablePouleListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                // display a toast with child name whenever a user clicks on a child item
+                // groupPosition = pouleIndex, childPosition = team
+                // when team is clicked open EditPouleActivity
+                Intent intent = new Intent(getApplicationContext(), EditPouleActivity.class);
+                intent.putExtra(POULE_INDEX, groupPosition);
+
+                startActivity(intent);
+
+                //Toast.makeText(getApplicationContext(), "Child Name Is :" + childItems[groupPosition][childPosition], Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 
-    /** This method is called when Edit button is clicked */
-    public void editTeam(View view) {
-        String message = "edit";
-        RadioGroup radioGroup;
 
+    public void addPoule(View view) {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
 
-        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        globalVariable.setSelectedTeam(selectedId);
+        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        int pouleId = pouleList.size();
 
-        Intent intent = new Intent(this, EditTeamActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        intent.putExtra(TEAM_INDEX, selectedId);
+        Poule poule = new Poule("Poule"+pouleId);
+        pouleList.add(poule);
 
-        startActivity(intent);
-    }
-
-    public void addTeam(View view) {
-        String message = "add";
-        RadioGroup radioGroup;
-        ArrayList<Team> poule;
-
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        poule = globalVariable.getPoule();
-        poule.add(new Team(""));
-
-        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        globalVariable.setSelectedTeam(selectedId);
-
-        Intent intent = new Intent(this, EditTeamActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
-        intent.putExtra(TEAM_INDEX, poule.size()-1);
-
-        startActivity(intent);
-    }
-
-    public void deleteTeam(View view) {
-        ArrayList<Team> poule;
-        RadioGroup radioGroup;
-
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        poule = globalVariable.getPoule();
-        PouleScheme pouleScheme = globalVariable.getPouleScheme();
-        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-
-        int sel_team = radioGroup.getCheckedRadioButtonId();
-        globalVariable.setSelectedTeam(sel_team);
-
-        // All results of selected team need to be removed and team needs to be removed
-        pouleScheme.removeTeamResults(poule, sel_team);
-        poule.remove(sel_team);
-
-        globalVariable.savePoule();
+        globalVariable.savePoule(pouleId);
 
         recreate();
 
-        Toast.makeText(getApplicationContext(),"Team removed", Toast.LENGTH_LONG).show();
-    }
-
-    /** This method is called when scheme button is clicked */
-    public void showScheme(View view) {
-        String message = "Scheme";
-
-        Intent intent = new Intent(this, SchemeTableActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
-
-        startActivity(intent);
-    }
-
-    /** This method is called when ranking button is clicked */
-    public void showRanking(View view) {
-        String message = "Ranking";
-
-        Intent intent = new Intent(this, RankingActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
-
-        startActivity(intent);
     }
 }

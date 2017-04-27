@@ -13,29 +13,36 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import static android.R.color.darker_gray;
+import static com.example.pouleapp.MainActivity.POULE_INDEX;
 
 /**
  * Created by gezamenlijk on 26-2-2017.
  */
 
 public class SchemeTableActivity extends AppCompatActivity {
+    private int mPoule_Index = 0;
+    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main_test);
         setContentView(R.layout.activity_scheme_table);
         ViewGroup radioGroup;
-        ArrayList<Team> poule;
-        PouleScheme pouleScheme;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        ArrayList<Poule> pouleList = globalVariable.getPouleList();
 
-        poule = globalVariable.getPoule();
-        pouleScheme = globalVariable.getPouleScheme();
+        Intent intent = getIntent();
+        mPoule_Index = intent.getIntExtra(SchemeTableActivity.POULE_INDEX,0);
+
+        Poule poule = pouleList.get(mPoule_Index);
+        ArrayList<Team> teamList = poule.getTeamList();
+        PouleScheme pouleScheme = poule.getPouleScheme();
 
         TableLayout tl = (TableLayout) findViewById(R.id.scheme_table);
 
-        for (int i=0; i < poule.size()+1; i++) {
+        for (int i=0; i < teamList.size()+1; i++) {
             TableRow tr = new TableRow(this);
             TextView tv = new TextView(this);
             tv.setMaxLines(1);
@@ -46,12 +53,12 @@ public class SchemeTableActivity extends AppCompatActivity {
                 tv.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             }
             else {
-                tv.setText(poule.get(i-1).getTeamName()); // first column is home team
+                tv.setText(teamList.get(i-1).getTeamName()); // first column is home team
             }
 
             tr.addView(tv);
 
-            for (int j=0; j < poule.size()+1; j++) {
+            for (int j=0; j < teamList.size()+1; j++) {
                 TextView tv1 = new TextView(this);
                 tv1.setMaxLines(1);
                 setTextViewAttributes(tv1);
@@ -61,7 +68,7 @@ public class SchemeTableActivity extends AppCompatActivity {
                 } else {
                     if (i==0) {
                         // first row consists of team names
-                        tv1.setText(poule.get(j-1).getTeamName());
+                        tv1.setText(teamList.get(j-1).getTeamName());
                         tv1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     } else if (i==j) {
                         // cells on the diagonal become gray
@@ -101,11 +108,13 @@ public class SchemeTableActivity extends AppCompatActivity {
     /** This method is called when ranking button is clicked */
     public void showRanking(View view) {
         Intent intent = new Intent(this, RankingActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
 
     public void showTeamList(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, EditPouleActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
 

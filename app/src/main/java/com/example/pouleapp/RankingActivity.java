@@ -9,7 +9,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import static com.example.pouleapp.MainActivity.POULE_INDEX;
+
 public class RankingActivity extends AppCompatActivity {
+    private int mPoule_Index = 0;
+    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +21,15 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        ArrayList<Poule> pouleList = globalVariable.getPouleList();
 
-        ArrayList<Team> poule = globalVariable.getPoule();
-        ArrayList<Team> sortedPoule = new ArrayList<Team>(poule);
+        Intent intent = getIntent();
+        mPoule_Index = intent.getIntExtra(SchemeTableActivity.POULE_INDEX,0);
+
+        Poule poule = pouleList.get(mPoule_Index);
+        ArrayList<Team> teamList = poule.getTeamList();
+
+        ArrayList<Team> sortedPoule = new ArrayList<Team>(teamList);
 
         Collections.sort(sortedPoule, Team.RankingComparator);
 
@@ -34,12 +44,14 @@ public class RankingActivity extends AppCompatActivity {
     /** This method is called when Scheme button is clicked */
     public void showScheme(View view) {
         Intent intent = new Intent(this, SchemeTableActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
 
     /** This method is called when Team List button is clicked */
     public void showTeamList(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, EditPouleActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
 

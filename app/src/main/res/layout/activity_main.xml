@@ -1,64 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/radio_group"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </RadioGroup>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
+    <ExpandableListView
+        android:id="@+id/ExpandablePouleListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom|center_horizontal">
+        android:divider="#f00"
+        android:dividerHeight="1dp" />
 
-        <Button
-            android:text="@string/edit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:onClick="editTeam" />
-
-        <Button
-            android:text="@string/add_team_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button4"
-            android:onClick="addTeam" />
-        <Button
-            android:text="@string/delete_team_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button5"
-            android:onClick="deleteTeam" />
-    </LinearLayout>
-
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:gravity="bottom|center_horizontal">
+        android:layout_height="wrap_content"
+        android:text="@string/add_poule_button"
+        android:layout_alignParentBottom="true"
+        android:onClick="addPoule"/>
 
-        <Button
-            android:text="@string/show_scheme_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnScheme"
-            android:onClick="showScheme"/>
-
-        <Button
-            android:id="@+id/btnRanking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="showRanking"
-            android:text="@string/show_ranking_button" />
-    </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

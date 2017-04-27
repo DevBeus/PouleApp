@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.pouleapp.MainActivity.POULE_INDEX;
+
 
 /**
  * Created by gezamenlijk on 26-2-2017.
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 public class EditMatchActivity extends AppCompatActivity {
     private int x = 0;
     private int y = 1;
+    private int mPoule_Index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +30,16 @@ public class EditMatchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         x = intent.getIntExtra("SchemeRow", 0);
         y = intent.getIntExtra("SchemeColumn", 0);
+        mPoule_Index = intent.getIntExtra(EditPouleActivity.POULE_INDEX,0);
 
-        ArrayList<Team> poule;
-        PouleScheme pouleScheme;
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Poule poule = pouleList.get(mPoule_Index);
+        ArrayList<Team> teamList = poule.getTeamList();
+        PouleScheme pouleScheme = poule.getPouleScheme();
 
-        poule = globalVariable.getPoule();
-        pouleScheme = globalVariable.getPouleScheme();
-
-        String homeTeam = poule.get(x).getTeamName();
-        String opponent = poule.get(y).getTeamName();
+        String homeTeam = teamList.get(x).getTeamName();
+        String opponent = teamList.get(y).getTeamName();
 
         TextView textHomeTeam = (TextView) findViewById(R.id.textHomeTeam);
         textHomeTeam.setText(homeTeam);
@@ -78,24 +81,25 @@ public class EditMatchActivity extends AppCompatActivity {
             os = Integer.parseInt(strOS);
         }
 
-        ArrayList<Team> poule;
-        PouleScheme pouleScheme;
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Poule poule = pouleList.get(mPoule_Index);
+        ArrayList<Team> teamList = poule.getTeamList();
+        PouleScheme pouleScheme = poule.getPouleScheme();
 
-        poule = globalVariable.getPoule();
-        pouleScheme = globalVariable.getPouleScheme();
+        pouleScheme.updateMatch(teamList,x,y,hs,os);
 
-        pouleScheme.updateMatch(poule,x,y,hs,os);
-
-        globalVariable.savePoule();
+        globalVariable.savePoule(mPoule_Index);
 
         Intent intent = new Intent(this, SchemeTableActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
 
     }
 
     public void cancel(View view) {
         Intent intent = new Intent(this, SchemeTableActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
 
     }
