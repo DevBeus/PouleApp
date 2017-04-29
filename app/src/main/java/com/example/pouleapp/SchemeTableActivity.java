@@ -86,6 +86,7 @@ public class SchemeTableActivity extends AppCompatActivity {
                         tv1.setOnClickListener(new View.OnClickListener(){
                             public void onClick(View v) {
                                 Intent intent = new Intent(v.getContext(), EditMatchActivity.class);
+                                intent.putExtra(POULE_INDEX,mPoule_Index);
                                 intent.putExtra("SchemeRow",x);
                                 intent.putExtra("SchemeColumn",y);
                                 startActivity(intent);

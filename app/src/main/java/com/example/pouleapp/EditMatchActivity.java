@@ -77,8 +77,18 @@ public class EditMatchActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Both scores should be filled or left empty !", Toast.LENGTH_LONG).show();
             return;
         } else {
-            hs = Integer.parseInt(strHS);
-            os = Integer.parseInt(strOS);
+            try {
+                hs = Integer.parseInt(strHS);
+                os = Integer.parseInt(strOS);
+            } catch (NumberFormatException e) {
+                hs = null;
+                os = null;
+
+                Toast.makeText(getApplicationContext(),"Scores should be numbers!", Toast.LENGTH_LONG).show();
+
+                return;
+            }
+
         }
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();

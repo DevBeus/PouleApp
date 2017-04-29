@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class GlobalData extends Application {
 
     private ArrayList<Poule> mPouleList = new ArrayList<Poule>();
-    //private ArrayList<Team> teamList = new ArrayList<Team>();
 
     private int selectedTeam = 0;
 
@@ -105,18 +104,18 @@ public class GlobalData extends Application {
     }
 
     public void savePoule(int pouleIndex) {
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
         String pouleName = mPouleList.get(pouleIndex).getPouleName();
         ArrayList<Team> teamList = mPouleList.get(pouleIndex).getTeamList();
         PouleScheme pouleScheme = mPouleList.get(pouleIndex).getPouleScheme();
 
-        // TODO: Clear current Shared Preferences for selected poule
-        //editor.clear();
-        //editor.commit();
-
-        //if new team is added nrofPoules need to be updated
+        //if new poule is stored added nrofPoules need to be updated
         editor.putInt("nrofPoules",mPouleList.size());
+
+        //Store info of selected poule:
+        //- nrof teams in poule
+        //- team list
+        //- poule scheme
 
         editor.putInt(pouleName+"nrofTeams", teamList.size());
 
@@ -124,19 +123,6 @@ public class GlobalData extends Application {
             String teamstr = pouleName + "Team"+i;
 
             editor.putString(teamstr, teamList.get(i).getTeamName());
-        }
-
-        if (pouleScheme.getPouleSize() < teamList.size()) {
-            //If new team was added, new pouleScheme should be created and data needs to be copied
-            PouleScheme pouleSchemeNew = new PouleScheme(teamList);
-            for (int i = 0; i < pouleScheme.getPouleSize(); i++) {
-                for (int j = 0; j < pouleScheme.getPouleSize(); j++) {
-                    pouleSchemeNew.setMatch(i,j,pouleScheme.getMatch(i,j));
-                }
-            }
-
-            pouleScheme = pouleSchemeNew;
-
         }
 
         for (int i = 0; i < teamList.size(); i++) {

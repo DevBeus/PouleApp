@@ -8,43 +8,66 @@ import java.util.ArrayList;
  */
 
 public class PouleScheme {
-    private Match[][] pouleScheme;
-    private int pouleSize;
+    private Match[][] mPouleScheme;
+    private int mPouleSize;
 
     public PouleScheme(ArrayList<Team> poule) {
-        pouleSize = poule.size();
-        pouleScheme = new Match[pouleSize][pouleSize];
+        mPouleSize = poule.size();
+        mPouleScheme = new Match[mPouleSize][mPouleSize];
 
         for (int i=0; i<poule.size(); i++) {
             for (int j=0; j<poule.size(); j++) {
                 Team team1 = poule.get(i);
                 Team team2 = poule.get(j);
                 Match match = new Match(team1.getTeamName(), team2.getTeamName());
-                pouleScheme[i][j] = match;
+                mPouleScheme[i][j] = match;
             }
 
         }
     }
 
-    public void removeTeamResults(ArrayList<Team> poule, int sel_team) {
+    public void addTeam(String newTeam) {
+        Match[][] pouleSchemeNew = new Match[mPouleSize+1][mPouleSize+1];
 
-        Match[][] pouleSchemeNew = new Match[pouleSize - 1][pouleSize - 1];
+        // Copy all existing results
+        for (int i = 0; i < mPouleSize; i++) {
+            for (int j = 0; j < mPouleSize; j++) {
+                pouleSchemeNew[i][j] = mPouleScheme[i][j];
+            }
+        }
+
+        // Add new matches
+        for (int i = 0; i < mPouleSize; i++) {
+            pouleSchemeNew[mPouleSize][i] = new Match(newTeam,mPouleScheme[0][i].getHomeTeam());
+            pouleSchemeNew[i][mPouleSize] = new Match(mPouleScheme[i][0].getOpponent(),newTeam);
+        }
+
+        pouleSchemeNew[mPouleSize][mPouleSize] = new Match(newTeam, newTeam);
+
+        mPouleSize++;
+        mPouleScheme = pouleSchemeNew;
+
+    }
+
+    public void deleteTeam(ArrayList<Team> teamList, int sel_team) {
+
+        Match[][] pouleSchemeNew = new Match[mPouleSize - 1][mPouleSize - 1];
         int a = 0;
 
-        for (int i = 0; i < pouleSize; i++) {
+        for (int i = 0; i < mPouleSize; i++) {
             int b = 0;
 
             if (i != sel_team) {
 
-                for (int j = 0; j < pouleSize; j++) {
+                for (int j = 0; j < mPouleSize; j++) {
 
                     if (j != sel_team) {
                         //copy match results
-                        pouleSchemeNew[a][b] = pouleScheme[i][j];
+                        pouleSchemeNew[a][b] = mPouleScheme[i][j];
                         b++;
                     } else {
                         //don't copy Match and remove match results
-                        removeMatch(poule, i, j);
+                        removeMatch(teamList, i, j);
                     }
                 }
 
@@ -52,17 +75,18 @@ public class PouleScheme {
             }
             else {
                 // remove complete row
-                for (int j = 0; j < pouleSize; j++) { removeMatch(poule, i, j); }
+                for (int j = 0; j < mPouleSize; j++) { removeMatch(teamList, i, j); }
 
             }
 
         }
 
-        pouleScheme = pouleSchemeNew;
+        mPouleSize--;
+        mPouleScheme = pouleSchemeNew;
     }
 
     public void removeMatch(ArrayList<Team> poule, int i, int j){
-        Match match = pouleScheme[i][j];
+        Match match = mPouleScheme[i][j];
 
         Team homeTeam = poule.get(i);
         Team opponent = poule.get(j);
@@ -79,7 +103,7 @@ public class PouleScheme {
     }
 
     public void updateMatch(ArrayList<Team> poule, int i, int j, Integer gf, Integer ga){
-        Match match = pouleScheme[i][j];
+        Match match = mPouleScheme[i][j];
 
         Team homeTeam = poule.get(i);
         Team opponent = poule.get(j);
@@ -102,31 +126,31 @@ public class PouleScheme {
     }
 
     public String getMatchResult(int i, int j) {
-        return pouleScheme[i][j].getResultString();
+        return mPouleScheme[i][j].getResultString();
     }
 
     public Integer getMatchGoalsFor(int i, int j) {
-        Match match = pouleScheme[i][j];
+        Match match = mPouleScheme[i][j];
         Integer gf = match.getGoalsFor();
         return gf;
     }
 
     public Integer getMatchGoalsAgainst(int i, int j) {
-        Match match = pouleScheme[i][j];
+        Match match = mPouleScheme[i][j];
         Integer ga = match.getGoalsAgainst();
         return ga;
     }
 
-    public Match getMatch(int i, int j){ return pouleScheme[i][j]; }
+    public Match getMatch(int i, int j){ return mPouleScheme[i][j]; }
 
-    public void setMatch(int i, int j, Match match) { pouleScheme[i][j] = match; }
+    public void setMatch(int i, int j, Match match) { mPouleScheme[i][j] = match; }
 
-    public int getPouleSize() { return pouleSize; }
+    public int getPouleSize() { return mPouleSize; }
 
 
 
     public void fillTestData(ArrayList<Team> poule) {
-        Match match = pouleScheme[0][1];
+        Match match = mPouleScheme[0][1];
 
         Team homeTeam = poule.get(0);
         Team opponent = poule.get(1);

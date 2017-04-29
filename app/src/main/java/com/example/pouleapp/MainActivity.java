@@ -20,12 +20,13 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String NAME = "POULE";
     public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
+    public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
 
 
     private SimpleExpandableListAdapter mAdapter;
     ExpandableListView ExpandablePouleListView;
     // string arrays for group and child items
-    private String groupItems[] = {"Poule A", "Poule B", "Poule C"};
+    //private String groupItems[] = {"Poule A", "Poule B", "Poule C"};
     //private String[][] childItems = {{"Ajax", "Feyenoord", "PSV"}, {"Heerenveen", "Twente", "Utrecht"}, {"NEC", "Heracles", "GA Eagles"}};
 
     @Override
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
                 // display a toast with group name whenever a user clicks on a group item
-                Toast.makeText(getApplicationContext(), "Group Name Is :" + groupItems[groupPosition], Toast.LENGTH_LONG).show();
+                // Toast.makeText(getApplicationContext(), "Group Name Is :" + groupItems[groupPosition], Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 // when team is clicked open EditPouleActivity
                 Intent intent = new Intent(getApplicationContext(), EditPouleActivity.class);
                 intent.putExtra(POULE_INDEX, groupPosition);
+                intent.putExtra(TEAM_INDEX,childPosition);
 
                 startActivity(intent);
 

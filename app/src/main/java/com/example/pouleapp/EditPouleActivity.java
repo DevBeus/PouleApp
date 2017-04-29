@@ -20,7 +20,8 @@ public class EditPouleActivity extends AppCompatActivity {
     public final static String EXTRA_MESSAGE = "com.example.pouleapp.MESSAGE";
     public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
     public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
-    private int mPoule_Index = 0;
+    private static int mPoule_Index = 0;
+    private static int mTeam_Index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,15 @@ public class EditPouleActivity extends AppCompatActivity {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Intent intent = getIntent();
         mPoule_Index = intent.getIntExtra(EditPouleActivity.POULE_INDEX,0);
+        //mTeam_Index = intent.getIntExtra(EditPouleActivity.TEAM_INDEX,0);
 
         pouleList = globalVariable.getPouleList();
         poule = pouleList.get(mPoule_Index);
 
         teamList = poule.getTeamList();
+        // When teams are removed, activity is re-entrant with same TEAM_INDEX value in intent
+        mTeam_Index = Math.min(intent.getIntExtra(EditPouleActivity.TEAM_INDEX,0),teamList.size()-1);
+
         TextView textView = (TextView) findViewById(R.id.textViewPoule);
         textView.setText(poule.getPouleName());
 
@@ -49,7 +54,8 @@ public class EditPouleActivity extends AppCompatActivity {
             team.setId(i);
             team.setText(teamList.get(i).getTeamName());
 
-            if (globalVariable.getSelectedTeam() == i) {
+            //Default first team is selected
+            if ( i==mTeam_Index ) {
                 team.setChecked(true);
             }
 
@@ -65,45 +71,28 @@ public class EditPouleActivity extends AppCompatActivity {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
 
         radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        globalVariable.setSelectedTeam(selectedId);
+        mTeam_Index = radioGroup.getCheckedRadioButtonId();
+        //globalVariable.setSelectedTeam(selectedId);
 
         Intent intent = new Intent(this, EditTeamActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
         intent.putExtra(POULE_INDEX, mPoule_Index);
-        intent.putExtra(TEAM_INDEX, selectedId);
+        intent.putExtra(TEAM_INDEX, mTeam_Index);
 
         startActivity(intent);
     }
 
     public void addTeam(View view) {
         String message = "add";
-        RadioGroup radioGroup;
-        ArrayList<Team> teamList;
-        ArrayList<Poule> pouleList;
-        Poule poule;
-
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        pouleList = globalVariable.getPouleList();
-        poule = pouleList.get(mPoule_Index);
-
-        teamList = poule.getTeamList();
-        teamList.add(new Team(""));
-
-        radioGroup = (RadioGroup) findViewById(R.id.radio_group);
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        globalVariable.setSelectedTeam(selectedId);
-
         Intent intent = new Intent(this, EditTeamActivity.class);
         intent.putExtra(EXTRA_MESSAGE,message);
         intent.putExtra(POULE_INDEX, mPoule_Index);
-        intent.putExtra(TEAM_INDEX, teamList.size()-1);
+        intent.putExtra(TEAM_INDEX, 0); //When new team is added, team index is not relevant
 
         startActivity(intent);
     }
 
     public void deleteTeam(View view) {
-        ArrayList<Team> teamList;
         ArrayList<Poule> pouleList;
         Poule poule;
         RadioGroup radioGroup;
@@ -112,22 +101,24 @@ public class EditPouleActivity extends AppCompatActivity {
         pouleList = globalVariable.getPouleList();
         poule = pouleList.get(mPoule_Index);
 
-        teamList = poule.getTeamList();
-        PouleScheme pouleScheme = poule.getPouleScheme();
         radioGroup = (RadioGroup) findViewById(R.id.radio_group);
 
-        int sel_team = radioGroup.getCheckedRadioButtonId();
-        globalVariable.setSelectedTeam(sel_team);
+        if (poule.getTeamList().size()>2) {
 
-        // All results of selected team need to be removed and team needs to be removed
-        pouleScheme.removeTeamResults(teamList, sel_team);
-        teamList.remove(sel_team);
+            int sel_team = radioGroup.getCheckedRadioButtonId();
+            poule.deleteTeam(sel_team);
 
-        globalVariable.savePoule(mPoule_Index);
+            // After delete, checked team will be the first team
+            mTeam_Index = 0;
 
-        recreate();
+            globalVariable.savePoule(mPoule_Index);
 
-        Toast.makeText(getApplicationContext(),"Team removed", Toast.LENGTH_LONG).show();
+            recreate();
+
+            Toast.makeText(getApplicationContext(), "Team removed", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Poule should contain at least 2 teams", Toast.LENGTH_LONG).show();
+        }
     }
 
     /** This method is called when scheme button is clicked */

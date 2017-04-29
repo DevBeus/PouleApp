@@ -39,6 +39,9 @@ public class Match {
         this.goalsAgainst = goalsAgainst;
     }
 
+    public String getHomeTeam() { return homeTeam; }
+    public String getOpponent() { return opponent; }
+
     public void setResult(Integer gf, Integer ga) {
         this.goalsFor = gf;
         this.goalsAgainst = ga;

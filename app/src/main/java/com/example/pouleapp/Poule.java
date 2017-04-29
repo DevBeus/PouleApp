@@ -41,4 +41,18 @@ public class Poule {
 
     public ArrayList<Team> getTeamList() { return teamList; }
     public void setTeamList(ArrayList<Team> teams ) { this.teamList = teams; }
+
+    public void addTeam( String teamName ) {
+        //@TODO: Check on unique team name
+        teamList.add(new Team(teamName));
+        pouleScheme.addTeam(teamName);
+
+    }
+
+    public void deleteTeam( int deleteTeam ) {
+
+        // All results of selected team need to be removed first and team needs to be removed afterwards
+        pouleScheme.deleteTeam(teamList, deleteTeam);
+        teamList.remove(deleteTeam);
+    }
 }
