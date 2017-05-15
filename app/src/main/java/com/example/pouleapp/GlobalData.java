@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 /**
  * Created by gezamenlijk on 21-1-2017.
+ *
+ * Viewing MyPrefsFile can be done with Android Device Manager (ADM)
+ * - Phone must be rooted, can be done by executing adb root in folder \Android\sdk\platform-tools after emulator has started
  */
 
 public class GlobalData extends Application {
