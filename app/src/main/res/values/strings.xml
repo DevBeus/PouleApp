@@ -3,7 +3,7 @@
     <string name="add_poule_button">Add Poule</string>
     <string name="edit_button">Edit</string>
     <string name="add_team_button">Add Team</string>
-    <string name="delete_team_button">Delete Team</string>
+    <string name="delete_team_button">Delete</string>
     <string name="show_team_list_button">Teams</string>
     <string name="show_poules_button">Poules</string>
     <string name="show_scheme_button">Scheme</string>

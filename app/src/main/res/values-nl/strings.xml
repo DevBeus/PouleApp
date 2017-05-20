@@ -3,7 +3,7 @@
     <string name="app_name">PouleApp</string>
     <string name="cancel_button">Annuleer</string>
     <string name="coach_text_view">Trainer:</string>
-    <string name="delete_team_button">Verwijder Team</string>
+    <string name="delete_team_button">Verwijder</string>
     <string name="edit_button">Wijzig</string>
     <string name="goals_against">GT</string>
     <string name="goals_for">GV</string>
