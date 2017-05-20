@@ -13,7 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import static android.R.color.darker_gray;
-import static com.example.pouleapp.MainActivity.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
+import static com.example.pouleapp.GlobalData.SCHEME_ROW;
+
 
 /**
  * Created by gezamenlijk on 26-2-2017.
@@ -21,7 +24,6 @@ import static com.example.pouleapp.MainActivity.POULE_INDEX;
 
 public class SchemeTableActivity extends AppCompatActivity {
     private int mPoule_Index = 0;
-    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class SchemeTableActivity extends AppCompatActivity {
         ArrayList<Poule> pouleList = globalVariable.getPouleList();
 
         Intent intent = getIntent();
-        mPoule_Index = intent.getIntExtra(SchemeTableActivity.POULE_INDEX,0);
+        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
         Poule poule = pouleList.get(mPoule_Index);
         ArrayList<Team> teamList = poule.getTeamList();
@@ -87,8 +89,8 @@ public class SchemeTableActivity extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent intent = new Intent(v.getContext(), EditMatchActivity.class);
                                 intent.putExtra(POULE_INDEX,mPoule_Index);
-                                intent.putExtra("SchemeRow",x);
-                                intent.putExtra("SchemeColumn",y);
+                                intent.putExtra(SCHEME_ROW,x);
+                                intent.putExtra(SCHEME_COLUMN,y);
                                 startActivity(intent);
                             }
                         });

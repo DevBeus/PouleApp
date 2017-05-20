@@ -12,14 +12,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.pouleapp.GlobalData.ACTION_ADD;
+import static com.example.pouleapp.GlobalData.ACTION_EDIT;
+import static com.example.pouleapp.GlobalData.ACTION_MESSAGE;
+import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.TEAM_INDEX;
+
+
 /**
  * Created by gezamenlijk on 26-4-2017.
  */
 
 public class EditPouleActivity extends AppCompatActivity {
-    public final static String EXTRA_MESSAGE = "com.example.pouleapp.MESSAGE";
-    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
-    public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
     private static int mPoule_Index = 0;
     private static int mTeam_Index = 0;
 
@@ -34,15 +38,14 @@ public class EditPouleActivity extends AppCompatActivity {
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Intent intent = getIntent();
-        mPoule_Index = intent.getIntExtra(EditPouleActivity.POULE_INDEX,0);
-        //mTeam_Index = intent.getIntExtra(EditPouleActivity.TEAM_INDEX,0);
+        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
         pouleList = globalVariable.getPouleList();
         poule = pouleList.get(mPoule_Index);
 
         teamList = poule.getTeamList();
         // When teams are removed, activity is re-entrant with same TEAM_INDEX value in intent
-        mTeam_Index = Math.min(intent.getIntExtra(EditPouleActivity.TEAM_INDEX,0),teamList.size()-1);
+        mTeam_Index = Math.min(intent.getIntExtra(TEAM_INDEX,0),teamList.size()-1);
 
         TextView textView = (TextView) findViewById(R.id.textViewPoule);
         textView.setText(poule.getPouleName());
@@ -65,17 +68,15 @@ public class EditPouleActivity extends AppCompatActivity {
 
     /** This method is called when Edit button is clicked */
     public void editTeam(View view) {
-        String message = "edit";
         RadioGroup radioGroup;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
 
         radioGroup = (RadioGroup) findViewById(R.id.radio_group);
         mTeam_Index = radioGroup.getCheckedRadioButtonId();
-        //globalVariable.setSelectedTeam(selectedId);
 
         Intent intent = new Intent(this, EditTeamActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra(ACTION_MESSAGE, ACTION_EDIT);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         intent.putExtra(TEAM_INDEX, mTeam_Index);
 
@@ -83,9 +84,8 @@ public class EditPouleActivity extends AppCompatActivity {
     }
 
     public void addTeam(View view) {
-        String message = "add";
         Intent intent = new Intent(this, EditTeamActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
+        intent.putExtra(ACTION_MESSAGE, ACTION_ADD);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         intent.putExtra(TEAM_INDEX, 0); //When new team is added, team index is not relevant
 
@@ -115,18 +115,15 @@ public class EditPouleActivity extends AppCompatActivity {
 
             recreate();
 
-            Toast.makeText(getApplicationContext(), "Team removed", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Team removed", Toast.LENGTH_LONG).show(); //@TODO: replace by string from strings.xml
         } else {
-            Toast.makeText(getApplicationContext(), "Poule should contain at least 2 teams", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Poule should contain at least 2 teams", Toast.LENGTH_LONG).show(); //@TODO: replace by string from strings.xml
         }
     }
 
     /** This method is called when scheme button is clicked */
     public void showScheme(View view) {
-        String message = "Scheme";
-
         Intent intent = new Intent(this, SchemeTableActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
         intent.putExtra(POULE_INDEX, mPoule_Index);
 
         startActivity(intent);
@@ -134,10 +131,7 @@ public class EditPouleActivity extends AppCompatActivity {
 
     /** This method is called when ranking button is clicked */
     public void showRanking(View view) {
-        String message = "Ranking";
-
         Intent intent = new Intent(this, RankingActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
         intent.putExtra(POULE_INDEX, mPoule_Index);
 
         startActivity(intent);
@@ -145,10 +139,7 @@ public class EditPouleActivity extends AppCompatActivity {
 
     /** This method is called when scheme button is clicked */
     public void showPoules(View view) {
-        String message = "Poules";
-
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(EXTRA_MESSAGE,message);
 
         startActivity(intent);
     }

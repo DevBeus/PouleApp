@@ -9,11 +9,10 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.example.pouleapp.MainActivity.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.POULE_INDEX;
 
 public class RankingActivity extends AppCompatActivity {
     private int mPoule_Index = 0;
-    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +23,12 @@ public class RankingActivity extends AppCompatActivity {
         ArrayList<Poule> pouleList = globalVariable.getPouleList();
 
         Intent intent = getIntent();
-        mPoule_Index = intent.getIntExtra(SchemeTableActivity.POULE_INDEX,0);
+        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
         Poule poule = pouleList.get(mPoule_Index);
         ArrayList<Team> teamList = poule.getTeamList();
 
-        ArrayList<Team> sortedPoule = new ArrayList<Team>(teamList);
+        ArrayList<Team> sortedPoule = new ArrayList<>(teamList);
 
         Collections.sort(sortedPoule, Team.RankingComparator);
 

@@ -14,19 +14,19 @@ import java.util.ArrayList;
  */
 
 public class GlobalData extends Application {
+    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
+    public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
+    public final static String SCHEME_ROW = "com.example.pouleapp.SCHEMEROW";
+    public final static String SCHEME_COLUMN = "com.example.pouleapp.SCHEMECOLUMN";
 
-    private ArrayList<Poule> mPouleList = new ArrayList<Poule>();
+    public final static String ACTION_MESSAGE = "com.example.pouleapp.ACTIONMESSAGE";
+    public final static String ACTION_ADD = "ADD";
+    public final static String ACTION_EDIT = "EDIT";
 
-    private int selectedTeam = 0;
+
+    private ArrayList<Poule> mPouleList = new ArrayList<>();
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
-    public int getSelectedTeam() {
-        return selectedTeam;
-    }
-    public void setSelectedTeam(int selectedTeam) {
-        this.selectedTeam = selectedTeam;
-    }
-    // public ArrayList<Team> getTeamList() { return teamList; }
     public ArrayList<Poule> getPouleList() { return mPouleList; }
 
     public void initPouleList() {
@@ -56,19 +56,15 @@ public class GlobalData extends Application {
             }
         }
 
-        //Debug statement
-        int x = prefs.getInt("nrofPoules",0);
-        x = x + x;
     }
 
     public void initPoule(int pouleIndex) {
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         String pouleName = "Poule" + pouleIndex;
 
-        ArrayList<Team> teamList = new ArrayList<Team>();
+        ArrayList<Team> teamList = new ArrayList<>();
 
         int nrofTeams = prefs.getInt(pouleName+"nrofTeams", 0);
-        //teamList.clear();
 
         if (nrofTeams == 0) {
             SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();

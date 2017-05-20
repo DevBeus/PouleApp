@@ -10,7 +10,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.example.pouleapp.MainActivity.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.SCHEME_ROW;
+import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
 
 
 /**
@@ -28,9 +30,9 @@ public class EditMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_match);
 
         Intent intent = getIntent();
-        x = intent.getIntExtra("SchemeRow", 0);
-        y = intent.getIntExtra("SchemeColumn", 0);
-        mPoule_Index = intent.getIntExtra(EditPouleActivity.POULE_INDEX,0);
+        x = intent.getIntExtra(SCHEME_ROW, 0);
+        y = intent.getIntExtra(SCHEME_COLUMN, 0);
+        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         ArrayList<Poule> pouleList = globalVariable.getPouleList();
@@ -74,7 +76,7 @@ public class EditMatchActivity extends AppCompatActivity {
             hs = null;
             os = null;
         } else if ((TextUtils.isEmpty(strHS)) || (TextUtils.isEmpty(strOS))) {
-            Toast.makeText(getApplicationContext(),"Both scores should be filled or left empty !", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Both scores should be filled or left empty !", Toast.LENGTH_LONG).show(); //@TODO: replace by string defined in strings.xml
             return;
         } else {
             try {
@@ -84,7 +86,7 @@ public class EditMatchActivity extends AppCompatActivity {
                 hs = null;
                 os = null;
 
-                Toast.makeText(getApplicationContext(),"Scores should be numbers!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Scores should be numbers!", Toast.LENGTH_LONG).show(); //@TODO: replace by string defined in strings.xml
 
                 return;
             }

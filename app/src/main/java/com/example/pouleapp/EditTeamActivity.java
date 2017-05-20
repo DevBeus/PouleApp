@@ -9,8 +9,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.example.pouleapp.MainActivity.POULE_INDEX;
-import static com.example.pouleapp.MainActivity.TEAM_INDEX;
+import static com.example.pouleapp.GlobalData.ACTION_ADD;
+import static com.example.pouleapp.GlobalData.ACTION_MESSAGE;
+import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.TEAM_INDEX;
 
 public class EditTeamActivity extends AppCompatActivity {
     private int mPoule_Index = 0;
@@ -24,16 +26,15 @@ public class EditTeamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_team);
 
         Intent intent = getIntent();
-        mMessage = intent.getStringExtra(EditPouleActivity.EXTRA_MESSAGE);
-        mPoule_Index = intent.getIntExtra(EditPouleActivity.POULE_INDEX,0);
-        mTeam_Index = intent.getIntExtra(EditPouleActivity.TEAM_INDEX,0);
+        mMessage = intent.getStringExtra(ACTION_MESSAGE);
+        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
+        mTeam_Index = intent.getIntExtra(TEAM_INDEX,0);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         ArrayList<Poule> pouleList = globalVariable.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
 
-        //TODO: replace string add with global defined message
-        if (mMessage.equals("add")) {
+        if (mMessage.equals(ACTION_ADD)) {
             poule.addTeam(mDefaultTeamName);
             mTeam_Index =  poule.getTeamList().size()-1;
         }
@@ -91,7 +92,7 @@ public class EditTeamActivity extends AppCompatActivity {
 
     public void cancel(View view) {
         //if cancel is done for addition of team, new team needs to be removed
-        if (mMessage.equals("add")) {
+        if (mMessage.equals(ACTION_ADD)) {
             final GlobalData globalVariable = (GlobalData) getApplicationContext();
             ArrayList<Poule> pouleList = globalVariable.getPouleList();
             Poule poule = pouleList.get(mPoule_Index);

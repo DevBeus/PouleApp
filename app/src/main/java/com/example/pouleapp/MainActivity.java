@@ -1,33 +1,27 @@
 package com.example.pouleapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.pouleapp.GlobalData.MY_PREFS_NAME;
+import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.TEAM_INDEX;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String NAME = "POULE";
-    public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
-    public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
 
 
     private SimpleExpandableListAdapter mAdapter;
     ExpandableListView ExpandablePouleListView;
-    // string arrays for group and child items
-    //private String groupItems[] = {"Poule A", "Poule B", "Poule C"};
-    //private String[][] childItems = {{"Ajax", "Feyenoord", "PSV"}, {"Heerenveen", "Twente", "Utrecht"}, {"NEC", "Heracles", "GA Eagles"}};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
