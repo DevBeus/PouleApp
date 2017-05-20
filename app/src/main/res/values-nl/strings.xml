@@ -23,4 +23,10 @@
     <string name="team">Team</string>
     <string name="team_list">Teams</string>
     <string name="team_text_view">Team:</string>
+    <string name="team_removal_warning">Poule met uit minstens 2 teams bestaan</string>
+    <string name="team_removed_message">Team Verwijderd!</string>
+    <string name="scores_should_be_numbers_message">Scores moeten cijfers zijn!</string>
+    <string name="no_empty_scores_message">Beide scores moeten gevuld of leeg zijn!</string>
+    <string name="add_team_button">Voeg Toe</string>
+    <string name="add_poule_button">Voeg Toe</string>
 </resources>

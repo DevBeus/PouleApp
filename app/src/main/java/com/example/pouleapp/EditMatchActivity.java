@@ -76,7 +76,8 @@ public class EditMatchActivity extends AppCompatActivity {
             hs = null;
             os = null;
         } else if ((TextUtils.isEmpty(strHS)) || (TextUtils.isEmpty(strOS))) {
-            Toast.makeText(getApplicationContext(),"Both scores should be filled or left empty !", Toast.LENGTH_LONG).show(); //@TODO: replace by string defined in strings.xml
+            String message = getResources().getString(R.string.no_empty_scores_message);
+            Toast.makeText(getApplicationContext(),message, Toast.LENGTH_LONG).show();
             return;
         } else {
             try {
@@ -86,7 +87,8 @@ public class EditMatchActivity extends AppCompatActivity {
                 hs = null;
                 os = null;
 
-                Toast.makeText(getApplicationContext(),"Scores should be numbers!", Toast.LENGTH_LONG).show(); //@TODO: replace by string defined in strings.xml
+                String message = getResources().getString(R.string.scores_should_be_numbers_message);
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                 return;
             }

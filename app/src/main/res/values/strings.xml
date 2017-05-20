@@ -30,4 +30,10 @@
     <string name="team_list">Team List</string>
     <string name="ranking">Ranking</string>
 
+    <string name="team_removed_message">Team Removed!</string>
+    <string name="team_removal_warning">Poule should contain at least 2 teams</string>
+
+    <string name="no_empty_scores_message">Both scores should be filled or left empty !</string>
+    <string name="scores_should_be_numbers_message">Scores should be numbers!</string>
+
 </resources>

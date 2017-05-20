@@ -115,9 +115,11 @@ public class EditPouleActivity extends AppCompatActivity {
 
             recreate();
 
-            Toast.makeText(getApplicationContext(), "Team removed", Toast.LENGTH_LONG).show(); //@TODO: replace by string from strings.xml
+            String message = getResources().getString(R.string.team_removed_message);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(), "Poule should contain at least 2 teams", Toast.LENGTH_LONG).show(); //@TODO: replace by string from strings.xml
+            String message = getResources().getString(R.string.team_removal_warning);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
     }
 
