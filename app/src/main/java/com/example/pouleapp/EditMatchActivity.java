@@ -35,7 +35,8 @@ public class EditMatchActivity extends AppCompatActivity {
         mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Tournament tournament = globalVariable.getTournament();
+        ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
         ArrayList<Team> teamList = poule.getTeamList();
         PouleScheme pouleScheme = poule.getPouleScheme();
@@ -96,14 +97,15 @@ public class EditMatchActivity extends AppCompatActivity {
         }
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Tournament tournament = globalVariable.getTournament();
+        ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
         ArrayList<Team> teamList = poule.getTeamList();
         PouleScheme pouleScheme = poule.getPouleScheme();
 
         pouleScheme.updateMatch(teamList,x,y,hs,os);
 
-        globalVariable.savePoule(mPoule_Index);
+        globalVariable.savePoule(poule);
 
         Intent intent = new Intent(this, SchemeTableActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);

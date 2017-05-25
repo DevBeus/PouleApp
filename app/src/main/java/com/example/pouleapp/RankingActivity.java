@@ -20,7 +20,8 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Tournament tournament = globalVariable.getTournament();
+        ArrayList<Poule> pouleList = tournament.getPouleList();
 
         Intent intent = getIntent();
         mPoule_Index = intent.getIntExtra(POULE_INDEX,0);

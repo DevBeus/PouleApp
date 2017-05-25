@@ -1,118 +1,54 @@
 package com.example.pouleapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import static com.example.pouleapp.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.GlobalData.TEAM_INDEX;
+import static com.example.pouleapp.GlobalData.DEFAULT_TOURNAMENT_ID;
+
+/**
+ * Created by gezamenlijk on 21-5-2017.
+ */
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String NAME = "POULE";
-
-
-    private SimpleExpandableListAdapter mAdapter;
-    ExpandableListView ExpandablePouleListView;
+    private Spinner mSpinner;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArrayList<Poule> pouleList;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        globalVariable.initPouleList();
-        pouleList = globalVariable.getPouleList();
+        globalVariable.initApp();
 
-        //  initiate the expandable list view
-        ExpandablePouleListView = (ExpandableListView) findViewById(R.id.ExpandablePouleListView);
-        // create lists for group and child items
-        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
-        List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
-        // add data in group and child list
-        for (int i = 0; i < pouleList.size(); i++) {
-            Map<String, String> curGroupMap = new HashMap<String, String>();
-            groupData.add(curGroupMap);
-            curGroupMap.put(NAME, pouleList.get(i).getPouleName());
+        mSpinner = (Spinner) findViewById(R.id.spinner);
+        List<String> list = globalVariable.getTournamentNameList();
 
-            ArrayList<Team> teamList = pouleList.get(i).getTeamList();
-
-            List<Map<String, String>> children = new ArrayList<Map<String, String>>();
-            for (int j = 0; j < teamList.size(); j++) {
-                Map<String, String> curChildMap = new HashMap<String, String>();
-                children.add(curChildMap);
-                curChildMap.put(NAME, teamList.get(j).getTeamName());
-            }
-            childData.add(children);
-        }
-        // define arrays for displaying data in Expandable list view
-        String groupFrom[] = {NAME};
-        int groupTo[] = {R.id.heading};
-        String childFrom[] = {NAME};
-        int childTo[] = {R.id.childItem};
-
-
-        // Set up the adapter
-        mAdapter = new SimpleExpandableListAdapter(this, groupData,
-                R.layout.group_items,
-                groupFrom, groupTo,
-                childData, R.layout.child_items,
-                childFrom, childTo);
-        ExpandablePouleListView.setAdapter(mAdapter);
-
-        // perform set on group click listener event
-        ExpandablePouleListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-
-                // display a toast with group name whenever a user clicks on a group item
-                // Toast.makeText(getApplicationContext(), "Group Name Is :" + groupItems[groupPosition], Toast.LENGTH_LONG).show();
-
-                return false;
-            }
-        });
-        // perform set on child click listener event
-        ExpandablePouleListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-                // display a toast with child name whenever a user clicks on a child item
-                // groupPosition = pouleIndex, childPosition = team
-                // when team is clicked open EditPouleActivity
-                Intent intent = new Intent(getApplicationContext(), EditPouleActivity.class);
-                intent.putExtra(POULE_INDEX, groupPosition);
-                intent.putExtra(TEAM_INDEX,childPosition);
-
-                startActivity(intent);
-
-                //Toast.makeText(getApplicationContext(), "Child Name Is :" + childItems[groupPosition][childPosition], Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(dataAdapter);
     }
 
-
-    public void addPoule(View view) {
+    public void showPoule(View view) {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        ArrayList<String> tournamentIDList = globalVariable.getTournamentIDList();
+        int selectedIndex = mSpinner.getSelectedItemPosition();
+        String id = tournamentIDList.get(selectedIndex);
 
-        ArrayList<Poule> pouleList = globalVariable.getPouleList();
-        int pouleId = pouleList.size();
+        if (id == DEFAULT_TOURNAMENT_ID) { id = globalVariable.addTournament(); }
 
-        Poule poule = new Poule("Poule"+pouleId);
-        pouleList.add(poule);
+        globalVariable.initTournament(id);
 
-        globalVariable.savePoule(pouleId);
+        Intent intent = new Intent(this, PouleActivity.class);
 
-        recreate();
-
+        startActivity(intent);
     }
+
 }

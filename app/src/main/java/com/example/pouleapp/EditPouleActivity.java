@@ -37,10 +37,11 @@ public class EditPouleActivity extends AppCompatActivity {
         Poule poule;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        Tournament tournament = globalVariable.getTournament();
         Intent intent = getIntent();
         mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
-        pouleList = globalVariable.getPouleList();
+        pouleList = tournament.getPouleList();
         poule = pouleList.get(mPoule_Index);
 
         teamList = poule.getTeamList();
@@ -98,7 +99,8 @@ public class EditPouleActivity extends AppCompatActivity {
         RadioGroup radioGroup;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        pouleList = globalVariable.getPouleList();
+        Tournament tournament = globalVariable.getTournament();
+        pouleList = tournament.getPouleList();
         poule = pouleList.get(mPoule_Index);
 
         radioGroup = (RadioGroup) findViewById(R.id.radio_group);
@@ -111,11 +113,11 @@ public class EditPouleActivity extends AppCompatActivity {
             // After delete, checked team will be the first team
             mTeam_Index = 0;
 
-            globalVariable.savePoule(mPoule_Index);
+            globalVariable.savePoule(poule);
 
             recreate();
 
-            String message = getResources().getString(R.string.team_removed_message);
+            String message = getResources().getString(R.string.team_removed_message); //@TODO: replace with string from strings.xml
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         } else {
             String message = getResources().getString(R.string.team_removal_warning);
@@ -141,7 +143,7 @@ public class EditPouleActivity extends AppCompatActivity {
 
     /** This method is called when scheme button is clicked */
     public void showPoules(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, PouleActivity.class);
 
         startActivity(intent);
     }

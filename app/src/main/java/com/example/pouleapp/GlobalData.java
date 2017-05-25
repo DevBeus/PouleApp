@@ -23,43 +23,101 @@ public class GlobalData extends Application {
     public final static String ACTION_ADD = "ADD";
     public final static String ACTION_EDIT = "EDIT";
 
+    private Tournament mTournament;
+    private ArrayList<String> mTournamentIDList = new ArrayList<>();
 
-    private ArrayList<Poule> mPouleList = new ArrayList<>();
 
-    public static final String MY_PREFS_NAME = "MyPrefsFile";
-    public ArrayList<Poule> getPouleList() { return mPouleList; }
 
-    public void initPouleList() {
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+    private ArrayList<String> mTournamentNameList = new ArrayList<>();
+    private int mSelectedTournamentIndex;
+    private int mNrofTournaments;
+    public Tournament getTournament() { return mTournament; }
+    public int getSelectedTournamentIndex() { return mSelectedTournamentIndex; }
+    public ArrayList<String> getTournamentIDList() { return mTournamentIDList; }
+    public ArrayList<String> getTournamentNameList() { return mTournamentNameList; }
+
+    //private ArrayList<Poule> mPouleList = new ArrayList<>();
+
+    public static final String POULE_APP_PREFS = "PouleAppPrefs";
+    //public static final String MY_PREFS_NAME = "MyPrefsFile";
+    public static final String DEFAULT_TOURNAMENT_NAME = "Tournament";
+    public static final String DEFAULT_TOURNAMENT_ID = "0";
+    public static final String DEFAULT_POULE_NAME = "Poule0";
+
+    //public ArrayList<Poule> getPouleList() { return mPouleList; }
+
+    public void initApp() {
+        SharedPreferences appPrefs = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE);
+        mNrofTournaments = appPrefs.getInt("nrofTournaments",0);
+
+        String selectedTournamentID = appPrefs.getString("SelectedTournamentID", DEFAULT_TOURNAMENT_ID);
+        mSelectedTournamentIndex = 0;
+
+        for (int i=0; i < mNrofTournaments; i++) {
+            String id = appPrefs.getString("TournamentID"+i, DEFAULT_TOURNAMENT_ID);
+            String name = appPrefs.getString("TournamentName"+i,DEFAULT_TOURNAMENT_NAME);
+
+            mTournamentIDList.add(id);
+            mTournamentNameList.add(name);
+
+            if (selectedTournamentID.equals(id)) { mSelectedTournamentIndex = i; }
+        }
+
+        //Element added to create new tournament
+        mTournamentIDList.add(DEFAULT_TOURNAMENT_ID);
+        mTournamentNameList.add("Create new tournament..");
+
+    }
+
+    public void initTournament(String id) {
+        mSelectedTournamentIndex = mTournamentIDList.indexOf(id);
+
+        //retrieve selected tournament id and name
+        SharedPreferences tournamentPrefs = getSharedPreferences(id, MODE_PRIVATE);
+        String tournamentName = tournamentPrefs.getString("TournamentName", "Tournament");
+        String location = tournamentPrefs.getString("Location", "New York");
+
+        //retrieve pouleList information
+        ArrayList<Poule> pouleList = initPouleList();
+
+        mTournament = new Tournament(id, tournamentName, location, pouleList);
+
+    }
+
+    public ArrayList<Poule> initPouleList() {
+        SharedPreferences prefs = getSharedPreferences(mTournamentIDList.get(mSelectedTournamentIndex), MODE_PRIVATE);
         int nrofPoules = prefs.getInt("nrofPoules",0);
-        mPouleList.clear();
+        ArrayList<Poule> pouleList = new ArrayList<>();
 
         if (nrofPoules == 0 ) {
-            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-            String defaultPouleName = "Poule0";
+            SharedPreferences.Editor editor = getSharedPreferences(mTournamentIDList.get(mSelectedTournamentIndex), MODE_PRIVATE).edit();
+            //String defaultPouleName = DEFAULT_POULE_NAME;
             int defaultPouleIndex = 0;
 
-            editor.putString("Poule0",defaultPouleName);
+            editor.putString("Poule0",DEFAULT_POULE_NAME);
             nrofPoules = 1;
             editor.putInt("nrofPoules",nrofPoules);
 
-            mPouleList.add(new Poule(defaultPouleName));
+            pouleList.add(new Poule(DEFAULT_POULE_NAME));
 
             editor.apply();
 
-            savePoule(defaultPouleIndex);
+            savePoule(pouleList.get(defaultPouleIndex));
         }
         else {
 
             for (int i=0; i < nrofPoules; i++) {
-                initPoule(i);
+                pouleList.add(initPoule(i));
             }
         }
 
+        return pouleList;
     }
 
-    public void initPoule(int pouleIndex) {
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+
+
+    public Poule initPoule(int pouleIndex) {
+        SharedPreferences prefs = getSharedPreferences(mTournamentIDList.get(mSelectedTournamentIndex), MODE_PRIVATE);
         String pouleName = "Poule" + pouleIndex;
 
         ArrayList<Team> teamList = new ArrayList<>();
@@ -67,7 +125,7 @@ public class GlobalData extends Application {
         int nrofTeams = prefs.getInt(pouleName+"nrofTeams", 0);
 
         if (nrofTeams == 0) {
-            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = getSharedPreferences(mTournamentIDList.get(mSelectedTournamentIndex), MODE_PRIVATE).edit();
             editor.putString(pouleName+"Team0", "Team0");
             editor.putString(pouleName+"Team1", "Team1");
             editor.putInt(pouleName+"nrofTeams",2);
@@ -99,17 +157,91 @@ public class GlobalData extends Application {
             }
         }
 
-        mPouleList.add(new Poule(pouleName,teamList,pouleScheme));
+        Poule poule = new Poule(pouleName,teamList,pouleScheme);
+
+        return poule;
     }
 
-    public void savePoule(int pouleIndex) {
-        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-        String pouleName = mPouleList.get(pouleIndex).getPouleName();
-        ArrayList<Team> teamList = mPouleList.get(pouleIndex).getTeamList();
-        PouleScheme pouleScheme = mPouleList.get(pouleIndex).getPouleScheme();
+    public String addTournament() {
+        mTournament = new Tournament(DEFAULT_TOURNAMENT_NAME);
+
+        String selectedTournamentID = mTournament.getTournamentID();
+        mSelectedTournamentIndex = mTournamentIDList.size()-1;
+        mTournamentIDList.add(selectedTournamentID);
+        mTournamentNameList.add(DEFAULT_TOURNAMENT_NAME);
+        mNrofTournaments++;
+
+        saveTournament();
+
+        //Save App data
+        SharedPreferences.Editor editor = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE).edit();
+        editor.putString("TournamentID"+mSelectedTournamentIndex,selectedTournamentID);
+        editor.putString("TournamentName"+mSelectedTournamentIndex,DEFAULT_TOURNAMENT_NAME);
+        editor.putString("SelectedTournamentID",selectedTournamentID);
+        editor.putInt("nrofTournaments",mNrofTournaments);
+        editor.apply();
+
+        return selectedTournamentID;
+    }
+
+
+
+    public void saveTournament() {
+        SharedPreferences.Editor editor = getSharedPreferences(mTournament.getTournamentID(), MODE_PRIVATE).edit();
+
+        editor.putString("TournamentID",mTournament.getTournamentID());
+        editor.putString("TournamentName",mTournament.getTournamentName());
+        editor.putString("Location",mTournament.getLocation());
+
+        ArrayList<Poule> pouleList = mTournament.getPouleList();
+        editor.putInt("nrofPoules",pouleList.size());
+
+        for (int n=0; n < pouleList.size(); n++) {
+            String pouleName = pouleList.get(n).getPouleName();
+            ArrayList<Team> teamList = pouleList.get(n).getTeamList();
+            PouleScheme pouleScheme = pouleList.get(n).getPouleScheme();
+
+            //Store info of selected poule:
+            //- nrof teams in poule
+            //- team list
+            //- poule scheme
+
+            editor.putInt(pouleName+"nrofTeams", teamList.size());
+
+            for (int i = 0; i < teamList.size(); i++) {
+                String teamstr = pouleName + "Team"+i;
+
+                editor.putString(teamstr, teamList.get(i).getTeamName());
+            }
+
+            for (int i = 0; i < teamList.size(); i++) {
+                for (int j = 0; j < teamList.size(); j++) {
+                    String keystr1 = pouleName + "Match" + i + "-" + j + "goalsFor";
+                    String keystr2 = pouleName + "Match" + i + "-" + j + "goalsAgainst";
+
+                    Integer gf = pouleScheme.getMatchGoalsFor(i, j);
+                    Integer ga = pouleScheme.getMatchGoalsAgainst(i, j);
+
+                    if ((gf != null) && (ga != null)) {
+                        editor.putInt(keystr1, gf);
+                        editor.putInt(keystr2, ga);
+                    }
+                }
+            }
+        }
+
+        editor.apply();
+    }
+
+     public void savePoule(Poule poule) {
+         //Not needed anymore
+        SharedPreferences.Editor editor = getSharedPreferences(mTournament.getTournamentID(), MODE_PRIVATE).edit();
+        String pouleName = poule.getPouleName();
+        ArrayList<Team> teamList = poule.getTeamList();
+        PouleScheme pouleScheme = poule.getPouleScheme();
 
         //if new poule is stored added nrofPoules need to be updated
-        editor.putInt("nrofPoules",mPouleList.size());
+        //editor.putInt("nrofPoules",mPouleList.size());
 
         //Store info of selected poule:
         //- nrof teams in poule
@@ -142,3 +274,77 @@ public class GlobalData extends Application {
         editor.apply();
     }
 }
+
+//    public void initPouleListX() {
+//        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+//        int nrofPoules = prefs.getInt("nrofPoules",0);
+//        mPouleList.clear();
+//
+//        if (nrofPoules == 0 ) {
+//            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+//            //String defaultPouleName = DEFAULT_POULE_NAME;
+//            int defaultPouleIndex = 0;
+//
+//            editor.putString("Poule0",DEFAULT_POULE_NAME);
+//            nrofPoules = 1;
+//            editor.putInt("nrofPoules",nrofPoules);
+//
+//            mPouleList.add(new Poule(DEFAULT_POULE_NAME));
+//
+//            editor.apply();
+//
+//            savePoule(defaultPouleIndex);
+//        }
+//        else {
+//
+//            for (int i=0; i < nrofPoules; i++) {
+//                initPoule(i);
+//            }
+//        }
+//
+//    }
+
+//    public void initPouleX(int pouleIndex) {
+//        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+//        String pouleName = "Poule" + pouleIndex;
+//
+//        ArrayList<Team> teamList = new ArrayList<>();
+//
+//        int nrofTeams = prefs.getInt(pouleName+"nrofTeams", 0);
+//
+//        if (nrofTeams == 0) {
+//            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+//            editor.putString(pouleName+"Team0", "Team0");
+//            editor.putString(pouleName+"Team1", "Team1");
+//            editor.putInt(pouleName+"nrofTeams",2);
+//            nrofTeams = 2;
+//
+//            editor.apply();
+//        }
+//
+//        for (int i=0; i < nrofTeams; i++) {
+//            String teamstr= pouleName + "Team"+i;
+//
+//            String teamName = prefs.getString(teamstr, ""); //Empty string is the default value.
+//            teamList.add(new Team(teamName));
+//        }
+//
+//        PouleScheme pouleScheme = new PouleScheme(teamList);
+//
+//        for (int i=0; i < nrofTeams; i++) {
+//            for (int j=0; j < nrofTeams; j++){
+//                String keystr1 = pouleName + "Match" + i + "-" + j + "goalsFor";
+//                String keystr2 = pouleName + "Match" + i + "-" + j + "goalsAgainst";
+//
+//                int gf = prefs.getInt(keystr1, -1);
+//                int ga = prefs.getInt(keystr2, -1);
+//
+//                if ((gf!=-1)&&(ga!=-1)) {
+//                    pouleScheme.updateMatch(teamList,i,j,gf,ga);
+//                }
+//            }
+//        }
+//
+//        mPouleList.add(new Poule(pouleName,teamList,pouleScheme));
+//    }
+

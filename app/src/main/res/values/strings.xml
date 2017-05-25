@@ -35,5 +35,11 @@
 
     <string name="no_empty_scores_message">Both scores should be filled or left empty !</string>
     <string name="scores_should_be_numbers_message">Scores should be numbers!</string>
+    <string name="tournament_text_view">Tournament</string>
+    <string name="location_text_view">Location</string>
+    <string name="welcome_text">Welcome to the Poule App</string>
+    <string name="welcome_explanation">With this App you can organize your own tournaments</string>
+    <string name="tournament_name_text_view">Tournament Name:</string>
+    <string name="tournament_location_text_view">Location:</string>
 
 </resources>

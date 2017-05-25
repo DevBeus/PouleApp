@@ -31,7 +31,8 @@ public class EditTeamActivity extends AppCompatActivity {
         mTeam_Index = intent.getIntExtra(TEAM_INDEX,0);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Tournament tournament = globalVariable.getTournament();
+        ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
 
         if (mMessage.equals(ACTION_ADD)) {
@@ -59,7 +60,8 @@ public class EditTeamActivity extends AppCompatActivity {
         String teamCoach = textCoach.getText().toString();
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        ArrayList<Poule> pouleList = globalVariable.getPouleList();
+        Tournament tournament = globalVariable.getTournament();
+        ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
 
         ArrayList<Team> teamList = poule.getTeamList();
@@ -77,7 +79,7 @@ public class EditTeamActivity extends AppCompatActivity {
             team.setTeamName(teamName);
             team.setCoachName(teamCoach);
 
-            globalVariable.savePoule(mPoule_Index);
+            globalVariable.savePoule(poule);
 
             Intent intent = new Intent(this, EditPouleActivity.class);
             intent.putExtra(POULE_INDEX, mPoule_Index);
@@ -94,7 +96,8 @@ public class EditTeamActivity extends AppCompatActivity {
         //if cancel is done for addition of team, new team needs to be removed
         if (mMessage.equals(ACTION_ADD)) {
             final GlobalData globalVariable = (GlobalData) getApplicationContext();
-            ArrayList<Poule> pouleList = globalVariable.getPouleList();
+            Tournament tournament = globalVariable.getTournament();
+            ArrayList<Poule> pouleList = tournament.getPouleList();
             Poule poule = pouleList.get(mPoule_Index);
             poule.deleteTeam(mTeam_Index);
         }
