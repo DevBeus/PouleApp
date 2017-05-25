@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,10 +20,11 @@
                 android:id="@+id/textTournamentName" />
 
             <EditText
+                android:id="@+id/editTournamentName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/editTournamentName"/>
+                android:textSize="12sp" />
 
         </TableRow>
 
@@ -37,14 +39,23 @@
                 android:id="@+id/textTournamentLocation" />
 
             <EditText
+                android:id="@+id/editTournamentLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/editTournamentLocation" />
+                android:textSize="12sp" />
 
         </TableRow>
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/textTournamentExplanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tournament_poule_explanation_text_view"
+        android:textSize="14sp" />
+
 
     <ExpandableListView
         android:id="@+id/ExpandablePouleListView"
@@ -53,11 +64,33 @@
         android:divider="#f00"
         android:dividerHeight="1dp" />
 
-    <Button
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_poule_button"
-        android:layout_alignParentBottom="true"
-        android:onClick="addPoule"/>
+        android:layout_height="fill_parent"
+        android:gravity="bottom|center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_tournament_button"
+            android:layout_alignParentBottom="true"
+            android:onClick="saveTournament"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_button"
+            android:layout_alignParentBottom="true"
+            android:onClick="home"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_poule_button"
+            android:layout_alignParentBottom="true"
+            android:onClick="addPoule"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -35,4 +35,19 @@
         android:layout_height="wrap_content"
         android:gravity="bottom|center_horizontal" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="bottom|center_horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_tournament_button"
+            android:layout_alignParentBottom="true"
+            android:onClick="deleteTournament"/>
+    </LinearLayout>
+
+
 </LinearLayout>

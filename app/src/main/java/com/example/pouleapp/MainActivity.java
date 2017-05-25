@@ -51,4 +51,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void deleteTournament(View view) {
+        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        ArrayList<String> tournamentIDList = globalVariable.getTournamentIDList();
+        int selectedIndex = mSpinner.getSelectedItemPosition();
+
+        globalVariable.deleteTournament(selectedIndex);
+        globalVariable.saveAppData();
+
+        recreate();
+    }
+
 }

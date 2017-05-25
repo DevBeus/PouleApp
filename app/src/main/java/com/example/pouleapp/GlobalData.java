@@ -2,7 +2,9 @@ package com.example.pouleapp;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -49,6 +51,10 @@ public class GlobalData extends Application {
     public void initApp() {
         SharedPreferences appPrefs = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE);
         mNrofTournaments = appPrefs.getInt("nrofTournaments",0);
+
+        // In case home action, ID and Name list need to be emptied first
+        mTournamentIDList.clear();
+        mTournamentNameList.clear();
 
         String selectedTournamentID = appPrefs.getString("SelectedTournamentID", DEFAULT_TOURNAMENT_ID);
         mSelectedTournamentIndex = 0;
@@ -184,6 +190,41 @@ public class GlobalData extends Application {
         return selectedTournamentID;
     }
 
+    public void deleteTournament(int index) {
+        if (mTournamentIDList.get(index).equals(DEFAULT_TOURNAMENT_ID)) {
+            String message = getResources().getString(R.string.tournament_creation_cannot_be_removed_message);
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        } else {
+            //First SharedPrefsFile needs to be cleared (i.e. remove data from memory), and the prefs file needs to deleted
+            SharedPreferences.Editor editor = getSharedPreferences(mTournamentIDList.get(index), MODE_PRIVATE).edit();
+            editor.clear();
+
+            String filePath = getApplicationContext().getFilesDir().getParent() + "/shared_prefs/" + mTournamentIDList.get(index) + ".xml";
+            File deletePrefFile = new File(filePath);
+            deletePrefFile.delete();
+
+            mTournamentIDList.remove(index);
+            mTournamentNameList.remove(index);
+            mSelectedTournamentIndex = 0;
+            mNrofTournaments--;
+        }
+    }
+
+    public void updateTournamentName(String name) {
+        mTournamentNameList.set(mSelectedTournamentIndex,name);
+    }
+
+    public void saveAppData() {
+        SharedPreferences.Editor editor = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE).edit();
+        for (int i=0; i< mNrofTournaments; i++) {
+            editor.putString("TournamentID"+i,mTournamentIDList.get(i));
+            editor.putString("TournamentName"+i,mTournamentNameList.get(i));
+        }
+
+        editor.putString("SelectedTournamentID",mTournamentIDList.get(mSelectedTournamentIndex));
+        editor.putInt("nrofTournaments",mNrofTournaments);
+        editor.apply();
+    }
 
 
     public void saveTournament() {

@@ -123,4 +123,32 @@ public class PouleActivity extends AppCompatActivity {
         recreate();
 
     }
+
+    public void saveTournament(View view) {
+        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        Tournament tournament = globalVariable.getTournament();
+
+        TextView tvTournamentName = (TextView) findViewById(R.id.editTournamentName);
+        String name = tvTournamentName.getText().toString();
+
+        TextView tvTournamentLocation = (TextView) findViewById(R.id.editTournamentLocation);
+        String location = tvTournamentLocation.getText().toString();
+
+        tournament.setTournamentName(name);
+        tournament.setLocation(location);
+
+        globalVariable.saveTournament();
+        globalVariable.updateTournamentName(name);
+        globalVariable.saveAppData();
+
+        recreate();
+
+    }
+
+    public void home(View view) {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
+        startActivity(intent);
+
+    }
 }
