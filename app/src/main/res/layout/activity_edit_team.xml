@@ -23,11 +23,12 @@
                 android:id="@+id/textViewTeam" />
 
             <EditText
+                android:id="@+id/editTextTeam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/editTextTeam" />
+                android:inputType="textPersonName"
+                android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
         </TableRow>
 
@@ -42,11 +43,12 @@
                 android:id="@+id/textViewCoach" />
 
             <EditText
+                android:id="@+id/editTextCoach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/editTextCoach" />
+                android:inputType="textPersonName"
+                android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
         </TableRow>
 

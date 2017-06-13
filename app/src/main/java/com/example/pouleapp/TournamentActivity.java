@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ExpandableListView;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
@@ -16,7 +17,7 @@ import java.util.Map;
 import static com.example.pouleapp.GlobalData.POULE_INDEX;
 import static com.example.pouleapp.GlobalData.TEAM_INDEX;
 
-public class PouleActivity extends AppCompatActivity {
+public class TournamentActivity extends AppCompatActivity {
 
     private static final String NAME = "POULE";
 
@@ -27,7 +28,7 @@ public class PouleActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_poule);
+        setContentView(R.layout.activity_tournament);
         ArrayList<Poule> pouleList;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
@@ -106,6 +107,9 @@ public class PouleActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //hide soft keyboard
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
 
@@ -115,7 +119,7 @@ public class PouleActivity extends AppCompatActivity {
         ArrayList<Poule> pouleList = tournament.getPouleList();
         int pouleId = pouleList.size();
 
-        Poule poule = new Poule("Poule"+pouleId);
+        Poule poule = new Poule(pouleId,"Poule"+pouleId);
         pouleList.add(poule);
 
         globalVariable.saveTournament();
@@ -146,6 +150,23 @@ public class PouleActivity extends AppCompatActivity {
     }
 
     public void home(View view) {
+        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        Tournament tournament = globalVariable.getTournament();
+
+        TextView tvTournamentName = (TextView) findViewById(R.id.editTournamentName);
+        String name = tvTournamentName.getText().toString();
+
+        TextView tvTournamentLocation = (TextView) findViewById(R.id.editTournamentLocation);
+        String location = tvTournamentLocation.getText().toString();
+
+        tournament.setTournamentName(name);
+        tournament.setLocation(location);
+
+        globalVariable.saveTournament();
+        globalVariable.updateTournamentName(name);
+        globalVariable.saveAppData();
+
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
         startActivity(intent);

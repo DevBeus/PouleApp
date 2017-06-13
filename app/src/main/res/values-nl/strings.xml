@@ -39,4 +39,7 @@
     <string name="home_button">home</string>
     <string name="delete_tournament_button">Verwijder Toernooi</string>
     <string name="tournament_creation_cannot_be_removed_message">Dit item kan niet verwijderd worden</string>
+    <string name="poule_text_view">Poule Naam:</string>
+    <string name="save_poule_button">Save</string>
+    <string name="save_tournament_button">Save</string>
 </resources>

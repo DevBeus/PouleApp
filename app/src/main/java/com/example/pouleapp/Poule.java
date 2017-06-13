@@ -15,8 +15,10 @@ public class Poule {
     private ArrayList<Team> teamList = new ArrayList<Team>();
     private PouleScheme pouleScheme;
     private String pouleName;
+    private int pouleNumber;
 
-    public Poule(String name) {
+    public Poule(int number, String name) {
+        this.pouleNumber = number;
         this.pouleName = name;
 
         //initialize poule with 2 dummy teams
@@ -27,12 +29,14 @@ public class Poule {
         pouleScheme = new PouleScheme(teamList);
     }
 
-    public Poule(String name, ArrayList<Team> teams, PouleScheme ps ) {
+    public Poule(int number, String name, ArrayList<Team> teams, PouleScheme ps ) {
+        this.pouleNumber = number;
         this.pouleName = name;
         this.teamList = teams;
         this.pouleScheme = ps;
     }
 
+    public int getPouleNumber() { return pouleNumber; }
     public String getPouleName() { return pouleName; }
     public void setPouleName(String name) { this.pouleName = name; }
 

@@ -23,11 +23,12 @@
                 android:id="@+id/textHomeTeam" />
 
             <EditText
+                android:id="@+id/editHomeScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editHomeScore"/>
+                android:inputType="number"
+                android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
         </TableRow>
 
@@ -42,11 +43,12 @@
                 android:id="@+id/textOpponentTeam" />
 
             <EditText
+                android:id="@+id/editOpponentScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:ems="10"
-                android:id="@+id/editOpponentScore" />
+                android:inputType="number"
+                android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
         </TableRow>
 

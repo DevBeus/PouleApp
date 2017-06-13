@@ -9,7 +9,7 @@
     <string name="show_scheme_button">Scheme</string>
     <string name="show_ranking_button">Ranking</string>
 
-    <string name="poule_text_view">Poule:</string>
+    <string name="poule_text_view">Poule Name:</string>
 
     <string name="rank">#</string>
     <string name="team">Team</string>
@@ -46,5 +46,6 @@
     <string name="home_button">home</string>
     <string name="delete_tournament_button">Delete Tournament</string>
     <string name="tournament_creation_cannot_be_removed_message">This item cannot be removed</string>
+    <string name="save_poule_button">Save</string>
 
 </resources>

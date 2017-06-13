@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         mSpinner.setAdapter(dataAdapter);
     }
 
-    public void showPoule(View view) {
+    public void showTournament(View view) {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         ArrayList<String> tournamentIDList = globalVariable.getTournamentIDList();
         int selectedIndex = mSpinner.getSelectedItemPosition();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         globalVariable.initTournament(id);
 
-        Intent intent = new Intent(this, PouleActivity.class);
+        Intent intent = new Intent(this, TournamentActivity.class);
 
         startActivity(intent);
     }

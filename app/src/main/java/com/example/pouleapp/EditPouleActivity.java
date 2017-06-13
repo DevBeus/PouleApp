@@ -48,7 +48,7 @@ public class EditPouleActivity extends AppCompatActivity {
         // When teams are removed, activity is re-entrant with same TEAM_INDEX value in intent
         mTeam_Index = Math.min(intent.getIntExtra(TEAM_INDEX,0),teamList.size()-1);
 
-        TextView textView = (TextView) findViewById(R.id.textViewPoule);
+        TextView textView = (TextView) findViewById(R.id.editTextPoule);
         textView.setText(poule.getPouleName());
 
         radioGroup = (ViewGroup) findViewById(R.id.radio_group);
@@ -143,9 +143,23 @@ public class EditPouleActivity extends AppCompatActivity {
 
     /** This method is called when scheme button is clicked */
     public void showPoules(View view) {
-        Intent intent = new Intent(this, PouleActivity.class);
+        Intent intent = new Intent(this, TournamentActivity.class);
 
         startActivity(intent);
+    }
+
+    public void savePoule(View view) {
+        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        Tournament tournament = globalVariable.getTournament();
+        ArrayList<Poule> pouleList = tournament.getPouleList();
+        Poule poule = pouleList.get(mPoule_Index);
+
+        TextView textPoule = (TextView) findViewById(R.id.editTextPoule);
+
+        String pouleName = textPoule.getText().toString();
+        poule.setPouleName(pouleName);
+
+        globalVariable.savePoule(poule);
     }
 }
 

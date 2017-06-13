@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".PouleActivity"></activity>
+        <activity android:name=".TournamentActivity"></activity>
         <activity android:name=".EditPouleActivity"></activity>
         <activity android:name=".EditTeamActivity"></activity>
         <activity android:name=".EditMatchActivity"></activity>

@@ -44,7 +44,7 @@ public class GlobalData extends Application {
     //public static final String MY_PREFS_NAME = "MyPrefsFile";
     public static final String DEFAULT_TOURNAMENT_NAME = "Tournament";
     public static final String DEFAULT_TOURNAMENT_ID = "0";
-    public static final String DEFAULT_POULE_NAME = "Poule0";
+    public static final String DEFAULT_POULE_NAME = "PouleName";
 
     //public ArrayList<Poule> getPouleList() { return mPouleList; }
 
@@ -52,7 +52,7 @@ public class GlobalData extends Application {
         SharedPreferences appPrefs = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE);
         mNrofTournaments = appPrefs.getInt("nrofTournaments",0);
 
-        // In case home action, ID and Name list need to be emptied first
+        // In case home action, ID and Name list need to be emptied first and data should be retrieved from preference file
         mTournamentIDList.clear();
         mTournamentNameList.clear();
 
@@ -104,7 +104,7 @@ public class GlobalData extends Application {
             nrofPoules = 1;
             editor.putInt("nrofPoules",nrofPoules);
 
-            pouleList.add(new Poule(DEFAULT_POULE_NAME));
+            pouleList.add(new Poule(0,DEFAULT_POULE_NAME));
 
             editor.apply();
 
@@ -124,24 +124,25 @@ public class GlobalData extends Application {
 
     public Poule initPoule(int pouleIndex) {
         SharedPreferences prefs = getSharedPreferences(mTournamentIDList.get(mSelectedTournamentIndex), MODE_PRIVATE);
-        String pouleName = "Poule" + pouleIndex;
+        String pouleKey = "Poule" + pouleIndex;
 
         ArrayList<Team> teamList = new ArrayList<>();
 
-        int nrofTeams = prefs.getInt(pouleName+"nrofTeams", 0);
+        int nrofTeams = prefs.getInt(pouleKey+"nrofTeams", 0);
 
         if (nrofTeams == 0) {
             SharedPreferences.Editor editor = getSharedPreferences(mTournamentIDList.get(mSelectedTournamentIndex), MODE_PRIVATE).edit();
-            editor.putString(pouleName+"Team0", "Team0");
-            editor.putString(pouleName+"Team1", "Team1");
-            editor.putInt(pouleName+"nrofTeams",2);
+            editor.putString(pouleKey,DEFAULT_POULE_NAME);
+            editor.putString(pouleKey+"Team0", "Team0");
+            editor.putString(pouleKey+"Team1", "Team1");
+            editor.putInt(pouleKey+"nrofTeams",2);
             nrofTeams = 2;
 
             editor.apply();
         }
 
         for (int i=0; i < nrofTeams; i++) {
-            String teamstr= pouleName + "Team"+i;
+            String teamstr= pouleKey + "Team"+i;
 
             String teamName = prefs.getString(teamstr, ""); //Empty string is the default value.
             teamList.add(new Team(teamName));
@@ -151,8 +152,8 @@ public class GlobalData extends Application {
 
         for (int i=0; i < nrofTeams; i++) {
             for (int j=0; j < nrofTeams; j++){
-                String keystr1 = pouleName + "Match" + i + "-" + j + "goalsFor";
-                String keystr2 = pouleName + "Match" + i + "-" + j + "goalsAgainst";
+                String keystr1 = pouleKey + "Match" + i + "-" + j + "goalsFor";
+                String keystr2 = pouleKey + "Match" + i + "-" + j + "goalsAgainst";
 
                 int gf = prefs.getInt(keystr1, -1);
                 int ga = prefs.getInt(keystr2, -1);
@@ -163,7 +164,9 @@ public class GlobalData extends Application {
             }
         }
 
-        Poule poule = new Poule(pouleName,teamList,pouleScheme);
+        String pouleName = prefs.getString(pouleKey, DEFAULT_POULE_NAME);
+
+        Poule poule = new Poule(pouleIndex,pouleName,teamList,pouleScheme);
 
         return poule;
     }
@@ -172,9 +175,11 @@ public class GlobalData extends Application {
         mTournament = new Tournament(DEFAULT_TOURNAMENT_NAME);
 
         String selectedTournamentID = mTournament.getTournamentID();
-        mSelectedTournamentIndex = mTournamentIDList.size()-1;
-        mTournamentIDList.add(selectedTournamentID);
-        mTournamentNameList.add(DEFAULT_TOURNAMENT_NAME);
+
+        //a new tournament is added at the beginning of the list at position 0
+        mSelectedTournamentIndex = 0;
+        mTournamentIDList.add(0,selectedTournamentID);
+        mTournamentNameList.add(0,DEFAULT_TOURNAMENT_NAME);
         mNrofTournaments++;
 
         saveTournament();
@@ -276,31 +281,35 @@ public class GlobalData extends Application {
 
      public void savePoule(Poule poule) {
          //Not needed anymore
-        SharedPreferences.Editor editor = getSharedPreferences(mTournament.getTournamentID(), MODE_PRIVATE).edit();
-        String pouleName = poule.getPouleName();
-        ArrayList<Team> teamList = poule.getTeamList();
-        PouleScheme pouleScheme = poule.getPouleScheme();
+         SharedPreferences.Editor editor = getSharedPreferences(mTournament.getTournamentID(), MODE_PRIVATE).edit();
+         String pouleKey = "Poule"+poule.getPouleNumber();
+         String pouleName = poule.getPouleName();
+         ArrayList<Team> teamList = poule.getTeamList();
+         PouleScheme pouleScheme = poule.getPouleScheme();
 
         //if new poule is stored added nrofPoules need to be updated
         //editor.putInt("nrofPoules",mPouleList.size());
 
         //Store info of selected poule:
+        //- poule name
         //- nrof teams in poule
         //- team list
         //- poule scheme
 
-        editor.putInt(pouleName+"nrofTeams", teamList.size());
+        editor.putString(pouleKey,pouleName);
+        editor.putInt(pouleKey+"nrofTeams", teamList.size());
+
 
         for (int i = 0; i < teamList.size(); i++) {
-            String teamstr = pouleName + "Team"+i;
+            String teamstr = pouleKey + "Team"+i;
 
             editor.putString(teamstr, teamList.get(i).getTeamName());
         }
 
         for (int i = 0; i < teamList.size(); i++) {
             for (int j = 0; j < teamList.size(); j++) {
-                String keystr1 = pouleName + "Match" + i + "-" + j + "goalsFor";
-                String keystr2 = pouleName + "Match" + i + "-" + j + "goalsAgainst";
+                String keystr1 = pouleKey + "Match" + i + "-" + j + "goalsFor";
+                String keystr2 = pouleKey + "Match" + i + "-" + j + "goalsAgainst";
 
                 Integer gf = pouleScheme.getMatchGoalsFor(i, j);
                 Integer ga = pouleScheme.getMatchGoalsAgainst(i, j);
