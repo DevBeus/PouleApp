@@ -109,6 +109,8 @@ public class SchemeTableActivity extends AppCompatActivity {
 
     }
 
+
+
     /** This method is called when ranking button is clicked */
     public void showRanking(View view) {
         Intent intent = new Intent(this, RankingActivity.class);
@@ -116,9 +118,15 @@ public class SchemeTableActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showTeamList(View view) {
-        Intent intent = new Intent(this, EditPouleActivity.class);
+    public void showPoule(View view) {
+        Intent intent = new Intent(this, PouleActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
+        startActivity(intent);
+    }
+
+    public void showTournament(View view) {
+        Intent intent = new Intent(this, TournamentActivity.class);
+
         startActivity(intent);
     }
 

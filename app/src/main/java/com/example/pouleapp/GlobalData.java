@@ -45,6 +45,7 @@ public class GlobalData extends Application {
     public static final String DEFAULT_TOURNAMENT_NAME = "Tournament";
     public static final String DEFAULT_TOURNAMENT_ID = "0";
     public static final String DEFAULT_POULE_NAME = "PouleName";
+    public static final String DEFAULT_TEAM_NAME = "Team";
 
     //public ArrayList<Poule> getPouleList() { return mPouleList; }
 

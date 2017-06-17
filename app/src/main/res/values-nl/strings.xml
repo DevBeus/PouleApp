@@ -21,7 +21,7 @@
     <string name="show_scheme_button">Schema</string>
     <string name="show_team_list_button">Teams</string>
     <string name="team">Team</string>
-    <string name="team_list">Teams</string>
+    <string name="team_list">Poule</string>
     <string name="team_text_view">Team:</string>
     <string name="team_removal_warning">Poule met uit minstens 2 teams bestaan</string>
     <string name="team_removed_message">Team Verwijderd!</string>
@@ -35,11 +35,15 @@
     <string name="welcome_explanation">Met deze App kun je je eigen toernooien oganizeren</string>
     <string name="tournament_name_text_view">Toernooi Naam:</string>
     <string name="tournament_location_text_view">"Plaats: "</string>
-    <string name="tournament_poule_explanation_text_view">Dit toernooi bestaat uit de volgende poules:</string>
+    <string name="tournament_poule_explanation_text_view">Poulelijst:</string>
     <string name="home_button">home</string>
     <string name="delete_tournament_button">Verwijder Toernooi</string>
     <string name="tournament_creation_cannot_be_removed_message">Dit item kan niet verwijderd worden</string>
     <string name="poule_text_view">Poule Naam:</string>
     <string name="save_poule_button">Save</string>
     <string name="save_tournament_button">Save</string>
+    <string name="team_explanation_text_view">Teams:</string>
+    <string name="show_tournament">Toernooi</string>
+    <string name="show_poules_button">Poule</string>
+    <string name="show_tournament_button">Toernooi</string>
 </resources>

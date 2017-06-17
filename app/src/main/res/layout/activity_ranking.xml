@@ -120,11 +120,19 @@
             android:gravity="bottom|center_horizontal">
 
             <Button
-                android:text="@string/show_team_list_button"
+                android:id="@+id/button10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="showTournament"
+                android:text="@string/show_tournament_button" />
+
+
+            <Button
+                android:text="@string/show_poules_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button8"
-                android:onClick="showTeamList"/>
+                android:onClick="showPoule"/>
 
             <Button
                 android:text="@string/show_scheme_button"

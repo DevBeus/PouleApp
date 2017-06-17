@@ -20,8 +20,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="showTournament"
+            android:text="@string/show_tournament_button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/team_list"
-            android:onClick="showTeamList"/>
+            android:onClick="showPoule"/>
 
         <Button
             android:layout_width="wrap_content"

@@ -6,9 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -17,11 +17,14 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
+import static com.example.pouleapp.GlobalData.ACTION_EDIT;
+import static com.example.pouleapp.GlobalData.ACTION_MESSAGE;
+import static com.example.pouleapp.GlobalData.DEFAULT_TEAM_NAME;
 import static com.example.pouleapp.GlobalData.POULE_INDEX;
 import static com.example.pouleapp.GlobalData.TEAM_INDEX;
 
-public class TournamentActivity extends AppCompatActivity {
-
+public class PouleActivity extends AppCompatActivity {
+    private static int mPoule_Index = 0;
     private SwipeMenuListView mListView;
     private ArrayList<String> mArrayList=new ArrayList<>();
     private ListDataAdapter mListDataAdapter;
@@ -29,32 +32,33 @@ public class TournamentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tournament);
+        setContentView(R.layout.activity_poule);
+        ArrayList<Team> teamList;
         ArrayList<Poule> pouleList;
+        Poule poule;
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
-        //globalVariable.initPouleList();
+        Intent intent = getIntent();
+        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
+
         pouleList = tournament.getPouleList();
+        poule = pouleList.get(mPoule_Index);
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.editTournamentName);
-        tvTournamentName.setText(tournament.getTournamentName());
+        teamList = poule.getTeamList();
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.editTournamentLocation);
-        tvTournamentLocation.setText(tournament.getLocation());
+        TextView textView = (TextView) findViewById(R.id.editTextTeam);
+        textView.setText(poule.getPouleName());
 
-        initListView(pouleList);
-
-        //hide soft keyboard
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        initListView(teamList);
     }
 
-    private void initListView(ArrayList<Poule> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.listViewPoules);
+    private void initListView(ArrayList<Team> list) {
+        mListView=(SwipeMenuListView)findViewById(R.id.listViewTeams);
         mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
-            mArrayList.add(list.get(i).getPouleName());
+            mArrayList.add(list.get(i).getTeamName());
         }
 
         // mListView.setCloseInterpolator(new BounceInterpolator());
@@ -66,15 +70,13 @@ public class TournamentActivity extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 // Create different menus depending on the view type
-                SwipeMenuItem goodItem = new SwipeMenuItem(getApplicationContext());
-                //goodItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
-                goodItem.setWidth(dp2px(48));
-                goodItem.setIcon(R.drawable.ic_edit_sq_48);
-                menu.addMenuItem(goodItem);
+                SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
+                editItem.setWidth(dp2px(48));
+                editItem.setIcon(R.drawable.ic_edit_sq_48);
+                menu.addMenuItem(editItem);
 
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
-                //deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
                 deleteItem.setWidth(dp2px(48));
                 deleteItem.setIcon(R.drawable.ic_recycle_bin_sq_48);
                 menu.addMenuItem(deleteItem);
@@ -88,25 +90,44 @@ public class TournamentActivity extends AppCompatActivity {
         mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
 
             @Override
+
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        //Toast.makeText(TournamentActivity.this,"Like button press",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), PouleActivity.class);
-                        intent.putExtra(POULE_INDEX, position);
-                        intent.putExtra(TEAM_INDEX,0);
+                        Intent intent = new Intent(getApplicationContext(), EditTeamActivity.class);
+                        intent.putExtra(ACTION_MESSAGE, ACTION_EDIT);
+                        intent.putExtra(POULE_INDEX, mPoule_Index);
+                        intent.putExtra(TEAM_INDEX, position);
 
                         startActivity(intent);
 
                         break;
                     case 1:
-                        deletePoule(position);
+                        mArrayList.remove(position);
                         mListDataAdapter.notifyDataSetChanged();
-                        //Toast.makeText(TournamentActivity.this,"Item deleted",Toast.LENGTH_SHORT).show();
+
+                        ArrayList<Poule> pouleList;
+                        Poule poule;
+
+                        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+                        Tournament tournament = globalVariable.getTournament();
+                        pouleList = tournament.getPouleList();
+                        poule = pouleList.get(mPoule_Index);
+
+                        if (poule.getTeamList().size()>2) {
+
+                            poule.deleteTeam(position);
+                            globalVariable.savePoule(poule);
+                        } else {
+                            String message = getResources().getString(R.string.team_removal_warning);
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                        }
+
                         break;
                 }
 
                 return true;
+
             }
 
         });
@@ -120,7 +141,6 @@ public class TournamentActivity extends AppCompatActivity {
             @Override
             public void onMenuClose(int position) {
             }
-
         });
 
         mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
@@ -131,30 +151,10 @@ public class TournamentActivity extends AppCompatActivity {
             @Override
             public void onSwipeEnd(int position) {
             }
-
         });
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_add) {
-//            //TODO add item to list from here
-//            mArrayList.add("List item --> "+mArrayList.size());
-//            mListDataAdapter.notifyDataSetChanged();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     class ListDataAdapter extends BaseAdapter {
         ViewHolder holder;
@@ -195,53 +195,59 @@ public class TournamentActivity extends AppCompatActivity {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,getResources().getDisplayMetrics());
     }
 
-    public void saveTournament(View view) {
+    public void addTeam(View view) {
+        ArrayList<Poule> pouleList;
+        Poule poule;
+
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
+        pouleList = tournament.getPouleList();
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.editTournamentName);
-        String name = tvTournamentName.getText().toString();
+        poule = pouleList.get(mPoule_Index);
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.editTournamentLocation);
-        String location = tvTournamentLocation.getText().toString();
-
-        tournament.setTournamentName(name);
-        tournament.setLocation(location);
+        poule.addTeam(DEFAULT_TEAM_NAME);
 
         globalVariable.saveTournament();
-        globalVariable.updateTournamentName(name);
-        globalVariable.saveAppData();
 
         recreate();
-
     }
 
-    public void addPoule(View view) {
+
+    /** This method is called when scheme button is clicked */
+    public void showScheme(View view) {
+        Intent intent = new Intent(this, SchemeTableActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
+
+        startActivity(intent);
+    }
+
+    /** This method is called when ranking button is clicked */
+    public void showRanking(View view) {
+        Intent intent = new Intent(this, RankingActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
+
+        startActivity(intent);
+    }
+
+    /** This method is called when scheme button is clicked */
+    public void showTournament(View view) {
+        Intent intent = new Intent(this, TournamentActivity.class);
+
+        startActivity(intent);
+    }
+
+    public void savePoule(View view) {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
         ArrayList<Poule> pouleList = tournament.getPouleList();
-        int pouleId = pouleList.size();
+        Poule poule = pouleList.get(mPoule_Index);
 
-        Poule poule = new Poule(pouleId,"Poule"+pouleId);
-        pouleList.add(poule);
+        TextView textPoule = (TextView) findViewById(R.id.editTextTeam);
 
-        globalVariable.saveTournament();
+        String pouleName = textPoule.getText().toString();
+        poule.setPouleName(pouleName);
 
-        recreate();
-
+        globalVariable.savePoule(poule);
     }
-
-    public void deletePoule(int index) {
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        Tournament tournament = globalVariable.getTournament();
-        ArrayList<Poule> pouleList = tournament.getPouleList();
-        pouleList.remove(index);
-
-        globalVariable.saveTournament();
-
-        recreate();
-
-    }
-
-
 }
+

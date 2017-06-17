@@ -41,6 +41,13 @@ public class RankingActivity extends AppCompatActivity {
 
     }
 
+    /** This method is called when Tournament button is clicked */
+    public void showTournament(View view) {
+        Intent intent = new Intent(this, TournamentActivity.class);
+
+        startActivity(intent);
+    }
+
     /** This method is called when Scheme button is clicked */
     public void showScheme(View view) {
         Intent intent = new Intent(this, SchemeTableActivity.class);
@@ -49,8 +56,8 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     /** This method is called when Team List button is clicked */
-    public void showTeamList(View view) {
-        Intent intent = new Intent(this, EditPouleActivity.class);
+    public void showPoule(View view) {
+        Intent intent = new Intent(this, PouleActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
