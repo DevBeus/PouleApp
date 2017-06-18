@@ -35,6 +35,8 @@ public class EditTeamActivity extends AppCompatActivity {
         ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
 
+        setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+
         if (mMessage.equals(ACTION_ADD)) {
             poule.addTeam(mDefaultTeamName);
             mTeam_Index =  poule.getTeamList().size()-1;

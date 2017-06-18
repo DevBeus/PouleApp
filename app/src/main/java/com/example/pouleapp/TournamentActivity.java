@@ -7,6 +7,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -34,6 +35,8 @@ public class TournamentActivity extends AppCompatActivity {
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
+
+        setTitle(getResources().getString(R.string.menu_tournament_name_text) + tournament.getTournamentName());
         //globalVariable.initPouleList();
         pouleList = tournament.getPouleList();
 
@@ -84,6 +87,16 @@ public class TournamentActivity extends AppCompatActivity {
 
         // set creator
         mListView.setMenuCreator(creator);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), RankingActivity.class);
+                intent.putExtra(POULE_INDEX, position);
+
+                startActivity(intent);
+            }
+        });
 
         mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
 

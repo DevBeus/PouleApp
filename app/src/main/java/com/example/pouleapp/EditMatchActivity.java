@@ -41,6 +41,8 @@ public class EditMatchActivity extends AppCompatActivity {
         ArrayList<Team> teamList = poule.getTeamList();
         PouleScheme pouleScheme = poule.getPouleScheme();
 
+        setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+
         String homeTeam = teamList.get(x).getTeamName();
         String opponent = teamList.get(y).getTeamName();
 

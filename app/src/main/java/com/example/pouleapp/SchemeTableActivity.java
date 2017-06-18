@@ -43,6 +43,8 @@ public class SchemeTableActivity extends AppCompatActivity {
         ArrayList<Team> teamList = poule.getTeamList();
         PouleScheme pouleScheme = poule.getPouleScheme();
 
+        setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+
         TableLayout tl = (TableLayout) findViewById(R.id.scheme_table);
 
         for (int i=0; i < teamList.size()+1; i++) {

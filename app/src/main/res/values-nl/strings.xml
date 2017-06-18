@@ -46,4 +46,7 @@
     <string name="show_tournament">Toernooi</string>
     <string name="show_poules_button">Poule</string>
     <string name="show_tournament_button">Toernooi</string>
+    <string name="menu_poule_name_text">"Poule: "</string>
+    <string name="menu_tournament_name_text">"Toernooi: "</string>
+    <string name="menu_team_name_text">"Team: "</string>
 </resources>

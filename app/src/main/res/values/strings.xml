@@ -50,5 +50,8 @@
     <string name="team_explanation_text_view">Teams:</string>
     <string name="show_tournament">Tournament</string>
     <string name="show_tournament_button">Tournament</string>
+    <string name="menu_poule_name_text">"Poule: "</string>
+    <string name="menu_tournament_name_text">"Tournament: "</string>
+    <string name="menu_team_name_text">"Team: "</string>
 
 </resources>

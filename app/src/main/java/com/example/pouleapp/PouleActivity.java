@@ -45,6 +45,8 @@ public class PouleActivity extends AppCompatActivity {
         pouleList = tournament.getPouleList();
         poule = pouleList.get(mPoule_Index);
 
+        setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+
         teamList = poule.getTeamList();
 
         TextView textView = (TextView) findViewById(R.id.editTextTeam);

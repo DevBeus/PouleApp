@@ -28,6 +28,7 @@ public class RankingActivity extends AppCompatActivity {
 
         Poule poule = pouleList.get(mPoule_Index);
         ArrayList<Team> teamList = poule.getTeamList();
+        setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 
         ArrayList<Team> sortedPoule = new ArrayList<>(teamList);
 

@@ -71,7 +71,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/button2"
         app:layout_constraintRight_toLeftOf="@+id/button5"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="36dp"
         app:layout_constraintLeft_toRightOf="@+id/button2"
         app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
@@ -83,7 +83,7 @@
         android:text="@string/show_ranking_button"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="37dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintLeft_toRightOf="@+id/button4"
         app:layout_constraintBottom_toBottomOf="@+id/button4" />
@@ -148,6 +148,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        android:onClick="addTeam"/>
+        android:onClick="addTeam"
+        android:layout_marginEnd="8dp" />
 
 </android.support.constraint.ConstraintLayout>
