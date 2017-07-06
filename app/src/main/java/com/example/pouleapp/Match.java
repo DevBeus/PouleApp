@@ -40,8 +40,15 @@ public class Match {
     }
 
     public String getHomeTeam() { return homeTeam; }
+
+    public void setHomeTeam(String team) {
+        this.homeTeam = team;
+    }
     public String getOpponent() { return opponent; }
 
+    public void setOpponent(String op) {
+        this.opponent = op;
+    }
     public void setResult(Integer gf, Integer ga) {
         this.goalsFor = gf;
         this.goalsAgainst = ga;

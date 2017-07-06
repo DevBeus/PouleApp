@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class PouleScheme {
     private Match[][] mPouleScheme;
+    private Round[] mRoundScheme;
     private int mPouleSize;
 
     public PouleScheme(ArrayList<Team> poule) {
@@ -24,6 +25,8 @@ public class PouleScheme {
             }
 
         }
+
+        generateRoundScheme();
     }
 
     public void addTeam(String newTeam) {
@@ -39,13 +42,15 @@ public class PouleScheme {
         // Add new matches
         for (int i = 0; i < mPouleSize; i++) {
             pouleSchemeNew[mPouleSize][i] = new Match(newTeam,mPouleScheme[0][i].getHomeTeam());
-            pouleSchemeNew[i][mPouleSize] = new Match(mPouleScheme[i][0].getOpponent(),newTeam);
+            pouleSchemeNew[i][mPouleSize] = new Match(mPouleScheme[i][0].getHomeTeam(),newTeam);
         }
 
         pouleSchemeNew[mPouleSize][mPouleSize] = new Match(newTeam, newTeam);
 
         mPouleSize++;
         mPouleScheme = pouleSchemeNew;
+
+        generateRoundScheme();
 
     }
 
@@ -83,6 +88,8 @@ public class PouleScheme {
 
         mPouleSize--;
         mPouleScheme = pouleSchemeNew;
+
+        generateRoundScheme();
     }
 
     public void removeMatch(ArrayList<Team> poule, int i, int j){
@@ -147,19 +154,132 @@ public class PouleScheme {
 
     public int getPouleSize() { return mPouleSize; }
 
+    public Match getMatchFromScheme(int r, int t) {
+        // this function returns the match team t plays in round r
+        // Explanation on this function can be found in SpeelSchema.xlsx
+        // r in [1..n)
+        // t in [0..n)
 
+        int n = mPouleSize;
+        int f = mod(n-t-r,n);
 
-    public void fillTestData(ArrayList<Team> poule) {
-        Match match = mPouleScheme[0][1];
+        if (f==t) {
+            if (f!=(n-1)) {
+                f = n-1;
+            } else {
+                f = n/2 - 1;
+            }
+        }
 
-        Team homeTeam = poule.get(0);
-        Team opponent = poule.get(1);
+        Match m = mPouleScheme[t][f];
 
-        match.setResult(3,1);
-
-        homeTeam.addMatchResult(3,1);
-        opponent.addMatchResult(1,3);
-
+        return m;
     }
 
+    private int calculateOpponent(int n, int r, int t) {
+        // this function returns the match team t plays in round r with poule size n
+        // Explanation on this function can be found in SpeelSchema.xlsx
+        // r in [1..n)
+        // t in [0..n)
+
+        int f = mod(n-t-r,n);
+
+        if (f==t) {
+            f = mod((t+(n/2)),n);
+        }
+
+        return f;
+    }
+
+    private int mod(int x, int y)
+    {
+        int result = x % y;
+        if (result < 0)
+        {
+            result += y;
+        }
+        return result;
+    }
+
+    private void generateRoundScheme() {
+        int pSize = mPouleSize;
+        boolean teamAdded = false;
+
+        //even number of teams required to calculate scheme, additional team is used as free match
+        if (mPouleSize%2==1) { pSize = mPouleSize+1; teamAdded = true; }
+
+        //number of playing rounds is pSize-1
+        mRoundScheme = new Round[pSize]; // element 0 will not be used
+
+        for (int r = 1; r<pSize; r++) {
+            // Number of matches per round is mPouleSize/2, Remark: not pSize/2, example when poule consists of 3 teams, only 1 match can be played per round
+            // Array of size 2 to store home team nr and opponent team nr
+            // Example: matchList[0] -> [1,3] describes team 1 playing team 3
+            int[][] matchList = new int[mPouleSize/2][2];
+            boolean[] teamScheduled = new boolean[pSize]; //implicitly whole array is set to false
+            int m = 0;
+
+            for (int t = 0; t <pSize; t++){
+                int op = calculateOpponent(pSize,r,t);
+
+                //Only plan teams when not yet scheduled
+                if ( !teamScheduled[t] && !teamScheduled[op] ) {
+                    teamScheduled[t] = true;
+                    teamScheduled[op] = true;
+
+                    //@TODO Check to be done when team is added as free team
+
+                    if ( teamAdded && (op==(pSize-1)) ) {
+                        // When team is added, pSize-1 as opponent means team is free
+                        // Skip
+                    } else {
+                        matchList[m][0] = t;
+                        matchList[m][1] = op;
+                        m++;
+                    }
+                }
+            }
+
+            mRoundScheme[r] = new Round(r,matchList);
+        }
+    }
+
+    public int getNumberOfRounds() {
+        int rounds = mPouleSize;
+
+        //When number of teams is odd, additional round is required
+        if (mPouleSize%2==1) { rounds++; }
+
+        return rounds;
+    }
+
+    public Match[] getRoundMatchList(int r) {
+        // Example: mList[0] -> [1,3] describes team 1 playing team 3
+        int[][] mList = mRoundScheme[r].getMatchList();
+        Match[] matchList = new Match[mList.length];
+
+        for (int i=0; i < mList.length; i++) {
+            int x = mList[i][0];
+            int y = mList[i][1];
+
+            matchList[i] = mPouleScheme[x][y];
+        }
+
+        return matchList;
+    }
+
+    public String[] getRoundMatchListStrings(int r) {
+        String[] matchList = new String[mPouleSize];
+
+        int i = 0;
+
+        for (int t=0; t<mPouleSize; t++) {
+            Match match;
+            match = getMatchFromScheme(r,t);
+
+            matchList[t] = match.getMatchString();
+        }
+
+        return matchList;
+    }
 }

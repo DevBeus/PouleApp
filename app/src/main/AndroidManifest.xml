@@ -18,11 +18,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TournamentActivity"></activity>
+        <activity android:name=".TournamentActivity"
+            android:windowSoftInputMode="adjustNothing">
+        </activity>
         <activity android:name=".PouleActivity"></activity>
         <activity android:name=".EditTeamActivity"></activity>
         <activity android:name=".EditMatchActivity"></activity>
         <activity android:name=".SchemeTableActivity"></activity>
+        <activity android:name=".SchemeActivity"></activity>
         <activity android:name=".RankingActivity"></activity>
     </application>
 

@@ -47,7 +47,6 @@ public class Poule {
     public void setTeamList(ArrayList<Team> teams ) { this.teamList = teams; }
 
     public void addTeam( String teamName ) {
-        //@TODO: Check on unique team name
         teamList.add(new Team(teamName));
         pouleScheme.addTeam(teamName);
 

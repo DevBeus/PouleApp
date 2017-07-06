@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -49,7 +51,7 @@ public class TournamentActivity extends AppCompatActivity {
         initListView(pouleList);
 
         //hide soft keyboard
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     private void initListView(ArrayList<Poule> list) {
@@ -91,7 +93,7 @@ public class TournamentActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), RankingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SchemeActivity.class);
                 intent.putExtra(POULE_INDEX, position);
 
                 startActivity(intent);
@@ -149,25 +151,25 @@ public class TournamentActivity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.action_add) {
-//            //TODO add item to list from here
-//            mArrayList.add("List item --> "+mArrayList.size());
-//            mListDataAdapter.notifyDataSetChanged();
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_home) {
+            Intent intent = new Intent(this, MainActivity.class);
+
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     class ListDataAdapter extends BaseAdapter {
         ViewHolder holder;

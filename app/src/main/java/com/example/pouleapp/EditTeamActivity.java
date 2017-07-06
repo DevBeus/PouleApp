@@ -72,7 +72,7 @@ public class EditTeamActivity extends AppCompatActivity {
         boolean found = false;
 
         for (int i=0; i < teamList.size(); i++) {
-            if (teamList.get(i).getTeamName().equals(teamName)) { found = true; }
+            if ((teamList.get(i).getTeamName().equals(teamName)) && (mTeam_Index !=i)) { found = true; }
         }
 
         if ( !found ) {
@@ -80,6 +80,18 @@ public class EditTeamActivity extends AppCompatActivity {
 
             team.setTeamName(teamName);
             team.setCoachName(teamCoach);
+
+            //@TODO all matches of teamName need to be updated with new team name
+            PouleScheme pouleScheme = poule.getPouleScheme();
+            Match m;
+
+            for (int j=0; j < teamList.size(); j++) {
+                m = pouleScheme.getMatch(mTeam_Index,j);
+                m.setHomeTeam(teamName);
+
+                m = pouleScheme.getMatch(j,mTeam_Index);
+                m.setOpponent(teamName);
+            }
 
             globalVariable.savePoule(poule);
 

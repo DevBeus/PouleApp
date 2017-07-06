@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -157,6 +159,26 @@ public class PouleActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_home) {
+            Intent intent = new Intent(this, MainActivity.class);
+
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     class ListDataAdapter extends BaseAdapter {
         ViewHolder holder;
@@ -217,7 +239,7 @@ public class PouleActivity extends AppCompatActivity {
 
     /** This method is called when scheme button is clicked */
     public void showScheme(View view) {
-        Intent intent = new Intent(this, SchemeTableActivity.class);
+        Intent intent = new Intent(this, SchemeActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
 
         startActivity(intent);
