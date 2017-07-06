@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.PREVIOUS_ACTIVITY;
+import static com.example.pouleapp.GlobalData.SCHEME_ACTIVITY;
+import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
+import static com.example.pouleapp.GlobalData.SCHEME_ROW;
+import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 /**
  * Created by gezamenlijk on 29-6-2017.
@@ -22,6 +27,7 @@ import static com.example.pouleapp.GlobalData.POULE_INDEX;
 
 public class SchemeActivity extends AppCompatActivity {
     private int mPoule_Index = 0;
+    private Poule mPoule;
 
     private static final String NAME = "NAME";
 
@@ -46,11 +52,11 @@ public class SchemeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         mPoule_Index = intent.getIntExtra(POULE_INDEX, 0);
 
-        Poule poule = pouleList.get(mPoule_Index);
-        ArrayList<Team> teamList = poule.getTeamList();
-        PouleScheme pouleScheme = poule.getPouleScheme();
+        mPoule = pouleList.get(mPoule_Index);
+        ArrayList<Team> teamList = mPoule.getTeamList();
+        PouleScheme pouleScheme = mPoule.getPouleScheme();
 
-        setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+        setTitle(getResources().getString(R.string.menu_poule_name_text) + mPoule.getPouleName());
 
         //  initiate the expandable list view
         simpleExpandableListView = (ExpandableListView) findViewById(R.id.simpleExpandableListView);
@@ -98,7 +104,7 @@ public class SchemeActivity extends AppCompatActivity {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 
                 // display a toast with group name whenever a user clicks on a group item
-                Toast.makeText(getApplicationContext(), "Group Name Is: Round " + groupPosition, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Group Name Is: Round " + groupPosition, Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -109,12 +115,55 @@ public class SchemeActivity extends AppCompatActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
                 // display a toast with child name whenever a user clicks on a child item
-                Toast.makeText(getApplicationContext(), "Child Name Is :" + childItems[groupPosition][childPosition], Toast.LENGTH_LONG).show();
+                int r = groupPosition;
+
+                PouleScheme pouleScheme = mPoule.getPouleScheme();
+                ArrayList<Team> teamList = mPoule.getTeamList();
+                Match[] mList = pouleScheme.getRoundMatchList(r+1);
+
+                Match match = mList[childPosition];
+                String homeTeam = match.getHomeTeam();
+                String opponent = match.getOpponent();
+
+                int x = 0;
+                int y = 0;
+
+                for (int i = 0; i< teamList.size(); i++) {
+                    if (homeTeam.equals(teamList.get(i).getTeamName())) { x = i; }
+                    if (opponent.equals(teamList.get(i).getTeamName())) { y = i; }
+                }
+
+                Intent intent = new Intent(v.getContext(), EditMatchActivity.class);
+                intent.putExtra(PREVIOUS_ACTIVITY,SCHEME_ACTIVITY);
+                intent.putExtra(POULE_INDEX,mPoule_Index);
+                intent.putExtra(SCHEME_ROW,x);
+                intent.putExtra(SCHEME_COLUMN,y);
+                startActivity(intent);
+
+                //Toast.makeText(getApplicationContext(), "Match Index Is : [" + x + "][" + y + "]", Toast.LENGTH_LONG).show();
                 return false;
             }
         });
     }
 
+    /** This method is called when ranking button is clicked */
+    public void showRanking(View view) {
+        Intent intent = new Intent(this, RankingActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
+        startActivity(intent);
+    }
+
+    public void showPoule(View view) {
+        Intent intent = new Intent(this, PouleActivity.class);
+        intent.putExtra(POULE_INDEX, mPoule_Index);
+        startActivity(intent);
+    }
+
+    public void showTournament(View view) {
+        Intent intent = new Intent(this, TournamentActivity.class);
+
+        startActivity(intent);
+    }
 
 
 }

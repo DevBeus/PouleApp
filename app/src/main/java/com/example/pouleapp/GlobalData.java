@@ -20,6 +20,10 @@ public class GlobalData extends Application {
     public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
     public final static String SCHEME_ROW = "com.example.pouleapp.SCHEMEROW";
     public final static String SCHEME_COLUMN = "com.example.pouleapp.SCHEMECOLUMN";
+    public final static String PREVIOUS_ACTIVITY = "com.example.pouleapp.PREVIOUSACTIVITY";
+
+    public final static String SCHEME_ACTIVITY = "com.example.pouleapp.SCHEME";
+    public final static String SCHEME_TABLE_ACTIVITY = "com.example.pouleapp.SCHEME_TABLE";
 
     public final static String ACTION_MESSAGE = "com.example.pouleapp.ACTIONMESSAGE";
     public final static String ACTION_ADD = "ADD";
@@ -326,76 +330,5 @@ public class GlobalData extends Application {
     }
 }
 
-//    public void initPouleListX() {
-//        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-//        int nrofPoules = prefs.getInt("nrofPoules",0);
-//        mPouleList.clear();
-//
-//        if (nrofPoules == 0 ) {
-//            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-//            //String defaultPouleName = DEFAULT_POULE_NAME;
-//            int defaultPouleIndex = 0;
-//
-//            editor.putString("Poule0",DEFAULT_POULE_NAME);
-//            nrofPoules = 1;
-//            editor.putInt("nrofPoules",nrofPoules);
-//
-//            mPouleList.add(new Poule(DEFAULT_POULE_NAME));
-//
-//            editor.apply();
-//
-//            savePoule(defaultPouleIndex);
-//        }
-//        else {
-//
-//            for (int i=0; i < nrofPoules; i++) {
-//                initPoule(i);
-//            }
-//        }
-//
-//    }
 
-//    public void initPouleX(int pouleIndex) {
-//        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-//        String pouleName = "Poule" + pouleIndex;
-//
-//        ArrayList<Team> teamList = new ArrayList<>();
-//
-//        int nrofTeams = prefs.getInt(pouleName+"nrofTeams", 0);
-//
-//        if (nrofTeams == 0) {
-//            SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
-//            editor.putString(pouleName+"Team0", "Team0");
-//            editor.putString(pouleName+"Team1", "Team1");
-//            editor.putInt(pouleName+"nrofTeams",2);
-//            nrofTeams = 2;
-//
-//            editor.apply();
-//        }
-//
-//        for (int i=0; i < nrofTeams; i++) {
-//            String teamstr= pouleName + "Team"+i;
-//
-//            String teamName = prefs.getString(teamstr, ""); //Empty string is the default value.
-//            teamList.add(new Team(teamName));
-//        }
-//
-//        PouleScheme pouleScheme = new PouleScheme(teamList);
-//
-//        for (int i=0; i < nrofTeams; i++) {
-//            for (int j=0; j < nrofTeams; j++){
-//                String keystr1 = pouleName + "Match" + i + "-" + j + "goalsFor";
-//                String keystr2 = pouleName + "Match" + i + "-" + j + "goalsAgainst";
-//
-//                int gf = prefs.getInt(keystr1, -1);
-//                int ga = prefs.getInt(keystr2, -1);
-//
-//                if ((gf!=-1)&&(ga!=-1)) {
-//                    pouleScheme.updateMatch(teamList,i,j,gf,ga);
-//                }
-//            }
-//        }
-//
-//        mPouleList.add(new Poule(pouleName,teamList,pouleScheme));
-//    }
 

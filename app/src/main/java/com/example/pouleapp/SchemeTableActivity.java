@@ -14,8 +14,10 @@ import java.util.ArrayList;
 
 import static android.R.color.darker_gray;
 import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.PREVIOUS_ACTIVITY;
 import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
 import static com.example.pouleapp.GlobalData.SCHEME_ROW;
+import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 
 /**
@@ -91,6 +93,7 @@ public class SchemeTableActivity extends AppCompatActivity {
                         tv1.setOnClickListener(new View.OnClickListener(){
                             public void onClick(View v) {
                                 Intent intent = new Intent(v.getContext(), EditMatchActivity.class);
+                                intent.putExtra(PREVIOUS_ACTIVITY,SCHEME_TABLE_ACTIVITY);
                                 intent.putExtra(POULE_INDEX,mPoule_Index);
                                 intent.putExtra(SCHEME_ROW,x);
                                 intent.putExtra(SCHEME_COLUMN,y);

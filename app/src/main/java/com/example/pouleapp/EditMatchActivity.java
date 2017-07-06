@@ -11,8 +11,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.GlobalData.PREVIOUS_ACTIVITY;
 import static com.example.pouleapp.GlobalData.SCHEME_ROW;
 import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
+import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 
 /**
@@ -23,6 +25,7 @@ public class EditMatchActivity extends AppCompatActivity {
     private int x = 0;
     private int y = 1;
     private int mPoule_Index = 0;
+    private String mPrevious_Activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class EditMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_match);
 
         Intent intent = getIntent();
+        mPrevious_Activity = intent.getStringExtra(PREVIOUS_ACTIVITY);
         x = intent.getIntExtra(SCHEME_ROW, 0);
         y = intent.getIntExtra(SCHEME_COLUMN, 0);
         mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
@@ -109,14 +113,28 @@ public class EditMatchActivity extends AppCompatActivity {
 
         globalVariable.savePoule(poule);
 
-        Intent intent = new Intent(this, SchemeTableActivity.class);
+        Intent intent;
+
+        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
+            intent = new Intent(this, SchemeTableActivity.class);
+        } else {
+            intent = new Intent(this, SchemeActivity.class);
+        }
+
         intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
 
     }
 
     public void cancel(View view) {
-        Intent intent = new Intent(this, SchemeTableActivity.class);
+        Intent intent;
+
+        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
+            intent = new Intent(this, SchemeTableActivity.class);
+        } else {
+            intent = new Intent(this, SchemeActivity.class);
+        }
+
         intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
 

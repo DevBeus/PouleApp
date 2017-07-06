@@ -81,7 +81,7 @@ public class EditTeamActivity extends AppCompatActivity {
             team.setTeamName(teamName);
             team.setCoachName(teamCoach);
 
-            //@TODO all matches of teamName need to be updated with new team name
+            // all matches of teamName need to be updated with new team name
             PouleScheme pouleScheme = poule.getPouleScheme();
             Match m;
 
