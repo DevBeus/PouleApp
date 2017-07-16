@@ -53,44 +53,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintBottom_toTopOf="@+id/guideline7" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:onClick="showTournament"
-        android:text="@string/show_tournament_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showScheme"
-        android:text="@string/show_scheme_button"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
-        app:layout_constraintRight_toLeftOf="@+id/button5"
-        android:layout_marginStart="36dp"
-        app:layout_constraintLeft_toRightOf="@+id/button2"
-        app:layout_constraintHorizontal_chainStyle="spread_inside" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="showRanking"
-        android:text="@string/show_ranking_button"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginStart="37dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintLeft_toRightOf="@+id/button4"
-        app:layout_constraintBottom_toBottomOf="@+id/button4" />
-
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -154,5 +116,19 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@mipmap/ic_add_48" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:backgroundTint="@android:color/transparent"
+        android:onClick="showTournament"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_arrow_left_48" />
 
 </android.support.constraint.ConstraintLayout>

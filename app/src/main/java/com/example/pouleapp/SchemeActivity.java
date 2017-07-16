@@ -3,6 +3,7 @@ package com.example.pouleapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
@@ -25,7 +26,8 @@ import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
  * Created by gezamenlijk on 29-6-2017.
  */
 
-public class SchemeActivity extends AppCompatActivity {
+public class SchemeActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener{
+    private SimpleGestureFilter detector;
     private int mPoule_Index = 0;
     private Poule mPoule;
 
@@ -44,6 +46,9 @@ public class SchemeActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main_test);
         setContentView(R.layout.activity_scheme);
         ViewGroup radioGroup;
+
+        // Detect touched area
+        detector = new SimpleGestureFilter(this,this);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
@@ -98,6 +103,10 @@ public class SchemeActivity extends AppCompatActivity {
                 childFrom, childTo);
         simpleExpandableListView.setAdapter(mAdapter);
 
+        for (int i=0; i<pouleScheme.getNumberOfRounds()-1; i++ ) {
+            simpleExpandableListView.expandGroup(i);
+        }
+
         // perform set on group click listener event
         simpleExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
@@ -144,6 +153,44 @@ public class SchemeActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent me){
+        // Call onTouchEvent of SimpleGestureFilter class
+        this.detector.onTouchEvent(me);
+        return super.dispatchTouchEvent(me);
+    }
+    @Override
+    public void onSwipe(int direction) {
+        String str = "";
+        Intent intent;
+
+        switch (direction) {
+
+            case SimpleGestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+                intent = new Intent(this, TournamentActivity.class);
+                startActivity(intent);
+                break;
+
+            case SimpleGestureFilter.SWIPE_LEFT :  str = "Swipe Left";
+                intent = new Intent(getApplicationContext(), RankingActivity.class);
+                intent.putExtra(POULE_INDEX, mPoule_Index);
+                startActivity(intent);
+                break;
+
+            case SimpleGestureFilter.SWIPE_DOWN :  str = "Swipe Down";
+                break;
+            case SimpleGestureFilter.SWIPE_UP :    str = "Swipe Up";
+                break;
+
+        }
+        //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDoubleTap() {
+        //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
     }
 
     /** This method is called when ranking button is clicked */

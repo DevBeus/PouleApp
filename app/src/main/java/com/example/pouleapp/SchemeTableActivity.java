@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,8 @@ import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
  * Created by gezamenlijk on 26-2-2017.
  */
 
-public class SchemeTableActivity extends AppCompatActivity {
+public class SchemeTableActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
+    private SimpleGestureFilter detector;
     private int mPoule_Index = 0;
 
     @Override
@@ -33,6 +36,9 @@ public class SchemeTableActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main_test);
         setContentView(R.layout.activity_scheme_table);
         ViewGroup radioGroup;
+
+        // Detect touched area
+        detector = new SimpleGestureFilter(this,this);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
@@ -57,7 +63,7 @@ public class SchemeTableActivity extends AppCompatActivity {
 
             if (i==0) {
                 tv.setText(""); //Top left remains empty: vertically home team, horizontally against team
-                tv.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                tv.setBackgroundColor(getResources().getColor(R.color.colorYellow));
             }
             else {
                 tv.setText(teamList.get(i-1).getTeamName()); // first column is home team
@@ -76,11 +82,11 @@ public class SchemeTableActivity extends AppCompatActivity {
                     if (i==0) {
                         // first row consists of team names
                         tv1.setText(teamList.get(j-1).getTeamName());
-                        tv1.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        tv1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                     } else if (i==j) {
                         // cells on the diagonal become gray
                         tv1.setText("");
-                        tv1.setBackgroundColor(getResources().getColor(darker_gray));
+                        tv1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
                     }
                     else {
                         String t = pouleScheme.getMatchResult(i-1,j-1);
@@ -114,6 +120,44 @@ public class SchemeTableActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent me){
+        // Call onTouchEvent of SimpleGestureFilter class
+        this.detector.onTouchEvent(me);
+        return super.dispatchTouchEvent(me);
+    }
+    @Override
+    public void onSwipe(int direction) {
+        String str = "";
+        Intent intent;
+
+        switch (direction) {
+
+            case SimpleGestureFilter.SWIPE_RIGHT : str = "Swipe Right";
+                intent = new Intent(this, RankingActivity.class);
+                intent.putExtra(POULE_INDEX, mPoule_Index);
+                startActivity(intent);
+                break;
+
+            case SimpleGestureFilter.SWIPE_LEFT :  str = "Swipe Left";
+                intent = new Intent(getApplicationContext(), TournamentActivity.class);
+                intent.putExtra(POULE_INDEX, mPoule_Index);
+                startActivity(intent);
+                break;
+
+            case SimpleGestureFilter.SWIPE_DOWN :  str = "Swipe Down";
+                break;
+            case SimpleGestureFilter.SWIPE_UP :    str = "Swipe Up";
+                break;
+
+        }
+        //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDoubleTap() {
+        //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
+    }
 
 
     /** This method is called when ranking button is clicked */
