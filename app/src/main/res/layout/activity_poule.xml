@@ -21,7 +21,7 @@
         android:onClick="savePoule"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_save_48"
+        app:srcCompat="@drawable/ic_save_48"
         app:layout_constraintLeft_toRightOf="@+id/editTextTeam"
         android:layout_marginLeft="0dp" />
 
@@ -115,7 +115,7 @@
         android:onClick="addTeam"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@mipmap/ic_add_48" />
+        app:srcCompat="@drawable/ic_add_48" />
 
     <ImageButton
         android:id="@+id/imageButton3"

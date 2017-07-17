@@ -110,7 +110,7 @@
         android:onClick="saveTournament"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_save_48" />
+        app:srcCompat="@drawable/ic_save_48" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -131,6 +131,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textTournamentExplanation"
         app:layout_constraintVertical_bias="0.514"
-        app:srcCompat="@mipmap/ic_add_48" />
+        app:srcCompat="@drawable/ic_add_48" />
 
 </android.support.constraint.ConstraintLayout>
