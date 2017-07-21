@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Data;
 
 /**
  * Created by gezamenlijk on 30-6-2017.

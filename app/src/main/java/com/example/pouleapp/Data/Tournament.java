@@ -1,9 +1,11 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Data;
+
+import com.example.pouleapp.Data.Poule;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
-import static com.example.pouleapp.GlobalData.DEFAULT_POULE_NAME;
+import static com.example.pouleapp.Data.GlobalData.DEFAULT_POULE_NAME;
 
 /**
  * Created by gezamenlijk on 21-5-2017.

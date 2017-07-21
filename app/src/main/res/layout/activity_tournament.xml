@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.pouleapp.TournamentActivity">
+    tools:context="com.example.pouleapp.Activities.TournamentActivity">
 
     <TextView
         android:text="@string/tournament_name_text_view"
@@ -110,7 +110,7 @@
         android:onClick="saveTournament"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_save_48" />
+        app:srcCompat="@mipmap/ic_save_48" />
 
     <android.support.constraint.Guideline
         android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textTournamentExplanation"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textTournamentExplanation"
-        app:layout_constraintVertical_bias="0.514"
-        app:srcCompat="@drawable/ic_add_48" />
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@mipmap/ic_add_48" />
 
 </android.support.constraint.ConstraintLayout>

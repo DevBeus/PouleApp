@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +8,20 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pouleapp.Data.GlobalData;
+import com.example.pouleapp.Data.Poule;
+import com.example.pouleapp.Data.Team;
+import com.example.pouleapp.Data.Tournament;
+import com.example.pouleapp.Data.PouleScheme;
+import com.example.pouleapp.R;
+
 import java.util.ArrayList;
 
-import static com.example.pouleapp.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.GlobalData.PREVIOUS_ACTIVITY;
-import static com.example.pouleapp.GlobalData.SCHEME_ROW;
-import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
-import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
+import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 
 /**

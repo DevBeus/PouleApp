@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.pouleapp.Data.GlobalData;
+import com.example.pouleapp.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.pouleapp.GlobalData.DEFAULT_TOURNAMENT_ID;
+import static com.example.pouleapp.Data.GlobalData.DEFAULT_TOURNAMENT_ID;
 
 /**
  * Created by gezamenlijk on 21-5-2017.
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mSpinner.setAdapter(dataAdapter);
     }
 
-    public void showTournament(View view) {
+    public void startTournamentActivity(View view) {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         ArrayList<String> tournamentIDList = globalVariable.getTournamentIDList();
         int selectedIndex = mSpinner.getSelectedItemPosition();

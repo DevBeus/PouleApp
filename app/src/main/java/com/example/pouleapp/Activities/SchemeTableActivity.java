@@ -1,7 +1,8 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -10,16 +11,21 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.pouleapp.Data.GlobalData;
+import com.example.pouleapp.Data.Poule;
+import com.example.pouleapp.Data.PouleScheme;
+import com.example.pouleapp.Data.Team;
+import com.example.pouleapp.Data.Tournament;
+import com.example.pouleapp.R;
 
 import java.util.ArrayList;
 
-import static android.R.color.darker_gray;
-import static com.example.pouleapp.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.GlobalData.PREVIOUS_ACTIVITY;
-import static com.example.pouleapp.GlobalData.SCHEME_COLUMN;
-import static com.example.pouleapp.GlobalData.SCHEME_ROW;
-import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
+import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 
 /**
@@ -27,7 +33,7 @@ import static com.example.pouleapp.GlobalData.SCHEME_TABLE_ACTIVITY;
  */
 
 public class SchemeTableActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
-    private SimpleGestureFilter detector;
+    private SimpleGestureFilter mDetector;
     private int mPoule_Index = 0;
 
     @Override
@@ -38,7 +44,7 @@ public class SchemeTableActivity extends AppCompatActivity implements SimpleGest
         ViewGroup radioGroup;
 
         // Detect touched area
-        detector = new SimpleGestureFilter(this,this);
+        mDetector = new SimpleGestureFilter(this,this);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
@@ -63,7 +69,7 @@ public class SchemeTableActivity extends AppCompatActivity implements SimpleGest
 
             if (i==0) {
                 tv.setText(""); //Top left remains empty: vertically home team, horizontally against team
-                tv.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                tv.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorYellow, null)); //null means no theme
             }
             else {
                 tv.setText(teamList.get(i-1).getTeamName()); // first column is home team
@@ -82,11 +88,11 @@ public class SchemeTableActivity extends AppCompatActivity implements SimpleGest
                     if (i==0) {
                         // first row consists of team names
                         tv1.setText(teamList.get(j-1).getTeamName());
-                        tv1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                        tv1.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorYellow, null)); //null means no theme
                     } else if (i==j) {
                         // cells on the diagonal become gray
                         tv1.setText("");
-                        tv1.setBackgroundColor(getResources().getColor(R.color.colorYellow));
+                        tv1.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.colorGray, null)); //null means no theme
                     }
                     else {
                         String t = pouleScheme.getMatchResult(i-1,j-1);
@@ -123,7 +129,7 @@ public class SchemeTableActivity extends AppCompatActivity implements SimpleGest
     @Override
     public boolean dispatchTouchEvent(MotionEvent me){
         // Call onTouchEvent of SimpleGestureFilter class
-        this.detector.onTouchEvent(me);
+        this.mDetector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }
     @Override
@@ -159,21 +165,13 @@ public class SchemeTableActivity extends AppCompatActivity implements SimpleGest
         //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
     }
 
-
-    /** This method is called when ranking button is clicked */
-    public void showRanking(View view) {
+    public void startRankingActivity(View view) {
         Intent intent = new Intent(this, RankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
 
-    public void showPoule(View view) {
-        Intent intent = new Intent(this, PouleActivity.class);
-        intent.putExtra(POULE_INDEX, mPoule_Index);
-        startActivity(intent);
-    }
-
-    public void showTournament(View view) {
+    public void startTournamentActivity(View view) {
         Intent intent = new Intent(this, TournamentActivity.class);
 
         startActivity(intent);

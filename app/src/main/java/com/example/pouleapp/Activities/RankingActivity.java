@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,15 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.pouleapp.Data.GlobalData;
+import com.example.pouleapp.Data.Poule;
+import com.example.pouleapp.Data.Team;
+import com.example.pouleapp.Data.Tournament;
+import com.example.pouleapp.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.example.pouleapp.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 
 public class RankingActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
-    private SimpleGestureFilter detector;
+    private SimpleGestureFilter mDetector;
     private int mPoule_Index = 0;
 
     @Override
@@ -22,7 +27,7 @@ public class RankingActivity extends AppCompatActivity implements SimpleGestureF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
         // Detect touched area
-        detector = new SimpleGestureFilter(this,this);
+        mDetector = new SimpleGestureFilter(this,this);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
@@ -50,7 +55,7 @@ public class RankingActivity extends AppCompatActivity implements SimpleGestureF
     @Override
     public boolean dispatchTouchEvent(MotionEvent me){
         // Call onTouchEvent of SimpleGestureFilter class
-        this.detector.onTouchEvent(me);
+        this.mDetector.onTouchEvent(me);
         return super.dispatchTouchEvent(me);
     }
     @Override
@@ -85,30 +90,15 @@ public class RankingActivity extends AppCompatActivity implements SimpleGestureF
     public void onDoubleTap() {
         //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
     }
-    /** This method is called when Tournament button is clicked */
-    public void showTournament(View view) {
-        Intent intent = new Intent(this, TournamentActivity.class);
 
-        startActivity(intent);
-    }
-
-    /** This method is called when Scheme button is clicked */
-    public void showScheme(View view) {
+    public void startSchemeActivity(View view) {
         Intent intent = new Intent(this, SchemeActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }
 
-    /** This method is called when Scheme button is clicked */
-    public void showSchemeTable(View view) {
+    public void startSchemeTableActivity(View view) {
         Intent intent = new Intent(this, SchemeTableActivity.class);
-        intent.putExtra(POULE_INDEX, mPoule_Index);
-        startActivity(intent);
-    }
-
-    /** This method is called when Team List button is clicked */
-    public void showPoule(View view) {
-        Intent intent = new Intent(this, PouleActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         startActivity(intent);
     }

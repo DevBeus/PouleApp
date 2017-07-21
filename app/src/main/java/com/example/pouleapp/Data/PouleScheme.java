@@ -1,5 +1,9 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Data;
 
+
+import com.example.pouleapp.Data.Match;
+import com.example.pouleapp.Data.Round;
+import com.example.pouleapp.Data.Team;
 
 import java.util.ArrayList;
 
@@ -226,8 +230,6 @@ public class PouleScheme {
                 if ( !teamScheduled[t] && !teamScheduled[op] ) {
                     teamScheduled[t] = true;
                     teamScheduled[op] = true;
-
-                    //@TODO Check to be done when team is added as free team
 
                     if ( teamAdded && (op==(pSize-1)) ) {
                         // When team is added, pSize-1 as opponent means team is free

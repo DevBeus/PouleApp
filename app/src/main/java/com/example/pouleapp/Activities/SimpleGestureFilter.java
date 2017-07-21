@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 /**
  * Created by gezamenlijk on 13-7-2017.
@@ -144,7 +144,7 @@ public class SimpleGestureFilter extends SimpleOnGestureListener{
 
     @Override
     public boolean onDoubleTap(MotionEvent arg) {
-        this.listener.onDoubleTap();;
+        this.listener.onDoubleTap();
         return true;
     }
 

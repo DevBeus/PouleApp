@@ -1,8 +1,10 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Data;
 
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import com.example.pouleapp.R;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,27 +33,20 @@ public class GlobalData extends Application {
 
     private Tournament mTournament;
     private ArrayList<String> mTournamentIDList = new ArrayList<>();
-
-
-
     private ArrayList<String> mTournamentNameList = new ArrayList<>();
     private int mSelectedTournamentIndex;
     private int mNrofTournaments;
+
     public Tournament getTournament() { return mTournament; }
-    public int getSelectedTournamentIndex() { return mSelectedTournamentIndex; }
     public ArrayList<String> getTournamentIDList() { return mTournamentIDList; }
     public ArrayList<String> getTournamentNameList() { return mTournamentNameList; }
 
-    //private ArrayList<Poule> mPouleList = new ArrayList<>();
-
     public static final String POULE_APP_PREFS = "PouleAppPrefs";
-    //public static final String MY_PREFS_NAME = "MyPrefsFile";
     public static final String DEFAULT_TOURNAMENT_NAME = "Tournament";
     public static final String DEFAULT_TOURNAMENT_ID = "0";
     public static final String DEFAULT_POULE_NAME = "PouleName";
     public static final String DEFAULT_TEAM_NAME = "Team";
 
-    //public ArrayList<Poule> getPouleList() { return mPouleList; }
 
     public void initApp() {
         SharedPreferences appPrefs = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE);

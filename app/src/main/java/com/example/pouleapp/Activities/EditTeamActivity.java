@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +7,20 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pouleapp.Data.GlobalData;
+import com.example.pouleapp.Data.Match;
+import com.example.pouleapp.Data.Poule;
+import com.example.pouleapp.Data.Team;
+import com.example.pouleapp.Data.Tournament;
+import com.example.pouleapp.Data.PouleScheme;
+import com.example.pouleapp.R;
+
 import java.util.ArrayList;
 
-import static com.example.pouleapp.GlobalData.ACTION_ADD;
-import static com.example.pouleapp.GlobalData.ACTION_MESSAGE;
-import static com.example.pouleapp.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.GlobalData.TEAM_INDEX;
+import static com.example.pouleapp.Data.GlobalData.ACTION_ADD;
+import static com.example.pouleapp.Data.GlobalData.ACTION_MESSAGE;
+import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
 public class EditTeamActivity extends AppCompatActivity {
     private int mPoule_Index = 0;
@@ -107,14 +115,6 @@ public class EditTeamActivity extends AppCompatActivity {
     }
 
     public void cancel(View view) {
-//        //if cancel is done for addition of team, new team needs to be removed
-//        if (mMessage.equals(ACTION_ADD)) {
-//            final GlobalData globalVariable = (GlobalData) getApplicationContext();
-//            Tournament tournament = globalVariable.getTournament();
-//            ArrayList<Poule> pouleList = tournament.getPouleList();
-//            Poule poule = pouleList.get(mPoule_Index);
-//            poule.deleteTeam(mTeam_Index);
-//        }
 
         Intent intent = new Intent(this, PouleActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);

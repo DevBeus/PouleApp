@@ -3,14 +3,14 @@
     package="com.example.pouleapp">
 
     <application
-        android:name="com.example.pouleapp.GlobalData"
+        android:name="com.example.pouleapp.Data.GlobalData"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,15 +18,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TournamentActivity"
+        <activity android:name=".Activities.TournamentActivity"
             android:windowSoftInputMode="adjustNothing">
         </activity>
-        <activity android:name=".PouleActivity"></activity>
-        <activity android:name=".EditTeamActivity"></activity>
-        <activity android:name=".EditMatchActivity"></activity>
-        <activity android:name=".SchemeTableActivity"></activity>
-        <activity android:name=".SchemeActivity"></activity>
-        <activity android:name=".RankingActivity"></activity>
+        <activity android:name=".Activities.PouleActivity"></activity>
+        <activity android:name=".Activities.EditTeamActivity"></activity>
+        <activity android:name=".Activities.EditMatchActivity"></activity>
+        <activity android:name=".Activities.SchemeTableActivity"></activity>
+        <activity android:name=".Activities.SchemeActivity"></activity>
+        <activity android:name=".Activities.RankingActivity"></activity>
     </application>
 
 </manifest>

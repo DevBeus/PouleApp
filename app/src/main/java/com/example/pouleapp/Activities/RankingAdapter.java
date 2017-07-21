@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Activities;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.pouleapp.Data.Team;
+import com.example.pouleapp.R;
 
 import java.util.ArrayList;
 
@@ -15,23 +18,23 @@ import java.util.ArrayList;
 
 public class RankingAdapter extends BaseAdapter {
 
-    private final ArrayList<Team> teamList;
+    private final ArrayList<Team> mTeamList;
     Activity activity;
 
     public RankingAdapter(Activity activity, ArrayList<Team> teamList) {
         super();
         this.activity = activity;
-        this.teamList = teamList;
+        this.mTeamList = teamList;
     }
 
     @Override
     public int getCount() {
-        return teamList.size();
+        return mTeamList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return teamList.get(position);
+        return mTeamList.get(position);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class RankingAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Team team = teamList.get(position);
+        Team team = mTeamList.get(position);
         holder.mRanking.setText(Integer.toString(position+1));
         holder.mTeam.setText(team.getTeamName());
         holder.mMatches.setText(Integer.toString(team.getMatches()));

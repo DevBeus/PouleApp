@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.pouleapp.PouleActivity">
+    tools:context="com.example.pouleapp.Activities.PouleActivity">
 
     <ImageButton
         android:id="@+id/imageButton9"
@@ -21,7 +21,7 @@
         android:onClick="savePoule"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_save_48"
+        app:srcCompat="@mipmap/ic_save_48"
         app:layout_constraintLeft_toRightOf="@+id/editTextTeam"
         android:layout_marginLeft="0dp" />
 
@@ -115,7 +115,7 @@
         android:onClick="addTeam"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_add_48" />
+        app:srcCompat="@mipmap/ic_add_48" />
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -125,10 +125,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:backgroundTint="@android:color/transparent"
-        android:onClick="showTournament"
+        android:onClick="startTournamentActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ic_arrow_left_48" />
+        app:srcCompat="@mipmap/ic_arrow_left_48" />
 
 </android.support.constraint.ConstraintLayout>

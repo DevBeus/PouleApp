@@ -1,4 +1,4 @@
-package com.example.pouleapp;
+package com.example.pouleapp.Data;
 
 import java.util.Comparator;
 
@@ -7,106 +7,106 @@ import java.util.Comparator;
  */
 
 public class Team {
-    private String teamName = "";
-    private String coachName = "";
+    private String mTeamName = "";
+    private String mCoachName = "";
 
-    private int matches = 0;
-    private int points = 0;
-    private int goalsFor = 0;
-    private int goalsAgainst = 0;
-    private int wins  = 0;
-    private int draws = 0;
-    private int losses = 0;
+    private int mMatches = 0;
+    private int mPoints = 0;
+    private int mGoalsFor = 0;
+    private int mGoalsAgainst = 0;
+    private int mWins = 0;
+    private int mDraws = 0;
+    private int mLosses = 0;
 
     public Team(String name) {
-        teamName = name;
+        mTeamName = name;
     }
 
     public Team(String tName, String cName) {
-        teamName = tName;
-        coachName = cName;
+        mTeamName = tName;
+        mCoachName = cName;
     }
 
     public String getTeamName() {
-        return teamName;
+        return mTeamName;
     }
 
     public void setTeamName(String teamName) {
-        this.teamName = teamName;
+        this.mTeamName = teamName;
     }
 
     public String getCoachName() {
-        return coachName;
+        return mCoachName;
     }
 
     public void setCoachName(String coachName) {
-        this.coachName = coachName;
+        this.mCoachName = coachName;
     }
 
     public void addMatchResult(int goalsFor, int goalsAgainst) {
 
         if (goalsFor > goalsAgainst) {
-            this.points = this.points + 3;
-            this.wins++;
+            this.mPoints = this.mPoints + 3;
+            this.mWins++;
         }
         else if (goalsFor == goalsAgainst) {
-            this.points = this.points + 1;
-            this.draws++;
+            this.mPoints = this.mPoints + 1;
+            this.mDraws++;
         }
         else {
-            this.losses++;
+            this.mLosses++;
         }
 
-        this.matches++;
-        this.goalsFor = this.goalsFor + goalsFor;
-        this.goalsAgainst = this.goalsAgainst + goalsAgainst;
+        this.mMatches++;
+        this.mGoalsFor = this.mGoalsFor + goalsFor;
+        this.mGoalsAgainst = this.mGoalsAgainst + goalsAgainst;
     }
 
     public void removeMatchResult(int goalsFor, int goalsAgainst) {
 
         if (goalsFor > goalsAgainst) {
-            this.points = this.points - 3;
-            this.wins--;
+            this.mPoints = this.mPoints - 3;
+            this.mWins--;
         }
         else if (goalsFor == goalsAgainst) {
-            this.points = this.points - 1;
-            this.draws--;
+            this.mPoints = this.mPoints - 1;
+            this.mDraws--;
         }
         else {
-            this.losses--;
+            this.mLosses--;
         }
 
-        this.matches--;
-        this.goalsFor = this.goalsFor - goalsFor;
-        this.goalsAgainst = this.goalsAgainst - goalsAgainst;
+        this.mMatches--;
+        this.mGoalsFor = this.mGoalsFor - goalsFor;
+        this.mGoalsAgainst = this.mGoalsAgainst - goalsAgainst;
 
     }
 
     public int getMatches() {
-        return matches;
+        return mMatches;
     }
     public int getPoints() {
-        return points;
+        return mPoints;
     }
 
     public int getGoalsFor() {
-        return goalsFor;
+        return mGoalsFor;
     }
 
     public int getGoalsAgainst() {
-        return goalsAgainst;
+        return mGoalsAgainst;
     }
 
     public int getWins() {
-        return wins;
+        return mWins;
     }
 
     public int getDraws() {
-        return draws;
+        return mDraws;
     }
 
     public int getLosses() {
-        return losses;
+        return mLosses;
     }
 
     public static Comparator<Team> RankingComparator = new Comparator<Team>() {
@@ -114,9 +114,9 @@ public class Team {
         @Override
         public int compare(Team t1, Team t2) {
             //This ranking is done in the following order:
-            //- px: points
-            //- grx: goals result: goalsFor - goalsAgainst
-            //- gfx: goalsFor
+            //- px: mPoints
+            //- grx: goals result: mGoalsFor - mGoalsAgainst
+            //- gfx: mGoalsFor
 
             int p1 = t1.getPoints();
             int p2 = t2.getPoints();
@@ -124,7 +124,7 @@ public class Team {
             int gr2 = t2.getGoalsFor()-t2.getGoalsAgainst();
             int gf1 = t1.getGoalsFor();
             int gf2 = t2.getGoalsFor();
-            int result = 0;
+            int result;
 
             result = p2-p1;
 

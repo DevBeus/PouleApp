@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pouleapp.EditMatchActivity">
+    tools:context="com.example.pouleapp.Activities.EditMatchActivity">
 
     <TableLayout
         android:layout_width="match_parent"
