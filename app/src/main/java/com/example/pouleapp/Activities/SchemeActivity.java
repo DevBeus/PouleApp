@@ -186,6 +186,11 @@ public class SchemeActivity extends AppCompatActivity implements SimpleGestureFi
         //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
     }
 
+    public void startTournamentActivity(View view) {
+        Intent intent = new Intent(this, TournamentActivity.class);
+        startActivity(intent);
+    }
+
     public void startRankingActivity(View view) {
         Intent intent = new Intent(this, RankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);

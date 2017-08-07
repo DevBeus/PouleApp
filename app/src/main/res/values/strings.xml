@@ -54,4 +54,15 @@
     <string name="menu_tournament_name_text">"Tournament: "</string>
     <string name="menu_team_name_text">"Team: "</string>
 
+    <string name="descr_welcome">"Welcome and Start"</string>
+    <string name="descr_deleteTournament">"Delete Tournament"</string>
+    <string name="descr_savePoule">"Save Poule"</string>
+    <string name="descr_saveTournament">"Save Tournament"</string>
+    <string name="descr_addPoule">"Add Poule"</string>
+    <string name="descr_addTeam">"Add Team"</string>
+    <string name="descr_startTournamentActivity">"Start Tournament Activity"</string>
+    <string name="descr_startSchemeTableActivity">"Start Scheme Table Activity"</string>
+    <string name="descr_startSchemeActivity">"Start Scheme Activity"</string>
+    <string name="descr_startRankingActivity">"Start Ranking Activity"</string>
+
 </resources>
