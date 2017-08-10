@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +18,10 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Activities.SelectTournamentActivity"></activity>
         <activity android:name=".Activities.TournamentActivity"
-            android:windowSoftInputMode="adjustNothing">
-        </activity>
+            android:windowSoftInputMode="adjustNothing"></activity>
+
         <activity android:name=".Activities.PouleActivity"></activity>
         <activity android:name=".Activities.EditTeamActivity"></activity>
         <activity android:name=".Activities.EditMatchActivity"></activity>

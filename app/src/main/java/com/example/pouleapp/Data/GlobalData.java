@@ -69,10 +69,6 @@ public class GlobalData extends Application {
             if (selectedTournamentID.equals(id)) { mSelectedTournamentIndex = i; }
         }
 
-        //Element added to create new tournament
-        mTournamentIDList.add(DEFAULT_TOURNAMENT_ID);
-        mTournamentNameList.add("Create new tournament..");
-
     }
 
     public void initTournament(String id) {
@@ -188,6 +184,30 @@ public class GlobalData extends Application {
         SharedPreferences.Editor editor = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE).edit();
         editor.putString("TournamentID"+mSelectedTournamentIndex,selectedTournamentID);
         editor.putString("TournamentName"+mSelectedTournamentIndex,DEFAULT_TOURNAMENT_NAME);
+        editor.putString("SelectedTournamentID",selectedTournamentID);
+        editor.putInt("nrofTournaments",mNrofTournaments);
+        editor.apply();
+
+        return selectedTournamentID;
+    }
+
+    public String addTournament(String tournamentName) {
+        mTournament = new Tournament(tournamentName);
+
+        String selectedTournamentID = mTournament.getTournamentID();
+
+        //a new tournament is added at the beginning of the list at position 0
+        mSelectedTournamentIndex = 0;
+        mTournamentIDList.add(0,selectedTournamentID);
+        mTournamentNameList.add(0,tournamentName);
+        mNrofTournaments++;
+
+        saveTournament();
+
+        //Save App data
+        SharedPreferences.Editor editor = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE).edit();
+        editor.putString("TournamentID"+mSelectedTournamentIndex,selectedTournamentID);
+        editor.putString("TournamentName"+mSelectedTournamentIndex,tournamentName);
         editor.putString("SelectedTournamentID",selectedTournamentID);
         editor.putInt("nrofTournaments",mNrofTournaments);
         editor.apply();
