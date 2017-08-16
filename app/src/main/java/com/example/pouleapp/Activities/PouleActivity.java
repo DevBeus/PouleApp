@@ -1,12 +1,19 @@
 package com.example.pouleapp.Activities;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +36,8 @@ import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
 public class PouleActivity extends AppCompatActivity {
+    final Context mContext = this;
+
     private static int mPoule_Index = 0;
     private SwipeMenuListView mListView;
     private ArrayList<String> mArrayList=new ArrayList<>();
@@ -42,6 +51,13 @@ public class PouleActivity extends AppCompatActivity {
         ArrayList<Poule> pouleList;
         Poule poule;
 
+        // Show the Up button in the action bar.
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
         Intent intent = getIntent();
@@ -54,11 +70,35 @@ public class PouleActivity extends AppCompatActivity {
 
         teamList = poule.getTeamList();
 
-        TextView textView = (TextView) findViewById(R.id.editTextTeam);
-        textView.setText(poule.getPouleName());
-
         initListView(teamList);
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                navigateUpTo(new Intent(this, TournamentActivity.class));
+                return true;
+            case R.id.action_settings:
+                Intent intent = new Intent(this, PouleSettingsActivity.class);
+                intent.putExtra(POULE_INDEX, mPoule_Index);
+
+                startActivity(intent);
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
 
     private void initListView(ArrayList<Team> list) {
         mListView=(SwipeMenuListView)findViewById(R.id.listViewTeams);
@@ -79,13 +119,15 @@ public class PouleActivity extends AppCompatActivity {
                 // Create different menus depending on the view type
                 SwipeMenuItem editItem = new SwipeMenuItem(getApplicationContext());
                 editItem.setWidth(dp2px(48));
-                editItem.setIcon(R.mipmap.ic_edit_sq_48);
+                editItem.setIcon(R.drawable.ic_edit_48dp);
+                editItem.setBackground(R.color.colorPrimary);
                 menu.addMenuItem(editItem);
 
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 deleteItem.setWidth(dp2px(48));
-                deleteItem.setIcon(R.mipmap.ic_recycle_bin_sq_48);
+                deleteItem.setIcon(R.drawable.ic_delete_48dp);
+                deleteItem.setBackground(R.color.colorRed);
                 menu.addMenuItem(deleteItem);
             }
 
@@ -203,26 +245,58 @@ public class PouleActivity extends AppCompatActivity {
     }
 
     public void addTeam(View view) {
-        ArrayList<Poule> pouleList;
-        Poule poule;
+        // get enter_team_name_dialog.xml view
+        LayoutInflater li = LayoutInflater.from(mContext);
+        View DialogView = li.inflate(R.layout.enter_team_name_dialog, null);
 
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        Tournament tournament = globalVariable.getTournament();
-        pouleList = tournament.getPouleList();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
-        poule = pouleList.get(mPoule_Index);
+        // set enter_team_name_dialog.xml to alertdialog builder
+        alertDialogBuilder.setView(DialogView);
 
-        poule.addTeam(DEFAULT_TEAM_NAME);
+        final EditText inputTeamName = (EditText) DialogView.findViewById(R.id.EnterTeamNameDialog_inputTeamName);
 
-        globalVariable.saveTournament();
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and create new team
+                                final GlobalData globalVariable = (GlobalData) getApplicationContext();
 
-        recreate();
-    }
+                                Tournament tournament = globalVariable.getTournament();
+                                ArrayList<Poule> pouleList = tournament.getPouleList();
+                                Poule poule = pouleList.get(mPoule_Index);
 
-    public void startTournamentActivity(View view) {
-        Intent intent = new Intent(this, TournamentActivity.class);
+                                poule.addTeam(inputTeamName.getText().toString());
 
-        startActivity(intent);
+                                globalVariable.saveTournament();
+
+                                //globalVariable.addTournament(etTournamentName.getText().toString());
+                                //globalVariable.saveAppData();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                          // Needed to refresh listView after update
+                                          @Override
+                                          public void onDismiss(DialogInterface dialog) {
+                                              recreate();
+                                          }
+                                      }
+                );
+
+        // create alert enter_tournament_dialog.xml
+        AlertDialog EnterTournamentNameDialog = alertDialogBuilder.create();
+
+        // show it
+        EnterTournamentNameDialog.show();
+
     }
 
     public void savePoule(View view) {

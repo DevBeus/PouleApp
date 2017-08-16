@@ -33,7 +33,7 @@
     <string name="location_text_view">Plaats</string>
     <string name="welcome_text">Welkom bij de Poule App</string>
     <string name="welcome_explanation">Met deze App kun je je eigen toernooien oganizeren</string>
-    <string name="tournament_name_text_view">Toernooi Naam:</string>
+    <string name="tournament_name_text_view">De onderstaande poules zijn onderdeel van dit  toernooi:</string>
     <string name="tournament_location_text_view">"Plaats: "</string>
     <string name="tournament_poule_explanation_text_view">Poulelijst:</string>
     <string name="home_button">home</string>

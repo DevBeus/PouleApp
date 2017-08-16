@@ -70,13 +70,17 @@ public class SelectTournamentActivity extends AppCompatActivity {
                 //goodItem.setBackground(new ColorDrawable(Color.rgb(0x30, 0xB1, 0xF5)));
                 goodItem.setWidth(dp2px(48));
                 goodItem.setIcon(R.mipmap.ic_edit_sq_48);
+                goodItem.setIcon(R.drawable.ic_edit_48dp);
+                goodItem.setBackground(R.color.colorPrimary);
                 menu.addMenuItem(goodItem);
 
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getApplicationContext());
                 //deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
                 deleteItem.setWidth(dp2px(48));
-                deleteItem.setIcon(R.mipmap.ic_recycle_bin_sq_48);
+                //deleteItem.setIcon(R.mipmap.ic_recycle_bin_sq_48);
+                deleteItem.setIcon(R.drawable.ic_delete_48dp);
+                deleteItem.setBackground(R.color.colorRed);
                 menu.addMenuItem(deleteItem);
             }
 

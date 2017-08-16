@@ -39,10 +39,13 @@
     <string name="location_text_view">Location</string>
     <string name="welcome_text">Welcome to the Poule App</string>
     <string name="welcome_explanation">With this App you can organize your own tournaments</string>
-    <string name="tournament_name_text_view">Tournament Name:</string>
+    <string name="tournament_name_text_view">"The following poules are part of this tournament "</string>
     <string name="tournament_location_text_view">Location:</string>
     <string name="save_tournament_button">Save</string>
     <string name="tournament_poule_explanation_text_view">Poule List:</string>
+
+    <string name="poule_name_text_view">"The following teams are part of this poule"</string>
+
     <string name="home_button">home</string>
     <string name="delete_tournament_button">Delete Tournament</string>
     <string name="tournament_creation_cannot_be_removed_message">This item cannot be removed</string>
@@ -52,6 +55,8 @@
     <string name="show_tournament_button">Tournament</string>
     <string name="menu_poule_name_text">"Poule: "</string>
     <string name="menu_tournament_name_text">"Tournament: "</string>
+    <string name="menu_tournament_settings_text">"Tournament Settings"</string>
+    <string name="menu_poule_settings_text">"Poule Settings"</string>
     <string name="menu_team_name_text">"Team: "</string>
 
     <string name="descr_welcome">"Welcome and Start"</string>
