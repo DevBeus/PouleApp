@@ -20,9 +20,15 @@ import java.util.ArrayList;
 public class GlobalData extends Application {
     public final static String POULE_INDEX = "com.example.pouleapp.POULEINDEX";
     public final static String TEAM_INDEX = "com.example.pouleapp.TEAMINDEX";
+    public final static String TAB_INDEX = "com.example.pouleapp.TABINDEX";
+    public final static int SCHEME_TAB = 0;
+    public final static int RANKING_TAB = 1;
+    public final static int SCHEMETABLE_TAB = 2;
+
     public final static String SCHEME_ROW = "com.example.pouleapp.SCHEMEROW";
     public final static String SCHEME_COLUMN = "com.example.pouleapp.SCHEMECOLUMN";
     public final static String PREVIOUS_ACTIVITY = "com.example.pouleapp.PREVIOUSACTIVITY";
+    public final static String PREVIOUS_TAB = "com.example.pouleapp.PREVIOUSTAB";
 
     public final static String SCHEME_ACTIVITY = "com.example.pouleapp.SCHEME";
     public final static String SCHEME_TABLE_ACTIVITY = "com.example.pouleapp.SCHEME_TABLE";

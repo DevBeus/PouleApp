@@ -19,9 +19,12 @@ import java.util.ArrayList;
 
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
+import static com.example.pouleapp.Data.GlobalData.PREVIOUS_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
+import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TABLE_ACTIVITY;
+import static com.example.pouleapp.Data.GlobalData.TAB_INDEX;
 
 
 /**
@@ -32,6 +35,7 @@ public class EditMatchActivity extends AppCompatActivity {
     private int x = 0;
     private int y = 1;
     private int mPoule_Index = 0;
+    private int mPrevious_Tab;
     private String mPrevious_Activity;
 
     @Override
@@ -41,6 +45,7 @@ public class EditMatchActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mPrevious_Activity = intent.getStringExtra(PREVIOUS_ACTIVITY);
+        mPrevious_Tab = intent.getIntExtra(PREVIOUS_TAB,SCHEME_TAB);
         x = intent.getIntExtra(SCHEME_ROW, 0);
         y = intent.getIntExtra(SCHEME_COLUMN, 0);
         mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
@@ -120,29 +125,33 @@ public class EditMatchActivity extends AppCompatActivity {
 
         globalVariable.savePoule(poule);
 
-        Intent intent;
+//        Intent intent;
+//
+//        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
+//            intent = new Intent(this, SchemeTableActivity.class);
+//        } else {
+//            intent = new Intent(this, SchemeActivity.class);
+//        }
 
-        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
-            intent = new Intent(this, SchemeTableActivity.class);
-        } else {
-            intent = new Intent(this, SchemeActivity.class);
-        }
-
+        Intent intent = new Intent(this, SchemeRankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
+        intent.putExtra(TAB_INDEX,mPrevious_Tab);
         startActivity(intent);
 
     }
 
     public void cancel(View view) {
-        Intent intent;
+//        Intent intent;
+//
+//        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
+//            intent = new Intent(this, SchemeTableActivity.class);
+//        } else {
+//            intent = new Intent(this, SchemeActivity.class);
+//        }
 
-        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
-            intent = new Intent(this, SchemeTableActivity.class);
-        } else {
-            intent = new Intent(this, SchemeActivity.class);
-        }
-
+        Intent intent = new Intent(this, SchemeRankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
+        intent.putExtra(TAB_INDEX,mPrevious_Tab);
         startActivity(intent);
 
     }

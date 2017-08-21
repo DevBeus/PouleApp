@@ -114,7 +114,7 @@ public class TournamentActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                 // startSchemeActivity
-                Intent intent = new Intent(getApplicationContext(), SchemeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SchemeRankingActivity.class);
                 intent.putExtra(POULE_INDEX, position);
 
                 startActivity(intent);
@@ -195,14 +195,19 @@ public class TournamentActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
 
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                navigateUpTo(new Intent(this, TournamentActivity.class));
+                navigateUpTo(new Intent(this, SelectTournamentActivity.class));
                 return true;
+//                intent = new Intent(this, SelectTournamentActivity.class);
+//
+//                startActivity(intent);
+
             case R.id.action_settings:
-                Intent intent = new Intent(this, TournamentSettingsActivity.class);
+                intent = new Intent(this, TournamentSettingsActivity.class);
 
                 startActivity(intent);
 
