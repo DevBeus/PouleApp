@@ -58,9 +58,11 @@ public class Match {
         String resultString;
 
         if ((mGoalsFor == null) || (mGoalsAgainst == null)) {
-            resultString = mHomeTeam + " - " + mOpponent + ": - ";
+            //resultString = mHomeTeam + " - " + mOpponent + ": - ";
+            resultString = mHomeTeam + " - " + mOpponent;
         } else {
-            resultString = mHomeTeam + " - " + mOpponent + ": " + mGoalsFor + " - " + mGoalsAgainst;
+            //resultString = mHomeTeam + " - " + mOpponent + ": " + mGoalsFor + " - " + mGoalsAgainst;
+            resultString = mHomeTeam + " - " + mOpponent;
         }
 
         return resultString;

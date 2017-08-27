@@ -18,9 +18,11 @@ public class Round {
         mMatchList = matchlist;
     }
 
-    public int getRound() {
+    public int getRoundNumber() {
         return mRound;
     }
+
+    public String getRoundName() { return "Round "+ mRound; }
 
     public int[][] getMatchList() {
         return mMatchList;

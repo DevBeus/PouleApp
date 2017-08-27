@@ -246,6 +246,11 @@ public class PouleScheme {
         }
     }
 
+    public Round getRound(int r) {
+        // r in [1..n] with n = getNumberOfRounds()
+
+        return mRoundScheme[r];
+    }
     public int getNumberOfRounds() {
         int rounds = mPouleSize;
 

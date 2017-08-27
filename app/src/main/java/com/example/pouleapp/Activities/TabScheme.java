@@ -47,7 +47,9 @@ public class TabScheme extends Fragment {
 
     private static final String NAME = "NAME";
 
-    private SimpleExpandableListAdapter mAdapter;
+//    private SimpleExpandableListAdapter mAdapter;
+
+    private RoundSchemeAdapter mAdapter;
     ExpandableListView schemeExpandableListView;
 
 
@@ -74,44 +76,46 @@ public class TabScheme extends Fragment {
         //  initiate the expandable list view
         schemeExpandableListView = (ExpandableListView) v.findViewById(R.id.schemeExpandableListView);
 
-        // create lists for group and child items
-        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
-        List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
-        // add data in group and child list
-        for (int round = 1; round < pouleScheme.getNumberOfRounds(); round++) {
-            Map<String, String> curGroupMap = new HashMap<String, String>();
-            groupData.add(curGroupMap);
-            curGroupMap.put(NAME, "Round " + round);
-
-            List<Map<String, String>> children = new ArrayList<Map<String, String>>();
-            Match[] mList = pouleScheme.getRoundMatchList(round);
-
-            for (int j = 0; j < mList.length; j++) {
-                Map<String, String> curChildMap = new HashMap<String, String>();
-                children.add(curChildMap);
-                curChildMap.put(NAME, mList[j].getMatchString());
-            }
-            childData.add(children);
-        }
-        // define arrays for displaying data in Expandable list view
-        String groupFrom[] = {NAME};
-        int groupTo[] = {R.id.heading};
-        String childFrom[] = {NAME};
-        int childTo[] = {R.id.childItem};
-
-
-        // Set up the adapter
-//        mAdapter = new SimpleExpandableListAdapter(this, groupData,
+//        // create lists for group and child items
+//        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();
+//        List<List<Map<String, String>>> childData = new ArrayList<List<Map<String, String>>>();
+//        // add data in group and child list
+//        for (int round = 1; round < pouleScheme.getNumberOfRounds(); round++) {
+//            Map<String, String> curGroupMap = new HashMap<String, String>();
+//            groupData.add(curGroupMap);
+//            curGroupMap.put(NAME, "Round " + round);
+//
+//            List<Map<String, String>> children = new ArrayList<Map<String, String>>();
+//            Match[] mList = pouleScheme.getRoundMatchList(round);
+//
+//            for (int j = 0; j < mList.length; j++) {
+//                Map<String, String> curChildMap = new HashMap<String, String>();
+//                children.add(curChildMap);
+//                curChildMap.put(NAME, mList[j].getMatchString());
+//            }
+//            childData.add(children);
+//        }
+//        // define arrays for displaying data in Expandable list view
+//        String groupFrom[] = {NAME};
+//        int groupTo[] = {R.id.heading};
+//        String childFrom[] = {NAME};
+//        int childTo[] = {R.id.childItem};
+//
+//
+//        // Set up the adapter
+////        mAdapter = new SimpleExpandableListAdapter(this, groupData,
+////                R.layout.group_items,
+////                groupFrom, groupTo,
+////                childData, R.layout.child_items,
+////                childFrom, childTo);
+//
+//        mAdapter = new SimpleExpandableListAdapter(v.getContext(), groupData,
 //                R.layout.group_items,
 //                groupFrom, groupTo,
 //                childData, R.layout.child_items,
 //                childFrom, childTo);
 
-        mAdapter = new SimpleExpandableListAdapter(v.getContext(), groupData,
-                R.layout.group_items,
-                groupFrom, groupTo,
-                childData, R.layout.child_items,
-                childFrom, childTo);
+        mAdapter = new RoundSchemeAdapter(v.getContext(), pouleScheme);
 
         schemeExpandableListView.setAdapter(mAdapter);
 

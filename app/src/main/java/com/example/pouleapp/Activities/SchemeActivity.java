@@ -85,7 +85,7 @@ public class SchemeActivity extends AppCompatActivity implements SimpleGestureFi
         String groupFrom[] = {NAME};
         int groupTo[] = {R.id.heading};
         String childFrom[] = {NAME};
-        int childTo[] = {R.id.childItem};
+        int childTo[] = {R.id.child_items_match};
 
 
         // Set up the adapter
