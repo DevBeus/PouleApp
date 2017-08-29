@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/list_item_text_view_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="TextView"
+        android:text="@string/list_item_text_view_1"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         android:layout_marginStart="8dp"
@@ -18,12 +18,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="0dp"
-        app:layout_constraintRight_toLeftOf="@+id/imageView"
+        app:layout_constraintRight_toLeftOf="@+id/list_item_image_view_chevron"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/list_item_image_view_chevron"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"

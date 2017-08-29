@@ -9,24 +9,24 @@
     <string name="show_scheme_button">Scheme</string>
     <string name="show_ranking_button">Ranking</string>
 
-    <string name="poule_text_view">Poule Name:</string>
+    <string name="poule_settings_text_view_poule_name">Poule Name:</string>
 
-    <string name="rank">#</string>
-    <string name="team">Team</string>
-    <string name="matches_won">W</string>
-    <string name="matches_draw">D</string>
-    <string name="matches_lost">L</string>
-    <string name="matches">M</string>
-    <string name="points">P</string>
-    <string name="goals_for">GF</string>
-    <string name="goals_against">GA</string>
+    <string name="tab_ranking_text_view_ranking">#</string>
+    <string name="tab_ranking_text_view_team">Team</string>
+    <string name="tab_ranking_text_view_matches_won">W</string>
+    <string name="tab_ranking_text_view_matches_draw">D</string>
+    <string name="tab_ranking_text_view_matches_lost">L</string>
+    <string name="tab_ranking_text_view_matches">M</string>
+    <string name="tab_ranking_text_view_points">P</string>
+    <string name="tab_ranking_text_view_goals_for">GF</string>
+    <string name="tab_ranking_text_view_goals_against">GA</string>
 
-    <string name="team_text_view">Team:</string>
-    <string name="coach_text_view">Coach:</string>
-    <string name="cancel_button">Cancel</string>
-    <string name="ok_button">OK</string>
-    <string name="home_team_text_view">Home Team</string>
-    <string name="opponent_text_view">Opponent</string>
+    <string name="edit_team_text_view_team">Team:</string>
+    <string name="edit_team_text_view_coach">Coach:</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
+    <string name="edit_match_text_view_home_team">Home Team</string>
+    <string name="edit_match_text_view_opponent">Opponent</string>
     <string name="team_list">Poule</string>
     <string name="ranking">Ranking</string>
 
@@ -35,22 +35,22 @@
 
     <string name="no_empty_scores_message">Both scores should be filled or left empty !</string>
     <string name="scores_should_be_numbers_message">Scores should be numbers!</string>
-    <string name="tournament_text_view">Tournament</string>
+    <string name="tournament_settings_text_view_tournament_name">Tournament</string>
     <string name="location_text_view">Location</string>
-    <string name="welcome_text">Welcome to the Poule App</string>
-    <string name="welcome_explanation">With this App you can organize your own tournaments</string>
-    <string name="tournament_name_text_view">"The following poules are part of this tournament "</string>
-    <string name="tournament_location_text_view">Location:</string>
+    <string name="welcome_text_view_welcome">Welcome to the Poule App</string>
+    <string name="welcome_text_view_intro">With this App you can organize your own tournaments and competitions</string>
+    <string name="tournament_text_view_intro">"The following poules are part of this tournament "</string>
+    <string name="tournament_settings_text_view_location">Location:</string>
     <string name="save_tournament_button">Save</string>
-    <string name="tournament_poule_explanation_text_view">Poule List:</string>
+    <string name="tournament_text_view_poule_list_view_header">Poule List:</string>
 
-    <string name="poule_name_text_view">"The following teams are part of this poule"</string>
+    <string name="poule_text_view_intro">"The following teams are part of this poule"</string>
 
     <string name="home_button">home</string>
     <string name="delete_tournament_button">Delete Tournament</string>
     <string name="tournament_creation_cannot_be_removed_message">This item cannot be removed</string>
     <string name="save_poule_button">Save</string>
-    <string name="team_explanation_text_view">Teams:</string>
+    <string name="poule_text_view_teams_list_view_header">Teams:</string>
     <string name="show_tournament">Tournament</string>
     <string name="show_tournament_button">Tournament</string>
     <string name="menu_poule_name_text">"Poule: "</string>
@@ -59,15 +59,23 @@
     <string name="menu_poule_settings_text">"Poule Settings"</string>
     <string name="menu_team_name_text">"Team: "</string>
 
-    <string name="descr_welcome">"Welcome and Start"</string>
+    <string name="welcome_image_button_descr_welcome">"Welcome and Start"</string>
     <string name="descr_deleteTournament">"Delete Tournament"</string>
     <string name="descr_savePoule">"Save Poule"</string>
     <string name="descr_saveTournament">"Save Tournament"</string>
-    <string name="descr_addPoule">"Add Poule"</string>
-    <string name="descr_addTeam">"Add Team"</string>
-    <string name="descr_startTournamentActivity">"Start Tournament Activity"</string>
-    <string name="descr_startSchemeTableActivity">"Start Scheme Table Activity"</string>
-    <string name="descr_startSchemeActivity">"Start Scheme Activity"</string>
-    <string name="descr_startRankingActivity">"Start Ranking Activity"</string>
+    <string name="tournament_image_button_descr_add_poule" translatable="false">"Add Poule"</string>
+    <string name="poule_image_button_description_add_team">"Add Team"</string>
+    <string name="descr_startTournamentActivity" translatable="false">"Start Tournament Activity"</string>
+    <string name="descr_startSchemeTableActivity" translatable="false">"Start Scheme Table Activity"</string>
+    <string name="descr_startSchemeActivity" translatable="false">"Start Scheme Activity"</string>
+    <string name="descr_startRankingActivity" translatable="false">"Start Ranking Activity"</string>
+    <string name="select_tournament_text_view_intro">Select an existing tournament or create a new one</string>
+    <string name="select_tournament_text_view_tournaments_list_view_header">Tournaments:</string>
+    <string name="select_tournament_image_button_descr_add_tournament">Add Tournament</string>
+    <string name="tournament_settings_text_view_date">Date</string>
+    <string name="enter_poule_name_dialog_text_view_enter_poule_name">Enter Poule name:</string>
+    <string name="enter_team_name_dialog_text_view_enter_team_name">Enter Team name:</string>
+    <string name="enter_tournament_name_dialog_text_view_enter_tournament_name">Enter Tournament name:</string>
+    <string name="list_item_text_view_1" translatable="false">TextView</string>
 
 </resources>

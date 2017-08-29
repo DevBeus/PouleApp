@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/heading"
+        android:id="@+id/group_items_text_view_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom"

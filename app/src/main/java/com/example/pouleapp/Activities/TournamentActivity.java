@@ -1,12 +1,10 @@
 package com.example.pouleapp.Activities;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -73,7 +71,7 @@ public class TournamentActivity extends AppCompatActivity {
     }
 
     private void initListView(ArrayList<Poule> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.listViewPoules);
+        mListView=(SwipeMenuListView)findViewById(R.id.tournament_list_view_poules);
         mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
@@ -233,7 +231,7 @@ public class TournamentActivity extends AppCompatActivity {
                 holder=new ViewHolder();
 
                 convertView=getLayoutInflater().inflate(R.layout.list_item,null);
-                holder.mTextview=(TextView)convertView.findViewById(R.id.textView);
+                holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
 
@@ -285,7 +283,7 @@ public class TournamentActivity extends AppCompatActivity {
         // set enter_poule_name_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText etPouleName = (EditText) DialogView.findViewById(R.id.editTextPouleName);
+        final EditText etPouleName = (EditText) DialogView.findViewById(R.id.enter_poule_name_dialog_edit_text_poule_name);
 
         alertDialogBuilder
                 .setCancelable(false)

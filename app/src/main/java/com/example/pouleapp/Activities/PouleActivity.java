@@ -31,7 +31,6 @@ import java.util.ArrayList;
 
 import static com.example.pouleapp.Data.GlobalData.ACTION_EDIT;
 import static com.example.pouleapp.Data.GlobalData.ACTION_MESSAGE;
-import static com.example.pouleapp.Data.GlobalData.DEFAULT_TEAM_NAME;
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
@@ -101,7 +100,7 @@ public class PouleActivity extends AppCompatActivity {
 
 
     private void initListView(ArrayList<Team> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.listViewTeams);
+        mListView=(SwipeMenuListView)findViewById(R.id.poule_list_view_teams);
         mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
@@ -223,7 +222,7 @@ public class PouleActivity extends AppCompatActivity {
                 holder=new ViewHolder();
 
                 convertView=getLayoutInflater().inflate(R.layout.list_item,null);
-                holder.mTextview=(TextView)convertView.findViewById(R.id.textView);
+                holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
 
@@ -254,7 +253,7 @@ public class PouleActivity extends AppCompatActivity {
         // set enter_team_name_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText inputTeamName = (EditText) DialogView.findViewById(R.id.EnterTeamNameDialog_inputTeamName);
+        final EditText inputTeamName = (EditText) DialogView.findViewById(R.id.enter_team_name_dialog_edit_text_team_name);
 
         alertDialogBuilder
                 .setCancelable(false)
@@ -305,7 +304,7 @@ public class PouleActivity extends AppCompatActivity {
         ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);
 
-        TextView textPoule = (TextView) findViewById(R.id.editTextTeam);
+        TextView textPoule = (TextView) findViewById(R.id.edit_team_edit_text_team);
 
         String pouleName = textPoule.getText().toString();
         poule.setPouleName(pouleName);

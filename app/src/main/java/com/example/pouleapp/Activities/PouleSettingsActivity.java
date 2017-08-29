@@ -45,7 +45,7 @@ public class PouleSettingsActivity extends AppCompatActivity {
 
         setTitle(getResources().getString(R.string.menu_poule_settings_text));
 
-        TextView tvPouleName = (TextView) findViewById(R.id.PouleSettings_inputPouleName);
+        TextView tvPouleName = (TextView) findViewById(R.id.poule_settings_edit_text_poule_name);
         tvPouleName.setText(pouleList.get(mPoule_Index).getPouleName());
 
     }
@@ -54,7 +54,7 @@ public class PouleSettingsActivity extends AppCompatActivity {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
 
-        TextView tvPouleName = (TextView) findViewById(R.id.PouleSettings_inputPouleName);
+        TextView tvPouleName = (TextView) findViewById(R.id.poule_settings_edit_text_poule_name);
         String name = tvPouleName.getText().toString();
 
         ArrayList<Poule> pouleList = tournament.getPouleList();

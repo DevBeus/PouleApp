@@ -94,7 +94,7 @@ public class RoundSchemeAdapter extends BaseExpandableListAdapter {
             view = inf.inflate(R.layout.group_items, null);
         }
 
-        TextView heading = (TextView) view.findViewById(R.id.heading);
+        TextView heading = (TextView) view.findViewById(R.id.group_items_text_view_heading);
         heading.setText(round.getRoundName());
 
         return view;

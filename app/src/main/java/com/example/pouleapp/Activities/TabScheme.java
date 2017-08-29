@@ -7,13 +7,10 @@ package com.example.pouleapp.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.ListViewAutoScrollHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.SimpleExpandableListAdapter;
-import android.widget.TextView;
 
 import com.example.pouleapp.Data.GlobalData;
 import com.example.pouleapp.Data.Match;
@@ -24,14 +21,9 @@ import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
 import static com.example.pouleapp.Data.GlobalData.PREVIOUS_TAB;
-import static com.example.pouleapp.Data.GlobalData.SCHEME_ACTIVITY;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
@@ -74,7 +66,7 @@ public class TabScheme extends Fragment {
         View v = inflater.inflate(R.layout.tab_scheme, container, false);
 
         //  initiate the expandable list view
-        schemeExpandableListView = (ExpandableListView) v.findViewById(R.id.schemeExpandableListView);
+        schemeExpandableListView = (ExpandableListView) v.findViewById(R.id.tab_scheme_expandable_list_view_scheme);
 
 //        // create lists for group and child items
 //        List<Map<String, String>> groupData = new ArrayList<Map<String, String>>();

@@ -7,80 +7,80 @@
     <!--android:background = "@color/colorCell" >-->
 
     <TextView
-        android:id = "@+id/ranking"
+        android:id = "@+id/ranking_row_text_view_ranking"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/rank"
+        android:text = "@string/tab_ranking_text_view_ranking"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/team"
+        android:id = "@+id/ranking_row_text_view_team"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "3"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/team"
+        android:text = "@string/tab_ranking_text_view_team"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/matches"
+        android:id = "@+id/ranking_row_text_view_matches"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/matches"
+        android:text = "@string/tab_ranking_text_view_matches"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/points"
+        android:id = "@+id/ranking_row_text_view_points"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/points"
+        android:text = "@string/tab_ranking_text_view_points"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/matches_won"
+        android:id = "@+id/ranking_row_text_view_matches_won"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/matches_won"
+        android:text = "@string/tab_ranking_text_view_matches_won"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/matches_draw"
+        android:id = "@+id/ranking_row_text_view_matches_draw"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/matches_draw"
+        android:text = "@string/tab_ranking_text_view_matches_draw"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/matches_lost"
+        android:id = "@+id/ranking_row_text_view_matches_lost"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/matches_lost"
+        android:text = "@string/tab_ranking_text_view_matches_lost"
         android:maxLines="1" />
 
 
@@ -88,24 +88,24 @@
 
 
     <TextView
-        android:id = "@+id/goals_for"
+        android:id = "@+id/ranking_row_text_view_goals_for"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/goals_for"
+        android:text = "@string/tab_ranking_text_view_goals_for"
         android:maxLines="1" />
 
     <TextView
-        android:id = "@+id/goals_against"
+        android:id = "@+id/ranking_row_text_view_goals_against"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
         android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
-        android:text = "@string/goals_against"
+        android:text = "@string/tab_ranking_text_view_goals_against"
         android:maxLines="1" />
 </LinearLayout>

@@ -23,7 +23,6 @@ import static com.example.pouleapp.Data.GlobalData.PREVIOUS_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
-import static com.example.pouleapp.Data.GlobalData.SCHEME_TABLE_ACTIVITY;
 import static com.example.pouleapp.Data.GlobalData.TAB_INDEX;
 
 
@@ -62,16 +61,16 @@ public class EditMatchActivity extends AppCompatActivity {
         String homeTeam = teamList.get(x).getTeamName();
         String opponent = teamList.get(y).getTeamName();
 
-        TextView textHomeTeam = (TextView) findViewById(R.id.textHomeTeam);
+        TextView textHomeTeam = (TextView) findViewById(R.id.edit_match_text_view_home_team);
         textHomeTeam.setText(homeTeam);
-        TextView textOpponent = (TextView) findViewById(R.id.textOpponentTeam);
+        TextView textOpponent = (TextView) findViewById(R.id.edit_match_text_view_opponent_team);
         textOpponent.setText(opponent);
 
         Integer gf = pouleScheme.getMatchGoalsFor(x, y);
         Integer ga = pouleScheme.getMatchGoalsAgainst(x, y);
 
-        TextView textGF = (TextView) findViewById(R.id.editHomeScore);
-        TextView textGA = (TextView) findViewById(R.id.editOpponentScore);
+        TextView textGF = (TextView) findViewById(R.id.edit_match_edit_text_home_score);
+        TextView textGA = (TextView) findViewById(R.id.edit_match_edit_text_opponent_score);
 
         if ((gf == null) || (ga == null)) {
             textGF.setText("");
@@ -83,8 +82,8 @@ public class EditMatchActivity extends AppCompatActivity {
     }
 
     public void updateMatch(View view) {
-        TextView textHS = (TextView) findViewById(R.id.editHomeScore);
-        TextView textOS = (TextView) findViewById(R.id.editOpponentScore);
+        TextView textHS = (TextView) findViewById(R.id.edit_match_edit_text_home_score);
+        TextView textOS = (TextView) findViewById(R.id.edit_match_edit_text_opponent_score);
 
         String strHS = textHS.getText().toString();
         String strOS = textOS.getText().toString();

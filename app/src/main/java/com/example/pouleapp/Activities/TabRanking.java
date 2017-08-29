@@ -55,7 +55,7 @@ public class TabRanking extends Fragment {
 
         Collections.sort(sortedPoule, Team.RankingComparator);
 
-        ListView lview = (ListView) v.findViewById(R.id.tabRanking_ListView);
+        ListView lview = (ListView) v.findViewById(R.id.tab_ranking_list_view_ranking);
         RankingAdapter adapter = new RankingAdapter(getActivity(), sortedPoule);
         lview.setAdapter(adapter);
 

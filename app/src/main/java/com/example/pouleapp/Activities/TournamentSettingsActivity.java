@@ -37,10 +37,10 @@ public class TournamentSettingsActivity extends AppCompatActivity {
 
         setTitle(getResources().getString(R.string.menu_tournament_settings_text));
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.TournamentSettings_inputTournamentName);
+        TextView tvTournamentName = (TextView) findViewById(R.id.tournament_settings_edit_text_tournament_name);
         tvTournamentName.setText(tournament.getTournamentName());
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.TournamentSettings_inputLocation);
+        TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
         tvTournamentLocation.setText(tournament.getLocation());
 
         //hide soft keyboard
@@ -51,10 +51,10 @@ public class TournamentSettingsActivity extends AppCompatActivity {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.TournamentSettings_inputTournamentName);
+        TextView tvTournamentName = (TextView) findViewById(R.id.tournament_settings_edit_text_tournament_name);
         String name = tvTournamentName.getText().toString();
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.TournamentSettings_inputLocation);
+        TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
         String location = tvTournamentLocation.getText().toString();
 
         tournament.setTournamentName(name);

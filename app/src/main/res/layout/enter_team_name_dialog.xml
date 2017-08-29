@@ -8,19 +8,19 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/EnterTeamNameDialog_textViewEnterTeamName"
+        android:id="@+id/enter_team_name_dialog_text_view_enter_team_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/enter_team_name_dialog_text_view_enter_team_name"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
-        android:text="Enter Team name:"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/EnterTeamNameDialog_inputTeamName"
+        android:id="@+id/enter_team_name_dialog_edit_text_team_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -29,6 +29,6 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EnterTeamNameDialog_textViewEnterTeamName" />
+        app:layout_constraintTop_toBottomOf="@+id/enter_team_name_dialog_text_view_enter_team_name" />
 
 </android.support.constraint.ConstraintLayout>

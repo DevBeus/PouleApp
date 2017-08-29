@@ -8,7 +8,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/tab_ranking_linear_layout_1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -23,100 +23,109 @@
         android:layout_marginTop="8dp">
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_ranking"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/rank"
+            android:text="@string/tab_ranking_text_view_ranking"
             android:textColor="@color/colorBlue"
             android:textColorLink="@color/colorRed" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_team"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/team"
+            android:text="@string/tab_ranking_text_view_team"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_matches"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/matches"
+            android:text="@string/tab_ranking_text_view_matches"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_points"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/points"
+            android:text="@string/tab_ranking_text_view_points"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_matches_won"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/matches_won"
+            android:text="@string/tab_ranking_text_view_matches_won"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_matches_draw"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/matches_draw"
+            android:text="@string/tab_ranking_text_view_matches_draw"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_matches_lost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/matches_lost"
+            android:text="@string/tab_ranking_text_view_matches_lost"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_goals_for"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/goals_for"
+            android:text="@string/tab_ranking_text_view_goals_for"
             android:textColor="@color/colorBlue" />
 
         <TextView
+            android:id = "@+id/tab_ranking_text_view_goals_against"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/colorYellow"
             android:gravity="center"
             android:padding="5dp"
-            android:text="@string/goals_against"
+            android:text="@string/tab_ranking_text_view_goals_against"
             android:textColor="@color/colorBlue" />
     </LinearLayout>
 
 
     <ListView
-        android:id="@+id/tabRanking_ListView"
+        android:id="@+id/tab_ranking_list_view_ranking"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -128,7 +137,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tab_ranking_linear_layout_1"
         tools:layout_conversion_absoluteHeight="361dp"
         tools:layout_conversion_absoluteWidth="384dp"
         tools:layout_conversion_absoluteX="0dp"

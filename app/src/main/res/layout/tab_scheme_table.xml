@@ -7,7 +7,7 @@ android:layout_height="match_parent"
 android:orientation="vertical">
 
     <TableLayout
-        android:id="@+id/tabSchemeTable_table"
+        android:id="@+id/tab_scheme_table_layout_table"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

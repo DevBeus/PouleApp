@@ -17,13 +17,13 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="@string/home_team_text_view"
+                android:id="@+id/edit_match_text_view_home_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textHomeTeam" />
+                android:text="@string/edit_match_text_view_home_team" />
 
             <EditText
-                android:id="@+id/editHomeScore"
+                android:id="@+id/edit_match_edit_text_home_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -37,13 +37,13 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="@string/opponent_text_view"
+                android:id="@+id/edit_match_text_view_opponent_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textOpponentTeam" />
+                android:text="@string/edit_match_text_view_opponent" />
 
             <EditText
-                android:id="@+id/editOpponentScore"
+                android:id="@+id/edit_match_edit_text_opponent_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -57,17 +57,17 @@
             android:layout_height="match_parent" >
 
             <Button
-                android:text="@string/cancel_button"
+                android:id="@+id/edit_match_button_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:text="@string/button_cancel"
                 android:onClick="cancel"/>
 
             <Button
-                android:text="@string/ok_button"
+                android:id="@+id/edit_match_button_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
+                android:text="@string/button_ok"
                 android:onClick="updateMatch"/>
 
         </TableRow>

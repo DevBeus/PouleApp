@@ -63,15 +63,15 @@ public class RankingAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.ranking_row, null);
             holder = new ViewHolder();
-            holder.mRanking = (TextView) convertView.findViewById(R.id.ranking);
-            holder.mTeam = (TextView) convertView.findViewById(R.id.team);
-            holder.mMatches = (TextView) convertView.findViewById(R.id.matches);
-            holder.mPoints = (TextView) convertView.findViewById(R.id.points);
-            holder.mMatchesWon = (TextView) convertView.findViewById(R.id.matches_won);
-            holder.mMatchesDraw = (TextView) convertView.findViewById(R.id.matches_draw);
-            holder.mMatchesLost = (TextView) convertView.findViewById(R.id.matches_lost);
-            holder.mGoalsFor = (TextView) convertView.findViewById(R.id.goals_for);
-            holder.mGoalsAgainst = (TextView) convertView.findViewById(R.id.goals_against);
+            holder.mRanking = (TextView) convertView.findViewById(R.id.ranking_row_text_view_ranking);
+            holder.mTeam = (TextView) convertView.findViewById(R.id.ranking_row_text_view_team);
+            holder.mMatches = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches);
+            holder.mPoints = (TextView) convertView.findViewById(R.id.ranking_row_text_view_points);
+            holder.mMatchesWon = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches_won);
+            holder.mMatchesDraw = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches_draw);
+            holder.mMatchesLost = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches_lost);
+            holder.mGoalsFor = (TextView) convertView.findViewById(R.id.ranking_row_text_view_goals_for);
+            holder.mGoalsAgainst = (TextView) convertView.findViewById(R.id.ranking_row_text_view_goals_against);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

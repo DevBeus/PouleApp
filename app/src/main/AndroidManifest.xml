@@ -26,9 +26,6 @@
         <activity android:name=".Activities.PouleSettingsActivity"></activity>
         <activity android:name=".Activities.EditTeamActivity"></activity>
         <activity android:name=".Activities.EditMatchActivity"></activity>
-        <activity android:name=".Activities.SchemeTableActivity"></activity>
-        <activity android:name=".Activities.SchemeActivity"></activity>
-        <activity android:name=".Activities.RankingActivity"></activity>
         <activity android:name=".Activities.SchemeRankingActivity"
             android:theme="@style/AppThemeNoActionBar"></activity>
 

@@ -17,13 +17,13 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="@string/team_text_view"
+                android:id="@+id/edit_team_text_view_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewTeam" />
+                android:text="@string/edit_team_text_view_team" />
 
             <EditText
-                android:id="@+id/editTextTeam"
+                android:id="@+id/edit_team_edit_text_team"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -37,13 +37,13 @@
             android:layout_height="match_parent" >
 
             <TextView
-                android:text="@string/coach_text_view"
+                android:id="@+id/edit_team_text_view_coach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textViewCoach" />
+                android:text="@string/edit_team_text_view_coach" />
 
             <EditText
-                android:id="@+id/editTextCoach"
+                android:id="@+id/edit_team_edit_text_coach"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -57,17 +57,17 @@
             android:layout_height="match_parent" >
 
             <Button
-                android:text="@string/cancel_button"
+                android:id="@+id/edit_match_button_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button"
+                android:text="@string/button_cancel"
                 android:onClick="cancel"/>
 
             <Button
-                android:text="@string/ok_button"
+                android:id="@+id/edit_match_button_ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
+                android:text="@string/button_ok"
                 android:onClick="updateTeam"/>
         </TableRow>
 

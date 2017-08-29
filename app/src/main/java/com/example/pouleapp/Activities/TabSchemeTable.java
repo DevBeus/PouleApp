@@ -31,7 +31,6 @@ import static com.example.pouleapp.Data.GlobalData.PREVIOUS_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEMETABLE_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
-import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 /**
@@ -64,7 +63,7 @@ public class TabSchemeTable extends Fragment {
 
         //setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 
-        TableLayout tl = (TableLayout) v.findViewById(R.id.tabSchemeTable_table);
+        TableLayout tl = (TableLayout) v.findViewById(R.id.tab_scheme_table_layout_table);
 
         for (int i=0; i < teamList.size()+1; i++) {
             TableRow tr = new TableRow(v.getContext());

@@ -51,7 +51,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
     }
 
     private void initListView(List<String> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.listViewTournaments);
+        mListView=(SwipeMenuListView)findViewById(R.id.select_tournament_list_view_tournaments);
         mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
@@ -175,7 +175,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
                 holder=new ViewHolder();
 
                 convertView=getLayoutInflater().inflate(R.layout.list_item,null);
-                holder.mTextview=(TextView)convertView.findViewById(R.id.textView);
+                holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
 
@@ -208,7 +208,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
         // set enter_tournament_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText etTournamentName = (EditText) DialogView.findViewById(R.id.editTextTournamentName);
+        final EditText etTournamentName = (EditText) DialogView.findViewById(R.id.enter_tournament_name_dialog_edit_text_tournament_name);
 
         final String tournamentName;
 
