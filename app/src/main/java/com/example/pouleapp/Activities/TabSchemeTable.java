@@ -1,8 +1,5 @@
 package com.example.pouleapp.Activities;
 
-/**
- * Created by gezamenlijk on 16-8-2017.
- */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +31,8 @@ import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TABLE_ACTIVITY;
 
 /**
- * Created by Belal on 2/3/2016.
+ * Created by gezamenlijk on 16-8-2017.
+ * Code concept copied from https://www.simplifiedcoding.net/android-tablayout-example-using-viewpager-fragments/
  */
 
 //Our class extending fragment

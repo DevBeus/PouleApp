@@ -1,27 +1,26 @@
 package com.example.pouleapp.Activities;
 
-/**
- * Created by gezamenlijk on 16-8-2017.
- */
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * Created by Belal on 2/3/2016.
+ * Created by gezamenlijk on 16-8-2017.
+ * this class is used to support the 3 tabs in SchemeRankingActivity
  */
+
 //Extending FragmentStatePagerAdapter
-public class SchemeRankingPager extends FragmentStatePagerAdapter {
+class SchemeRankingPager extends FragmentStatePagerAdapter {
 
     //integer to count number of tabs
-    int tabCount;
+    private int mTabCount;
 
     //Constructor to the class
-    public SchemeRankingPager(FragmentManager fm, int tabCount) {
+    SchemeRankingPager(FragmentManager fm, int tabCount) {
         super(fm);
         //Initializing tab count
-        this.tabCount= tabCount;
+        this.mTabCount = tabCount;
     }
 
     //Overriding method getItem
@@ -30,14 +29,11 @@ public class SchemeRankingPager extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                TabScheme tabScheme = new TabScheme();
-                return tabScheme;
+                return new TabScheme();
             case 1:
-                TabRanking tabRanking = new TabRanking();
-                return tabRanking;
+                return new TabRanking();
             case 2:
-                TabSchemeTable tabSchemeTable = new TabSchemeTable();
-                return tabSchemeTable;
+                return new TabSchemeTable();
             default:
                 return null;
         }
@@ -46,6 +42,6 @@ public class SchemeRankingPager extends FragmentStatePagerAdapter {
     //Overriden method getCount to get the number of tabs
     @Override
     public int getCount() {
-        return tabCount;
+        return mTabCount;
     }
 }

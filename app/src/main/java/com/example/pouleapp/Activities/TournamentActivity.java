@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -33,8 +34,6 @@ import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
 public class TournamentActivity extends AppCompatActivity {
     final Context mContext = this;
-
-    private SwipeMenuListView mListView;
     private ArrayList<String> mArrayList=new ArrayList<>();
     private ListDataAdapter mListDataAdapter;
 
@@ -58,12 +57,6 @@ public class TournamentActivity extends AppCompatActivity {
         //globalVariable.initPouleList();
         pouleList = tournament.getPouleList();
 
-//        TextView tvTournamentName = (TextView) findViewById(R.id.editTournamentName);
-//        tvTournamentName.setText(tournament.getTournamentName());
-//
-//        TextView tvTournamentLocation = (TextView) findViewById(R.id.editTournamentLocation);
-//        tvTournamentLocation.setText(tournament.getLocation());
-
         initListView(pouleList);
 
         //hide soft keyboard
@@ -71,8 +64,8 @@ public class TournamentActivity extends AppCompatActivity {
     }
 
     private void initListView(ArrayList<Poule> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.tournament_list_view_poules);
-        mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuListView listView=(SwipeMenuListView)findViewById(R.id.tournament_list_view_poules);
+        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
             mArrayList.add(list.get(i).getPouleName());
@@ -81,7 +74,7 @@ public class TournamentActivity extends AppCompatActivity {
         // mListView.setCloseInterpolator(new BounceInterpolator());
 
         mListDataAdapter=new ListDataAdapter();
-        mListView.setAdapter(mListDataAdapter);
+        listView.setAdapter(mListDataAdapter);
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
@@ -106,8 +99,8 @@ public class TournamentActivity extends AppCompatActivity {
         };
 
         // set creator
-        mListView.setMenuCreator(creator);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setMenuCreator(creator);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
@@ -119,13 +112,12 @@ public class TournamentActivity extends AppCompatActivity {
             }
         });
 
-        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        //Toast.makeText(TournamentActivity.this,"Like button press",Toast.LENGTH_SHORT).show();
                         // startPouleActivity
                         Intent intent = new Intent(getApplicationContext(), PouleActivity.class);
                         intent.putExtra(POULE_INDEX, position);
@@ -147,7 +139,7 @@ public class TournamentActivity extends AppCompatActivity {
         });
 
         //mListView
-        mListView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
+        listView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
             @Override
             public void onMenuOpen(int position) {
             }
@@ -158,7 +150,7 @@ public class TournamentActivity extends AppCompatActivity {
 
         });
 
-        mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
+        listView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
             @Override
             public void onSwipeStart(int position) {
             }
@@ -213,7 +205,7 @@ public class TournamentActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class ListDataAdapter extends BaseAdapter {
+    private class ListDataAdapter extends BaseAdapter {
         ViewHolder holder;
 
         @Override
@@ -229,8 +221,9 @@ public class TournamentActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView==null){
                 holder=new ViewHolder();
+                final ViewGroup nullParent = null; // introduced to avoid warning
 
-                convertView=getLayoutInflater().inflate(R.layout.list_item,null);
+                convertView=getLayoutInflater().inflate(R.layout.list_item, nullParent);
                 holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
@@ -252,31 +245,12 @@ public class TournamentActivity extends AppCompatActivity {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,getResources().getDisplayMetrics());
     }
 
-    public void saveTournament(View view) {
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-//        Tournament tournament = globalVariable.getTournament();
-
-//        TextView tvTournamentName = (TextView) findViewById(R.id.editTournamentName);
-//        String name = tvTournamentName.getText().toString();
-//
-//        TextView tvTournamentLocation = (TextView) findViewById(R.id.editTournamentLocation);
-//        String location = tvTournamentLocation.getText().toString();
-
-//        tournament.setTournamentName(name);
-//        tournament.setLocation(location);
-//
-        globalVariable.saveTournament();
-//        globalVariable.updateTournamentName(name);
-//        globalVariable.saveAppData();
-
-        recreate();
-
-    }
-
     public void addPoule(View view) {
         // get enter_poule_name_dialog.xml view
         LayoutInflater li = LayoutInflater.from(mContext);
-        View DialogView = li.inflate(R.layout.enter_poule_name_dialog, null);
+        final ViewGroup nullParent = null; // introduced to avoid warning
+
+        View DialogView = li.inflate(R.layout.enter_poule_name_dialog, nullParent);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
@@ -291,19 +265,32 @@ public class TournamentActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 // get user input and create new poule
-
                                 final GlobalData globalVariable = (GlobalData) getApplicationContext();
                                 Tournament tournament = globalVariable.getTournament();
                                 ArrayList<Poule> pouleList = tournament.getPouleList();
-                                int pouleId = pouleList.size();
-                                //Poule poule = new Poule(pouleId,"Poule"+pouleId);
-                                Poule poule = new Poule(pouleId,etPouleName.getText().toString());
-                                pouleList.add(poule);
+
+                                //Check whether new poule name already exists
+                                boolean found = false;
+                                String pouleName = etPouleName.getText().toString();
+
+                                for (int i=0; i < pouleList.size(); i++) {
+                                    if ((pouleList.get(i).getPouleName().equals(pouleName))) { found = true; }
+                                }
+
+                                if ( !found ) {
+                                    int pouleId = pouleList.size();
+                                    Poule poule = new Poule(pouleId, pouleName);
+                                    pouleList.add(poule);
+
+                                    globalVariable.saveTournament();
+                                }
+                                else {
+                                    String message = getResources().getString(R.string.toast_message_poule_name_twice);
+                                    Toast.makeText(getApplicationContext(), pouleName + message, Toast.LENGTH_LONG).show();
+                                }
+
 
                                 globalVariable.saveTournament();
-
-                                //globalVariable.addTournament(etTournamentName.getText().toString());
-                                //globalVariable.saveAppData();
                             }
                         })
                 .setNegativeButton("Cancel",

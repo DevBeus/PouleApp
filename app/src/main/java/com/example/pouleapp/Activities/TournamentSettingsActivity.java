@@ -8,14 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.pouleapp.Data.GlobalData;
-import com.example.pouleapp.Data.Poule;
 import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
 
-import java.util.ArrayList;
-
 /**
  * Created by gezamenlijk on 10-8-2017.
+ * this class is used to define all tournament settings
  */
 
 public class TournamentSettingsActivity extends AppCompatActivity {
@@ -23,7 +21,6 @@ public class TournamentSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_settings);
-        ArrayList<Poule> pouleList;
 
         // Show the Up button in the action bar.
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

@@ -14,16 +14,17 @@ import java.util.ArrayList;
 
 /**
  * Created by gezamenlijk on 4-3-2017.
+ * This adapter class is intended to map all ranking items to ranking tab row items
  */
 
-public class RankingAdapter extends BaseAdapter {
+class RankingAdapter extends BaseAdapter {
 
     private final ArrayList<Team> mTeamList;
-    Activity activity;
+    private Activity mActivity;
 
-    public RankingAdapter(Activity activity, ArrayList<Team> teamList) {
+    RankingAdapter(Activity activity, ArrayList<Team> teamList) {
         super();
-        this.activity = activity;
+        this.mActivity = activity;
         this.mTeamList = teamList;
     }
 
@@ -58,10 +59,12 @@ public class RankingAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
-        LayoutInflater inflater = activity.getLayoutInflater();
+        LayoutInflater inflater = mActivity.getLayoutInflater();
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.ranking_row, null);
+            final ViewGroup nullParent = null; // introduced to avoid warning
+
+            convertView = inflater.inflate(R.layout.ranking_row, nullParent);
             holder = new ViewHolder();
             holder.mRanking = (TextView) convertView.findViewById(R.id.ranking_row_text_view_ranking);
             holder.mTeam = (TextView) convertView.findViewById(R.id.ranking_row_text_view_team);
@@ -78,15 +81,24 @@ public class RankingAdapter extends BaseAdapter {
         }
 
         Team team = mTeamList.get(position);
-        holder.mRanking.setText(Integer.toString(position+1));
+        String ranking = Integer.toString(position+1);
+        String matches = Integer.toString(team.getMatches());
+        String points = Integer.toString(team.getPoints());
+        String wons = Integer.toString(team.getWins());
+        String draws = Integer.toString(team.getDraws());
+        String losses = Integer.toString(team.getLosses());
+        String goalsFor = Integer.toString(team.getGoalsFor());
+        String goalsAgainst = Integer.toString(team.getGoalsAgainst());
+
+        holder.mRanking.setText(ranking);
         holder.mTeam.setText(team.getTeamName());
-        holder.mMatches.setText(Integer.toString(team.getMatches()));
-        holder.mPoints.setText(Integer.toString(team.getPoints()));
-        holder.mMatchesWon.setText(Integer.toString(team.getWins()));
-        holder.mMatchesDraw.setText(Integer.toString(team.getDraws()));
-        holder.mMatchesLost.setText(Integer.toString(team.getLosses()));
-        holder.mGoalsFor.setText(Integer.toString(team.getGoalsFor()));
-        holder.mGoalsAgainst.setText(Integer.toString(team.getGoalsAgainst()));
+        holder.mMatches.setText(matches);
+        holder.mPoints.setText(points);
+        holder.mMatchesWon.setText(wons);
+        holder.mMatchesDraw.setText(draws);
+        holder.mMatchesLost.setText(losses);
+        holder.mGoalsFor.setText(goalsFor);
+        holder.mGoalsAgainst.setText(goalsAgainst);
 
         return convertView;
     }

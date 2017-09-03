@@ -64,4 +64,6 @@
     <string name="menu_poule_settings_text">Poule Instellingen</string>
     <string name="menu_tournament_settings_text">Toernooi Instellingen</string>
     <string name="welcome_image_button_descr_welcome">Welkom en Start</string>
+    <string name="toast_message_team_name_twice">" bestaat al in deze poule"</string>
+    <string name="toast_message_poule_name_twice">" bestaat al binnen dit toernooi"</string>
 </resources>

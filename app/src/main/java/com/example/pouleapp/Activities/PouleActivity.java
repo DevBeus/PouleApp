@@ -38,7 +38,6 @@ public class PouleActivity extends AppCompatActivity {
     final Context mContext = this;
 
     private static int mPoule_Index = 0;
-    private SwipeMenuListView mListView;
     private ArrayList<String> mArrayList=new ArrayList<>();
     private ListDataAdapter mListDataAdapter;
 
@@ -100,17 +99,15 @@ public class PouleActivity extends AppCompatActivity {
 
 
     private void initListView(ArrayList<Team> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.poule_list_view_teams);
-        mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuListView listView=(SwipeMenuListView)findViewById(R.id.poule_list_view_teams);
+        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
             mArrayList.add(list.get(i).getTeamName());
         }
 
-        // mListView.setCloseInterpolator(new BounceInterpolator());
-
         mListDataAdapter=new ListDataAdapter();
-        mListView.setAdapter(mListDataAdapter);
+        listView.setAdapter(mListDataAdapter);
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
@@ -133,9 +130,9 @@ public class PouleActivity extends AppCompatActivity {
         };
 
         // set creator
-        mListView.setMenuCreator(creator);
+        listView.setMenuCreator(creator);
 
-        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
 
             @Override
 
@@ -180,8 +177,7 @@ public class PouleActivity extends AppCompatActivity {
 
         });
 
-        //mListView
-        mListView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
+        listView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
             @Override
             public void onMenuOpen(int position) {
             }
@@ -191,7 +187,7 @@ public class PouleActivity extends AppCompatActivity {
             }
         });
 
-        mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
+        listView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
             @Override
             public void onSwipeStart(int position) {
             }
@@ -204,7 +200,7 @@ public class PouleActivity extends AppCompatActivity {
     }
 
 
-    class ListDataAdapter extends BaseAdapter {
+    private class ListDataAdapter extends BaseAdapter {
         ViewHolder holder;
 
         @Override
@@ -220,8 +216,9 @@ public class PouleActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView==null){
                 holder=new ViewHolder();
+                final ViewGroup nullParent = null; // introduced to avoid warning
 
-                convertView=getLayoutInflater().inflate(R.layout.list_item,null);
+                convertView=getLayoutInflater().inflate(R.layout.list_item, nullParent);
                 holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
@@ -246,7 +243,9 @@ public class PouleActivity extends AppCompatActivity {
     public void addTeam(View view) {
         // get enter_team_name_dialog.xml view
         LayoutInflater li = LayoutInflater.from(mContext);
-        View DialogView = li.inflate(R.layout.enter_team_name_dialog, null);
+        final ViewGroup nullParent = null; // introduced to avoid warning
+
+        View DialogView = li.inflate(R.layout.enter_team_name_dialog, nullParent);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
@@ -267,12 +266,25 @@ public class PouleActivity extends AppCompatActivity {
                                 ArrayList<Poule> pouleList = tournament.getPouleList();
                                 Poule poule = pouleList.get(mPoule_Index);
 
-                                poule.addTeam(inputTeamName.getText().toString());
+                                //Check whether new team name already exists
+                                boolean found = false;
+                                String teamName = inputTeamName.getText().toString();
+                                ArrayList<Team> teamList = poule.getTeamList();
 
-                                globalVariable.saveTournament();
+                                for (int i=0; i < teamList.size(); i++) {
+                                    if ((teamList.get(i).getTeamName().equals(teamName))) { found = true; }
+                                }
 
-                                //globalVariable.addTournament(etTournamentName.getText().toString());
-                                //globalVariable.saveAppData();
+                                if ( !found ) {
+                                    poule.addTeam(teamName);
+
+                                    globalVariable.saveTournament();
+                                }
+                                else {
+                                    String message = getResources().getString(R.string.toast_message_team_name_twice);
+                                    Toast.makeText(getApplicationContext(), teamName + message, Toast.LENGTH_LONG).show();
+                                }
+
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -296,20 +308,6 @@ public class PouleActivity extends AppCompatActivity {
         // show it
         EnterTournamentNameDialog.show();
 
-    }
-
-    public void savePoule(View view) {
-        final GlobalData globalVariable = (GlobalData) getApplicationContext();
-        Tournament tournament = globalVariable.getTournament();
-        ArrayList<Poule> pouleList = tournament.getPouleList();
-        Poule poule = pouleList.get(mPoule_Index);
-
-        TextView textPoule = (TextView) findViewById(R.id.edit_team_edit_text_team);
-
-        String pouleName = textPoule.getText().toString();
-        poule.setPouleName(pouleName);
-
-        globalVariable.savePoule(poule);
     }
 }
 

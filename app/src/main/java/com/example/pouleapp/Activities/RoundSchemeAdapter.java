@@ -1,9 +1,5 @@
 package com.example.pouleapp.Activities;
 
-/**
- * Created by gezamenlijk on 21-8-2017.
- */
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +12,17 @@ import com.example.pouleapp.Data.PouleScheme;
 import com.example.pouleapp.Data.Round;
 import com.example.pouleapp.R;
 
+/**
+ * Created by gezamenlijk on 21-8-2017.
+ * This class is used to map the scheme rounds to a list view
+ */
 
-public class RoundSchemeAdapter extends BaseExpandableListAdapter {
+class RoundSchemeAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
     private PouleScheme mPouleScheme;
 
-    public RoundSchemeAdapter(Context context, PouleScheme pouleScheme) {
+    RoundSchemeAdapter(Context context, PouleScheme pouleScheme) {
         this.mContext = context;
         this.mPouleScheme = pouleScheme;
     }
@@ -45,8 +45,10 @@ public class RoundSchemeAdapter extends BaseExpandableListAdapter {
 
         Match match = (Match) getChild(groupPosition, childPosition);
         if (view == null) {
+            final ViewGroup nullParent = null; // introduced to avoid warning
+
             LayoutInflater infalInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = infalInflater.inflate(R.layout.child_items, null);
+            view = infalInflater.inflate(R.layout.child_items, nullParent);
         }
 
         TextView tvMatch = (TextView) view.findViewById(R.id.child_items_match);
@@ -90,8 +92,10 @@ public class RoundSchemeAdapter extends BaseExpandableListAdapter {
 
         Round round = (Round) getGroup(groupPosition);
         if (view == null) {
+            final ViewGroup nullParent = null; // introduced to avoid warning
+
             LayoutInflater inf = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inf.inflate(R.layout.group_items, null);
+            view = inf.inflate(R.layout.group_items, nullParent);
         }
 
         TextView heading = (TextView) view.findViewById(R.id.group_items_text_view_heading);

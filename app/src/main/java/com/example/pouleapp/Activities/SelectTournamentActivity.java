@@ -27,12 +27,13 @@ import java.util.List;
 
 /**
  * Created by gezamenlijk on 8-8-2017.
+ * This class is used for the selection of a tournament or creation of a new one
  */
 
 public class SelectTournamentActivity extends AppCompatActivity {
     final Context mContext = this;
 
-    private SwipeMenuListView mListView;
+//    private SwipeMenuListView mListView;
     private ArrayList<String> mArrayList=new ArrayList<>();
     private ListDataAdapter mListDataAdapter;
 
@@ -51,15 +52,17 @@ public class SelectTournamentActivity extends AppCompatActivity {
     }
 
     private void initListView(List<String> list) {
-        mListView=(SwipeMenuListView)findViewById(R.id.select_tournament_list_view_tournaments);
-        mListView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
+        SwipeMenuListView listView;
+
+        listView=(SwipeMenuListView)findViewById(R.id.select_tournament_list_view_tournaments);
+        listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
             mArrayList.add(list.get(i));
         }
 
         mListDataAdapter=new ListDataAdapter();
-        mListView.setAdapter(mListDataAdapter);
+        listView.setAdapter(mListDataAdapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -87,8 +90,8 @@ public class SelectTournamentActivity extends AppCompatActivity {
         };
 
         // set creator
-        mListView.setMenuCreator(creator);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setMenuCreator(creator);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
@@ -103,7 +106,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
             }
         });
 
-        mListView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
@@ -132,8 +135,8 @@ public class SelectTournamentActivity extends AppCompatActivity {
 
         });
 
-        //mListView
-        mListView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
+        //listView
+        listView.setOnMenuStateChangeListener(new SwipeMenuListView.OnMenuStateChangeListener() {
             @Override
             public void onMenuOpen(int position) {
             }
@@ -144,7 +147,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
 
         });
 
-        mListView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
+        listView.setOnSwipeListener(new SwipeMenuListView.OnSwipeListener() {
             @Override
             public void onSwipeStart(int position) {
             }
@@ -157,7 +160,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
 
     }
 
-    class ListDataAdapter extends BaseAdapter {
+    private class ListDataAdapter extends BaseAdapter {
         ViewHolder holder;
 
         @Override
@@ -173,8 +176,9 @@ public class SelectTournamentActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView==null){
                 holder=new ViewHolder();
+                final ViewGroup nullParent = null; // introduced to avoid warning
 
-                convertView=getLayoutInflater().inflate(R.layout.list_item,null);
+                convertView=getLayoutInflater().inflate(R.layout.list_item,nullParent);
                 holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
@@ -197,11 +201,11 @@ public class SelectTournamentActivity extends AppCompatActivity {
     }
 
     public void addTournament(View view) {
-        //final GlobalData globalVariable = (GlobalData) getApplicationContext();
-
-        // get enter_tournament_dialog.xml view
+         // get enter_tournament_dialog.xml view
         LayoutInflater li = LayoutInflater.from(mContext);
-        View DialogView = li.inflate(R.layout.enter_tournament_name_dialog, null);
+        final ViewGroup nullParent = null; // introduced to avoid warning
+
+        View DialogView = li.inflate(R.layout.enter_tournament_name_dialog, nullParent);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
@@ -209,8 +213,6 @@ public class SelectTournamentActivity extends AppCompatActivity {
         alertDialogBuilder.setView(DialogView);
 
         final EditText etTournamentName = (EditText) DialogView.findViewById(R.id.enter_tournament_name_dialog_edit_text_tournament_name);
-
-        final String tournamentName;
 
         alertDialogBuilder
                 .setCancelable(false)

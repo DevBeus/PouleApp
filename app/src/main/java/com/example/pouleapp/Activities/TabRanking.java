@@ -1,8 +1,5 @@
 package com.example.pouleapp.Activities;
 
-/**
- * Created by gezamenlijk on 16-8-2017.
- */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,13 +21,14 @@ import java.util.Collections;
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 
 /**
- * Created by Belal on 2/3/2016.
+ * Created by gezamenlijk on 16-8-2017.
+ * This class is used for the tab named Ranking
+ * Code concept copied from https://www.simplifiedcoding.net/android-tablayout-example-using-viewpager-fragments/
  */
 
 //Our class extending fragment
 public class TabRanking extends Fragment {
 
-    private int mPoule_Index = 0;
 
     //Overriden method onCreateView
     @Override
@@ -45,9 +43,9 @@ public class TabRanking extends Fragment {
         ArrayList<Poule> pouleList = tournament.getPouleList();
 
         Intent intent = getActivity().getIntent();
-        mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
+        int pouleIndex = intent.getIntExtra(POULE_INDEX,0);
 
-        Poule poule = pouleList.get(mPoule_Index);
+        Poule poule = pouleList.get(pouleIndex);
         ArrayList<Team> teamList = poule.getTeamList();
         //setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 

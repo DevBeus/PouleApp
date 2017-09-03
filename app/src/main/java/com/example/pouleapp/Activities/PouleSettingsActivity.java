@@ -18,6 +18,7 @@ import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 
 /**
  * Created by gezamenlijk on 11-8-2017.
+ * This class takes care of the Poule Settings
  */
 
 public class PouleSettingsActivity extends AppCompatActivity {

@@ -18,7 +18,6 @@ import com.example.pouleapp.R;
 import java.util.ArrayList;
 
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
 import static com.example.pouleapp.Data.GlobalData.PREVIOUS_TAB;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
 import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
@@ -28,6 +27,7 @@ import static com.example.pouleapp.Data.GlobalData.TAB_INDEX;
 
 /**
  * Created by gezamenlijk on 26-2-2017.
+ * This class enables the user to fill the score of a match
  */
 
 public class EditMatchActivity extends AppCompatActivity {
@@ -35,7 +35,6 @@ public class EditMatchActivity extends AppCompatActivity {
     private int y = 1;
     private int mPoule_Index = 0;
     private int mPrevious_Tab;
-    private String mPrevious_Activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,6 @@ public class EditMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_match);
 
         Intent intent = getIntent();
-        mPrevious_Activity = intent.getStringExtra(PREVIOUS_ACTIVITY);
         mPrevious_Tab = intent.getIntExtra(PREVIOUS_TAB,SCHEME_TAB);
         x = intent.getIntExtra(SCHEME_ROW, 0);
         y = intent.getIntExtra(SCHEME_COLUMN, 0);
@@ -76,8 +74,10 @@ public class EditMatchActivity extends AppCompatActivity {
             textGF.setText("");
             textGA.setText("");
         } else {
-            textGF.setText(Integer.toString(gf));
-            textGA.setText(Integer.toString(ga));
+            String gfStr = Integer.toString(gf);
+            String gaStr = Integer.toString(ga);
+            textGF.setText(gfStr);
+            textGA.setText(gaStr);
         }
     }
 
@@ -87,8 +87,8 @@ public class EditMatchActivity extends AppCompatActivity {
 
         String strHS = textHS.getText().toString();
         String strOS = textOS.getText().toString();
-        Integer hs = null;
-        Integer os = null;
+        Integer hs;
+        Integer os;
 
         if ((TextUtils.isEmpty(strHS)) && (TextUtils.isEmpty(strOS))) {
             hs = null;
@@ -102,15 +102,11 @@ public class EditMatchActivity extends AppCompatActivity {
                 hs = Integer.parseInt(strHS);
                 os = Integer.parseInt(strOS);
             } catch (NumberFormatException e) {
-                hs = null;
-                os = null;
-
                 String message = getResources().getString(R.string.scores_should_be_numbers_message);
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
 
                 return;
             }
-
         }
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
@@ -124,14 +120,6 @@ public class EditMatchActivity extends AppCompatActivity {
 
         globalVariable.savePoule(poule);
 
-//        Intent intent;
-//
-//        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
-//            intent = new Intent(this, SchemeTableActivity.class);
-//        } else {
-//            intent = new Intent(this, SchemeActivity.class);
-//        }
-
         Intent intent = new Intent(this, SchemeRankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
         intent.putExtra(TAB_INDEX,mPrevious_Tab);
@@ -140,17 +128,9 @@ public class EditMatchActivity extends AppCompatActivity {
     }
 
     public void cancel(View view) {
-//        Intent intent;
-//
-//        if (mPrevious_Activity.equals(SCHEME_TABLE_ACTIVITY)){
-//            intent = new Intent(this, SchemeTableActivity.class);
-//        } else {
-//            intent = new Intent(this, SchemeActivity.class);
-//        }
-
         Intent intent = new Intent(this, SchemeRankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
-        intent.putExtra(TAB_INDEX,mPrevious_Tab);
+        intent.putExtra(TAB_INDEX, mPrevious_Tab);
         startActivity(intent);
 
     }

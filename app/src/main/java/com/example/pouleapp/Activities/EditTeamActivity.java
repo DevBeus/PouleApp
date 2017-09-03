@@ -109,7 +109,8 @@ public class EditTeamActivity extends AppCompatActivity {
 
             startActivity(intent);
         } else {
-            Toast.makeText(getApplicationContext(), "Team name " + teamName + " already part of poule", Toast.LENGTH_LONG).show();
+            String message = getResources().getString(R.string.toast_message_team_name_twice);
+            Toast.makeText(getApplicationContext(), teamName + message, Toast.LENGTH_LONG).show();
         }
 
     }

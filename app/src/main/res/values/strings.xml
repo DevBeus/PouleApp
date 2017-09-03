@@ -77,5 +77,7 @@
     <string name="enter_team_name_dialog_text_view_enter_team_name">Enter Team name:</string>
     <string name="enter_tournament_name_dialog_text_view_enter_tournament_name">Enter Tournament name:</string>
     <string name="list_item_text_view_1" translatable="false">TextView</string>
+    <string name="toast_message_team_name_twice">already part of this poule</string>
+    <string name="toast_message_poule_name_twice">already part of this tournament</string>
 
 </resources>

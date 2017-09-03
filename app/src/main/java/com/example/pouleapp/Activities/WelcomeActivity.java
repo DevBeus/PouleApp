@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.example.pouleapp.Data.GlobalData;
 import com.example.pouleapp.R;
 
 /**
  * Created by gezamenlijk on 21-5-2017.
+ * this class is used for the welcome screen
  */
 
 public class WelcomeActivity extends AppCompatActivity {
