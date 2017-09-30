@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import static com.example.pouleapp.Data.GlobalData.ACTION_EDIT;
 import static com.example.pouleapp.Data.GlobalData.ACTION_MESSAGE;
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
+import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
 import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
 public class PouleActivity extends AppCompatActivity {

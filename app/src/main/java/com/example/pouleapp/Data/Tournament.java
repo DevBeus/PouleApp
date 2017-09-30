@@ -9,11 +9,14 @@ import static com.example.pouleapp.Data.GlobalData.DEFAULT_POULE_NAME;
 
 /**
  * Created by gezamenlijk on 21-5-2017.
+ * This class holds the complete Tournament
  */
 
 public class Tournament {
     private String mTournamentName;
     private String mLocation = "";
+    private String mDate = "";
+    private Boolean mIsFullCompetition = false;
     private String mTournamentID;
     private ArrayList<Poule> mPouleList;
 
@@ -30,10 +33,12 @@ public class Tournament {
         mPouleList = pouleList;
     }
 
-    public Tournament(String id, String name, String location, ArrayList<Poule> pouleList) {
+    public Tournament(String id, String name, String location, String date, Boolean isFullComp, ArrayList<Poule> pouleList) {
         mTournamentID = id;
         mTournamentName = name;
         mLocation = location;
+        mDate = date;
+        mIsFullCompetition = isFullComp;
         mPouleList = pouleList;
     }
 
@@ -55,6 +60,22 @@ public class Tournament {
 
     public void setLocation(String Location) {
         this.mLocation = Location;
+    }
+
+    public String getDate() {
+        return mDate;
+    }
+
+    public void setDate(String Date) {
+        this.mDate = Date;
+    }
+
+    public Boolean isFullCompetition() {
+        return mIsFullCompetition;
+    }
+
+    public void setIsFullCompetition(Boolean isFullCompetition) {
+        this.mIsFullCompetition = isFullCompetition;
     }
 
     public ArrayList<Poule> getPouleList() {

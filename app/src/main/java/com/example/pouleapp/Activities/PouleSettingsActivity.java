@@ -67,6 +67,7 @@ public class PouleSettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PouleActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);
 
+
         startActivity(intent);
 
     }

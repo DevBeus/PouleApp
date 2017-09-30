@@ -1,10 +1,15 @@
 package com.example.pouleapp.Activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import java.util.Calendar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.pouleapp.Data.GlobalData;
@@ -17,6 +22,9 @@ import com.example.pouleapp.R;
  */
 
 public class TournamentSettingsActivity extends AppCompatActivity {
+    Calendar calendar = Calendar.getInstance();
+    Button selectDateButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +48,30 @@ public class TournamentSettingsActivity extends AppCompatActivity {
         TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
         tvTournamentLocation.setText(tournament.getLocation());
 
+        selectDateButton = (Button) findViewById(R.id.tournament_settings_button_select_date);
+
+        if (!tournament.getDate().equals("")) { selectDateButton.setText(tournament.getDate());}
+
+        Switch switchCompetition = (Switch) findViewById(R.id.tournament_settings_switch_competition);
+        switchCompetition.setChecked(tournament.isFullCompetition());
+
         //hide soft keyboard
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    }
+
+    DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            final GlobalData globalVariable = (GlobalData) getApplicationContext();
+            Tournament tournament = globalVariable.getTournament();
+
+            tournament.setDate(day+"/"+month+"/"+year);
+            selectDateButton.setText(day+"/"+month+"/"+year);
+        }
+    };
+
+    public void startSelectDateDialog(View v){
+        new DatePickerDialog(TournamentSettingsActivity.this, listener, calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     public void saveTournamentSettings(View view) {
@@ -54,8 +84,15 @@ public class TournamentSettingsActivity extends AppCompatActivity {
         TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
         String location = tvTournamentLocation.getText().toString();
 
+        Button btnTournamentSelectDate = (Button) findViewById(R.id.tournament_settings_button_select_date);
+        String date = btnTournamentSelectDate.getText().toString();
+
+        Switch switchCompetition = (Switch) findViewById(R.id.tournament_settings_switch_competition);
+
         tournament.setTournamentName(name);
         tournament.setLocation(location);
+        tournament.setDate(date);
+        tournament.setIsFullCompetition(switchCompetition.isChecked());
 
         globalVariable.saveTournament();
         globalVariable.updateTournamentName(name);

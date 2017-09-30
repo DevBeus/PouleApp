@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">PouleApp</string>
+    <string name="app_name">MyCupApp</string>
     <string name="button_cancel">Annuleer</string>
     <string name="edit_team_text_view_coach">Trainer:</string>
     <string name="delete_team_button">Verwijder</string>
@@ -31,7 +31,7 @@
     <string name="add_poule_button">Voeg Toe</string>
     <string name="tournament_settings_text_view_tournament_name">Toernooi</string>
     <string name="location_text_view">Plaats</string>
-    <string name="welcome_text_view_welcome">Welkom bij de Poule App</string>
+    <string name="welcome_text_view_welcome">Welkom bij MyCupApp</string>
     <string name="welcome_text_view_intro">Met deze App kun je je eigen toernooien en competities oganizeren</string>
     <string name="tournament_text_view_intro">De onderstaande poules zijn onderdeel van dit  toernooi:</string>
     <string name="tournament_settings_text_view_location">"Plaats: "</string>
@@ -54,7 +54,7 @@
     <string name="select_tournament_text_view_intro">Kies een toernooi of maak een nieuwe aan</string>
     <string name="select_tournament_text_view_tournaments_list_view_header">Toernooien:</string>
     <string name="select_tournament_image_button_descr_add_tournament">Voeg Toernooi Toe</string>
-    <string name="tournament_settings_text_view_date">Date</string>
+    <string name="tournament_settings_text_view_date">Datum</string>
     <string name="enter_poule_name_dialog_text_view_enter_poule_name">Voer poule naam in:</string>
     <string name="enter_team_name_dialog_text_view_enter_team_name">Voer team naam in:</string>
     <string name="enter_tournament_name_dialog_text_view_enter_tournament_name">Voer toernooi naam in:</string>
@@ -66,4 +66,10 @@
     <string name="welcome_image_button_descr_welcome">Welkom en Start</string>
     <string name="toast_message_team_name_twice">" bestaat al in deze poule"</string>
     <string name="toast_message_poule_name_twice">" bestaat al binnen dit toernooi"</string>
+    <string name="tournament_settings_text_view_nrof_fields">Aantal velden</string>
+    <string name="tournament_settings_text_view_full_competition">Competitie</string>
+    <string name="tournament_settings_button_select_date">Select Date</string>
+    <string name="tournament_settings_switch_value_competition_full">Hele</string>
+    <string name="tournament_settings_switch_value_competition_half">Halve</string>
+    <string name="welcome_button_start">Start</string>
 </resources>

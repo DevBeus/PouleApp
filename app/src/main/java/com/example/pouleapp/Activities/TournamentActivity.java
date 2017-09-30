@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
 import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
+
 public class TournamentActivity extends AppCompatActivity {
     final Context mContext = this;
     private ArrayList<String> mArrayList=new ArrayList<>();
@@ -120,6 +121,7 @@ public class TournamentActivity extends AppCompatActivity {
                     case 0:
                         // startPouleActivity
                         Intent intent = new Intent(getApplicationContext(), PouleActivity.class);
+//                        intent.putExtra(PREVIOUS_ACTIVITY, TOURNAMENT_ACTIVITY);
                         intent.putExtra(POULE_INDEX, position);
                         intent.putExtra(TEAM_INDEX,0);
 
