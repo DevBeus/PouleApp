@@ -222,7 +222,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
                                 // get user input and create new tournament
 
                                 final GlobalData globalVariable = (GlobalData) getApplicationContext();
-                                globalVariable.addTournament(etTournamentName.getText().toString());
+                                globalVariable.addTournament(etTournamentName.getText().toString().trim());
                                 globalVariable.saveAppData();
                              }
                         })

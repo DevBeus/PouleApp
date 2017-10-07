@@ -85,5 +85,9 @@
     <string name="tournament_settings_switch_value_competition_full">Full</string>
     <string name="tournament_settings_switch_value_competition_half">Half</string>
     <string name="welcome_button_start">Start</string>
+    <string name="scheme_ranking_activity_text_view_ranking">Ranking</string>
+    <string name="scheme_ranking_activity_text_view_scheme">Scheme</string>
+    <string name="scheme_ranking_activity_text_view_tab_scheme">Table</string>
+    <string name="poule_text_view_poule_name">Group:</string>
 
 </resources>

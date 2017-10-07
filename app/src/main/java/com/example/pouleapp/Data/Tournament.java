@@ -40,6 +40,8 @@ public class Tournament {
         mDate = date;
         mIsFullCompetition = isFullComp;
         mPouleList = pouleList;
+
+        for (int i=0; i < mPouleList.size(); i++) { mPouleList.get(i).getPouleScheme().setFullCompetition(isFullComp); }
     }
 
     public String getTournamentName() {
@@ -74,8 +76,10 @@ public class Tournament {
         return mIsFullCompetition;
     }
 
-    public void setIsFullCompetition(Boolean isFullCompetition) {
-        this.mIsFullCompetition = isFullCompetition;
+    public void setFullCompetition(Boolean b) {
+        this.mIsFullCompetition = b;
+
+        for (int i=0; i < mPouleList.size(); i++) { mPouleList.get(i).getPouleScheme().setFullCompetition(b); }
     }
 
     public ArrayList<Poule> getPouleList() {

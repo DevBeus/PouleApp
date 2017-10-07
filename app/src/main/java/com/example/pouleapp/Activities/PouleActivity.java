@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,7 +33,6 @@ import java.util.ArrayList;
 import static com.example.pouleapp.Data.GlobalData.ACTION_EDIT;
 import static com.example.pouleapp.Data.GlobalData.ACTION_MESSAGE;
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.Data.GlobalData.PREVIOUS_ACTIVITY;
 import static com.example.pouleapp.Data.GlobalData.TEAM_INDEX;
 
 public class PouleActivity extends AppCompatActivity {
@@ -67,6 +67,9 @@ public class PouleActivity extends AppCompatActivity {
 
         setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 
+        EditText etPouleName = (EditText) findViewById(R.id.poule_edit_text_poule_name);
+        etPouleName.setText(poule.getPouleName());
+
         teamList = poule.getTeamList();
 
         initListView(teamList);
@@ -81,11 +84,24 @@ public class PouleActivity extends AppCompatActivity {
             case android.R.id.home:
                 navigateUpTo(new Intent(this, TournamentActivity.class));
                 return true;
-            case R.id.action_settings:
-                Intent intent = new Intent(this, PouleSettingsActivity.class);
-                intent.putExtra(POULE_INDEX, mPoule_Index);
+            case R.id.action_save:
+                final GlobalData globalVariable = (GlobalData) getApplicationContext();
+                Tournament tournament = globalVariable.getTournament();
 
-                startActivity(intent);
+                EditText etPouleName = (EditText) findViewById(R.id.poule_edit_text_poule_name);
+                String name = etPouleName.getText().toString().trim();
+
+                ArrayList<Poule> pouleList = tournament.getPouleList();
+                Poule poule = pouleList.get(mPoule_Index);
+
+                // @TODO: Check on double poule name
+                poule.setPouleName(name);
+                globalVariable.saveTournament();
+
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 
         }
         return super.onOptionsItemSelected(item);
@@ -93,7 +109,7 @@ public class PouleActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_save, menu);
 
         return true;
     }
@@ -269,7 +285,7 @@ public class PouleActivity extends AppCompatActivity {
 
                                 //Check whether new team name already exists
                                 boolean found = false;
-                                String teamName = inputTeamName.getText().toString();
+                                String teamName = inputTeamName.getText().toString().trim();
                                 ArrayList<Team> teamList = poule.getTeamList();
 
                                 for (int i=0; i < teamList.size(); i++) {

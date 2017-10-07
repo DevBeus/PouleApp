@@ -85,8 +85,8 @@ public class EditMatchActivity extends AppCompatActivity {
         TextView textHS = (TextView) findViewById(R.id.edit_match_edit_text_home_score);
         TextView textOS = (TextView) findViewById(R.id.edit_match_edit_text_opponent_score);
 
-        String strHS = textHS.getText().toString();
-        String strOS = textOS.getText().toString();
+        String strHS = textHS.getText().toString().trim();
+        String strOS = textOS.getText().toString().trim();
         Integer hs;
         Integer os;
 

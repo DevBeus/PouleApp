@@ -84,15 +84,6 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/tournament_settings_text_view_nrof_fields"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:text="@string/tournament_settings_text_view_nrof_fields"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tournament_settings_edit_text_nrof_fields" />
-
-    <TextView
         android:id="@+id/tournament_settings_text_view_full_competition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,31 +92,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBaseline_toBaselineOf="@+id/tournament_settings_switch_competition" />
 
-    <EditText
-        android:id="@+id/tournament_settings_edit_text_nrof_fields"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number"
-        android:textSize="14sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tournament_settings_button_select_date"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="@+id/tournament_settings_vertical_guideline" />
-
     <Switch
         android:id="@+id/tournament_settings_switch_competition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:checked="false"
         android:showText="true"
         android:splitTrack="true"
         android:textOff="@string/tournament_settings_switch_value_competition_half"
         android:textOn="@string/tournament_settings_switch_value_competition_full"
         app:layout_constraintLeft_toLeftOf="@+id/tournament_settings_vertical_guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tournament_settings_edit_text_nrof_fields" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tournament_settings_button_select_date" />
 
     <Button
         android:id="@+id/tournament_settings_button_select_date"

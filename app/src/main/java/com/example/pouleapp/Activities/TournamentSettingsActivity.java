@@ -79,10 +79,10 @@ public class TournamentSettingsActivity extends AppCompatActivity {
         Tournament tournament = globalVariable.getTournament();
 
         TextView tvTournamentName = (TextView) findViewById(R.id.tournament_settings_edit_text_tournament_name);
-        String name = tvTournamentName.getText().toString();
+        String name = tvTournamentName.getText().toString().trim();
 
         TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
-        String location = tvTournamentLocation.getText().toString();
+        String location = tvTournamentLocation.getText().toString().trim();
 
         Button btnTournamentSelectDate = (Button) findViewById(R.id.tournament_settings_button_select_date);
         String date = btnTournamentSelectDate.getText().toString();
@@ -92,11 +92,17 @@ public class TournamentSettingsActivity extends AppCompatActivity {
         tournament.setTournamentName(name);
         tournament.setLocation(location);
         tournament.setDate(date);
-        tournament.setIsFullCompetition(switchCompetition.isChecked());
+
+        boolean b = switchCompetition.isChecked();
+
+        tournament.setFullCompetition(b);
 
         globalVariable.saveTournament();
         globalVariable.updateTournamentName(name);
         globalVariable.saveAppData();
+
+        // when competition is switched from full to half, tournament needs to be reloaded to clear old data
+        globalVariable.initTournament(tournament.getTournamentID());
 
         Intent intent = new Intent(this, TournamentActivity.class);
 

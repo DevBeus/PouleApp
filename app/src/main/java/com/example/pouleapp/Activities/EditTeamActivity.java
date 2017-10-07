@@ -66,8 +66,8 @@ public class EditTeamActivity extends AppCompatActivity {
         TextView textTeam = (TextView) findViewById(R.id.edit_team_edit_text_team);
         TextView textCoach = (TextView) findViewById(R.id.edit_team_edit_text_coach);
 
-        String teamName = textTeam.getText().toString();
-        String teamCoach = textCoach.getText().toString();
+        String teamName = textTeam.getText().toString().trim();
+        String teamCoach = textCoach.getText().toString().trim();
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();

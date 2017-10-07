@@ -9,12 +9,14 @@ import java.util.ArrayList;
 
 /**
  * Created by gezamenlijk on 26-2-2017.
+ * this class is intended to calculate and store the match scheme for a poule/group
  */
 
 public class PouleScheme {
     private Match[][] mPouleScheme;
     private Round[] mRoundScheme;
     private int mPouleSize;
+    private boolean mFullCompetition = false;
 
     public PouleScheme(ArrayList<Team> poule) {
         mPouleSize = poule.size();
@@ -212,8 +214,14 @@ public class PouleScheme {
         //even number of teams required to calculate scheme, additional team is used as free match
         if (mPouleSize%2==1) { pSize = mPouleSize+1; teamAdded = true; }
 
-        //number of playing rounds is pSize-1
-        mRoundScheme = new Round[pSize]; // element 0 will not be used
+        if (mFullCompetition) {
+            // number of playing rounds is pSize-1 where 0 is not used as numbering starts at 1
+            // So full competition is (pSize-1)+ (pSize-1) + 1 for position 0
+            mRoundScheme = new Round[2*pSize-1];
+        } else {
+            //number of playing rounds is pSize-1
+            mRoundScheme = new Round[pSize]; // element 0 will not be used, round numbering starts at 1
+        }
 
         for (int r = 1; r<pSize; r++) {
             // Number of matches per round is mPouleSize/2, Remark: not pSize/2, example when poule consists of 3 teams, only 1 match can be played per round
@@ -244,6 +252,24 @@ public class PouleScheme {
 
             mRoundScheme[r] = new Round(r,matchList);
         }
+
+        if (mFullCompetition) {
+            // Copy first half of competition with swapping home and opponent team
+            for (int r = pSize; r < 2*pSize-1; r++) {
+                int[][] matchList = new int[mPouleSize/2][2];
+
+                Round orgRound = mRoundScheme[r-pSize+1];
+                int[][] orgMatchList = orgRound.getMatchList();
+
+                for (int i = 0; i < orgMatchList.length; i++) {
+                    matchList[i][0] = orgMatchList[i][1];
+                    matchList[i][1] = orgMatchList[i][0];
+                }
+
+                mRoundScheme[r] = new Round(r,matchList);
+            }
+        }
+
     }
 
     public Round getRound(int r) {
@@ -252,12 +278,14 @@ public class PouleScheme {
         return mRoundScheme[r];
     }
     public int getNumberOfRounds() {
-        int rounds = mPouleSize;
+        //int rounds = mPouleSize;
 
         //When number of teams is odd, additional round is required
-        if (mPouleSize%2==1) { rounds++; }
+        //if (mPouleSize%2==1) { rounds++; }
 
-        return rounds;
+        //return rounds;
+
+        return mRoundScheme.length;
     }
 
     public Match[] getRoundMatchList(int r) {
@@ -288,5 +316,15 @@ public class PouleScheme {
         }
 
         return matchList;
+    }
+
+    public boolean IsFullCompetition() { return mFullCompetition; }
+
+    public void setFullCompetition(boolean b) {
+
+        if ( mFullCompetition != b) {
+            mFullCompetition = b;
+            generateRoundScheme(); // when competition is changed from full to half or vice versa round scheme needs to be recalculated
+        }
     }
 }

@@ -22,7 +22,8 @@
         <activity android:name=".Activities.TournamentActivity"
             android:windowSoftInputMode="adjustNothing"></activity>
         <activity android:name=".Activities.TournamentSettingsActivity"></activity>
-        <activity android:name=".Activities.PouleActivity"></activity>
+        <activity android:name=".Activities.PouleActivity"
+            android:windowSoftInputMode="adjustNothing"></activity>
         <activity android:name=".Activities.PouleSettingsActivity"></activity>
         <activity android:name=".Activities.EditTeamActivity"></activity>
         <activity android:name=".Activities.EditMatchActivity"></activity>

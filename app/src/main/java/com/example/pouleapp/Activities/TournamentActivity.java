@@ -167,7 +167,7 @@ public class TournamentActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
 
         return true;
     }
@@ -273,7 +273,7 @@ public class TournamentActivity extends AppCompatActivity {
 
                                 //Check whether new poule name already exists
                                 boolean found = false;
-                                String pouleName = etPouleName.getText().toString();
+                                String pouleName = etPouleName.getText().toString().trim();
 
                                 for (int i=0; i < pouleList.size(); i++) {
                                     if ((pouleList.get(i).getPouleName().equals(pouleName))) { found = true; }

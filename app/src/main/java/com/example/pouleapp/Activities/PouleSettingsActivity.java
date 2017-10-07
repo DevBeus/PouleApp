@@ -56,7 +56,7 @@ public class PouleSettingsActivity extends AppCompatActivity {
         Tournament tournament = globalVariable.getTournament();
 
         TextView tvPouleName = (TextView) findViewById(R.id.poule_settings_edit_text_poule_name);
-        String name = tvPouleName.getText().toString();
+        String name = tvPouleName.getText().toString().trim();
 
         ArrayList<Poule> pouleList = tournament.getPouleList();
         Poule poule = pouleList.get(mPoule_Index);

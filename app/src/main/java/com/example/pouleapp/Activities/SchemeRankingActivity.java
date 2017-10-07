@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.pouleapp.Data.GlobalData;
+import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
 
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
@@ -49,9 +51,14 @@ public class SchemeRankingActivity extends AppCompatActivity implements TabLayou
         tabLayout = (TabLayout) findViewById(R.id.scheme_ranking_tab_layout);
 
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("Scheme")); // @TODO: replace by resource string
-        tabLayout.addTab(tabLayout.newTab().setText("Ranking")); // @TODO: replace by resource string
-        tabLayout.addTab(tabLayout.newTab().setText("Table Scheme")); // @TODO: replace by resource string
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.scheme_ranking_activity_text_view_scheme));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.scheme_ranking_activity_text_view_ranking));
+
+        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        Tournament tournament = globalVariable.getTournament();
+
+        if (tournament.isFullCompetition()) { tabLayout.addTab(tabLayout.newTab().setText(R.string.scheme_ranking_activity_text_view_tab_scheme)); }
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager

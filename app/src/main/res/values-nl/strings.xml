@@ -8,7 +8,7 @@
     <string name="tab_ranking_text_view_goals_against">GT</string>
     <string name="tab_ranking_text_view_goals_for">GV</string>
     <string name="edit_match_text_view_home_team">Team</string>
-    <string name="tab_ranking_text_view_matches">W</string>
+    <string name="tab_ranking_text_view_matches">G</string>
     <string name="tab_ranking_text_view_matches_draw">G</string>
     <string name="tab_ranking_text_view_matches_lost">V</string>
     <string name="tab_ranking_text_view_matches_won">G</string>
@@ -72,4 +72,8 @@
     <string name="tournament_settings_switch_value_competition_full">Hele</string>
     <string name="tournament_settings_switch_value_competition_half">Halve</string>
     <string name="welcome_button_start">Start</string>
+    <string name="scheme_ranking_activity_text_view_ranking">Stand</string>
+    <string name="scheme_ranking_activity_text_view_scheme">Schema</string>
+    <string name="scheme_ranking_activity_text_view_tab_scheme">Tabel</string>
+    <string name="poule_text_view_poule_name">Poule:</string>
 </resources>
