@@ -76,4 +76,6 @@
     <string name="scheme_ranking_activity_text_view_scheme">Schema</string>
     <string name="scheme_ranking_activity_text_view_tab_scheme">Tabel</string>
     <string name="poule_text_view_poule_name">Poule:</string>
+    <string name="round_round_name">Round</string>
+    <string name="round_scheme_adapter_text_round">Ronde</string>
 </resources>

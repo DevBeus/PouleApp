@@ -47,7 +47,7 @@ public class GlobalData extends Application {
     public ArrayList<String> getTournamentIDList() { return mTournamentIDList; }
     public ArrayList<String> getTournamentNameList() { return mTournamentNameList; }
 
-    private static final String KEY_TOURNAMENT_ID = "TournamentID"; // @TODO all key variables can be made local
+    private static final String KEY_TOURNAMENT_ID = "TournamentID";
     private static final String KEY_NROF_TOURNAMENTS = "nrofTournaments";
     private static final String KEY_SELECTED_TOURNAMENT_ID = "SelectedTournamentID";
     private static final String KEY_TOURNAMENT_NAME = "TournamentName";
@@ -274,7 +274,10 @@ public class GlobalData extends Application {
             editor.putString(KEY_TOURNAMENT_NAME+i,mTournamentNameList.get(i));
         }
 
-        editor.putString(KEY_SELECTED_TOURNAMENT_ID,mTournamentIDList.get(mSelectedTournamentIndex));
+        if (mNrofTournaments > 0) {
+            editor.putString(KEY_SELECTED_TOURNAMENT_ID,mTournamentIDList.get(mSelectedTournamentIndex));
+        }
+        
         editor.putInt(KEY_NROF_TOURNAMENTS,mNrofTournaments);
         editor.apply();
     }

@@ -89,19 +89,31 @@ public class PouleActivity extends AppCompatActivity {
                 Tournament tournament = globalVariable.getTournament();
 
                 EditText etPouleName = (EditText) findViewById(R.id.poule_edit_text_poule_name);
-                String name = etPouleName.getText().toString().trim();
+                String pouleName = etPouleName.getText().toString().trim();
 
                 ArrayList<Poule> pouleList = tournament.getPouleList();
                 Poule poule = pouleList.get(mPoule_Index);
 
-                // @TODO: Check on double poule name
-                poule.setPouleName(name);
-                globalVariable.saveTournament();
+                //Check whether new poule name already exists
+                boolean found = false;
 
-                InputMethodManager inputManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                for (int i=0; i < pouleList.size(); i++) {
+                    if ((pouleList.get(i).getPouleName().equals(pouleName)) && (mPoule_Index !=i)) { found = true; }
+                }
 
-                setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+                if ( !found ) {
+                    poule.setPouleName(pouleName);
+                    globalVariable.saveTournament();
+
+                    InputMethodManager inputManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+
+                    setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
+                } else {
+                    String message = getResources().getString(R.string.toast_message_poule_name_twice);
+                    Toast.makeText(getApplicationContext(), pouleName + message, Toast.LENGTH_LONG).show();
+                }
+
 
         }
         return super.onOptionsItemSelected(item);

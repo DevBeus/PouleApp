@@ -99,7 +99,7 @@ class RoundSchemeAdapter extends BaseExpandableListAdapter {
         }
 
         TextView heading = (TextView) view.findViewById(R.id.group_items_text_view_heading);
-        heading.setText(round.getRoundName());
+        heading.setText(mContext.getString(R.string.round_scheme_adapter_text_round)+ round.getRoundNumber());
 
         return view;
     }

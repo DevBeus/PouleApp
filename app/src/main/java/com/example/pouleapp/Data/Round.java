@@ -1,7 +1,9 @@
 package com.example.pouleapp.Data;
 
+
 /**
  * Created by gezamenlijk on 30-6-2017.
+ * This class stores the data related to a playing round
  */
 
 public class Round {
@@ -21,8 +23,6 @@ public class Round {
     public int getRoundNumber() {
         return mRound;
     }
-
-    public String getRoundName() { return "Round "+ mRound; }
 
     public int[][] getMatchList() {
         return mMatchList;
