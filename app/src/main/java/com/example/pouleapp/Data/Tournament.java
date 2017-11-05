@@ -24,7 +24,7 @@ public class Tournament {
         mTournamentID = UUID.randomUUID().toString();
         mTournamentName = name;
         mPouleList = new ArrayList<>();
-        mPouleList.add(new Poule(0,DEFAULT_POULE_NAME));
+        mPouleList.add(new Poule(0,DEFAULT_POULE_NAME,mIsFullCompetition));
     }
 
     public Tournament(String name, ArrayList<Poule> pouleList) {
