@@ -127,7 +127,7 @@ public class GlobalData extends Application {
             nrofPoules = 1;
             editor.putInt(KEY_NROF_POULES,nrofPoules);
 
-            pouleList.add(new Poule(0,DEFAULT_POULE_NAME));
+            pouleList.add(new Poule(0,DEFAULT_POULE_NAME,false));
 
             editor.apply();
 
@@ -172,7 +172,7 @@ public class GlobalData extends Application {
             teamList.add(new Team(teamName,coachName));
         }
 
-        PouleScheme pouleScheme = new PouleScheme(teamList);
+        PouleScheme pouleScheme = new PouleScheme(teamList, prefs.getBoolean(KEY_COMPETITION,false));
 
         for (int i=0; i < nrofTeams; i++) {
             for (int j=0; j < nrofTeams; j++){

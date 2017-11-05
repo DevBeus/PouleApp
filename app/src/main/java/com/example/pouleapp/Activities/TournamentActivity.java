@@ -281,7 +281,7 @@ public class TournamentActivity extends AppCompatActivity {
 
                                 if ( !found ) {
                                     int pouleId = pouleList.size();
-                                    Poule poule = new Poule(pouleId, pouleName);
+                                    Poule poule = new Poule(pouleId, pouleName,tournament.isFullCompetition());
                                     pouleList.add(poule);
 
                                     globalVariable.saveTournament();

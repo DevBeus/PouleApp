@@ -16,17 +16,19 @@ public class Poule {
     private PouleScheme mPouleScheme;
     private String mPouleName;
     private int mPouleNumber;
+    private boolean mIsFullCompetition;
 
-    public Poule(int number, String name) {
+    public Poule(int number, String name, Boolean b) {
         this.mPouleNumber = number;
         this.mPouleName = name;
+        this.mIsFullCompetition = b;
 
         //initialize poule with 2 dummy teams
         mTeamList.add(new Team("Team0"));
         mTeamList.add(new Team("Team1"));
 
         //initialize mPouleScheme
-        mPouleScheme = new PouleScheme(mTeamList);
+        mPouleScheme = new PouleScheme(mTeamList, mIsFullCompetition);
     }
 
     public Poule(int number, String name, ArrayList<Team> teams, PouleScheme ps ) {

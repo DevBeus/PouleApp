@@ -66,7 +66,7 @@ public class TournamentSettingsActivity extends AppCompatActivity {
             Tournament tournament = globalVariable.getTournament();
 
             tournament.setDate(day+"/"+month+"/"+year);
-            selectDateButton.setText(day+"/"+month+"/"+year);
+            selectDateButton.setText(day+"/"+(month+1)+"/"+year); //months are counted from 0 onwards
         }
     };
 

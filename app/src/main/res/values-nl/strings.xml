@@ -11,7 +11,7 @@
     <string name="tab_ranking_text_view_matches">G</string>
     <string name="tab_ranking_text_view_matches_draw">G</string>
     <string name="tab_ranking_text_view_matches_lost">V</string>
-    <string name="tab_ranking_text_view_matches_won">G</string>
+    <string name="tab_ranking_text_view_matches_won">W</string>
     <string name="button_ok">OK</string>
     <string name="edit_match_text_view_opponent">Tegenstander</string>
     <string name="tab_ranking_text_view_points">P</string>
