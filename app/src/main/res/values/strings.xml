@@ -39,7 +39,7 @@
     <string name="location_text_view">Location</string>
     <string name="welcome_text_view_welcome">Welcome to MyCupApp</string>
     <string name="welcome_text_view_intro">With this App you can organize your own tournaments and competitions</string>
-    <string name="tournament_text_view_intro">\"The following groups are part of this tournament \"</string>
+    <string name="tournament_text_view_intro">The following groups are part of this tournament</string>
     <string name="tournament_settings_text_view_location">Location:</string>
     <string name="save_tournament_button">Save</string>
     <string name="tournament_text_view_poule_list_view_header">Group List:</string>
@@ -53,22 +53,22 @@
     <string name="poule_text_view_teams_list_view_header">Teams:</string>
     <string name="show_tournament">Tournament</string>
     <string name="show_tournament_button">Tournament</string>
-    <string name="menu_poule_name_text">\"Group: \"</string>
-    <string name="menu_tournament_name_text">"Tournament: "</string>
-    <string name="menu_tournament_settings_text">"Tournament Settings"</string>
-    <string name="menu_poule_settings_text">\"Group Settings\"</string>
-    <string name="menu_team_name_text">"Team: "</string>
+    <string name="menu_poule_name_text">Group: </string>
+    <string name="menu_tournament_name_text">Tournament: </string>
+    <string name="menu_tournament_settings_text">Tournament Settings</string>
+    <string name="menu_poule_settings_text">Group Settings</string>
+    <string name="menu_team_name_text">Team: </string>
 
-    <string name="welcome_image_button_descr_welcome">"Welcome and Start"</string>
-    <string name="descr_deleteTournament">"Delete Tournament"</string>
-    <string name="descr_savePoule">\"Save Group\"</string>
-    <string name="descr_saveTournament">"Save Tournament"</string>
-    <string name="tournament_image_button_descr_add_poule" translatable="false">\"Add Group\"</string>
-    <string name="poule_image_button_description_add_team">"Add Team"</string>
-    <string name="descr_startTournamentActivity" translatable="false">"Start Tournament Activity"</string>
-    <string name="descr_startSchemeTableActivity" translatable="false">"Start Scheme Table Activity"</string>
-    <string name="descr_startSchemeActivity" translatable="false">"Start Scheme Activity"</string>
-    <string name="descr_startRankingActivity" translatable="false">"Start Ranking Activity"</string>
+    <string name="welcome_image_button_descr_welcome">Welcome and Start</string>
+    <string name="descr_deleteTournament">Delete Tournament</string>
+    <string name="descr_savePoule">Save Group</string>
+    <string name="descr_saveTournament">Save Tournament</string>
+    <string name="tournament_image_button_descr_add_poule" translatable="false">Add Group</string>
+    <string name="poule_image_button_description_add_team">Add Team</string>
+    <string name="descr_startTournamentActivity" translatable="false">Start Tournament Activity</string>
+    <string name="descr_startSchemeTableActivity" translatable="false">Start Scheme Table Activity</string>
+    <string name="descr_startSchemeActivity" translatable="false">Start Scheme Activity</string>
+    <string name="descr_startRankingActivity" translatable="false">Start Ranking Activity</string>
     <string name="select_tournament_text_view_intro">Select an existing tournament or create a new one</string>
     <string name="select_tournament_text_view_tournaments_list_view_header">Tournaments:</string>
     <string name="select_tournament_image_button_descr_add_tournament">Add Tournament</string>

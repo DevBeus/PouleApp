@@ -11,7 +11,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_ranking"
@@ -22,7 +21,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "3"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_team"
@@ -33,7 +31,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_matches"
@@ -44,7 +41,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_points"
@@ -55,7 +51,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_matches_won"
@@ -66,7 +61,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_matches_draw"
@@ -77,23 +71,17 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_matches_lost"
         android:maxLines="1" />
-
-
-
-
 
     <TextView
         android:id = "@+id/ranking_row_text_view_goals_for"
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
-        android:ellipsize = "end"
+         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_goals_for"
         android:maxLines="1" />
@@ -103,7 +91,6 @@
         android:layout_width = "0dp"
         android:layout_height = "match_parent"
         android:layout_weight = "1"
-        android:background = "@drawable/cell_shape"
         android:ellipsize = "end"
         android:padding = "5dp"
         android:text = "@string/tab_ranking_text_view_goals_against"
