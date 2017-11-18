@@ -18,17 +18,20 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activities.SelectTournamentActivity"></activity>
-        <activity android:name=".Activities.TournamentActivity"
-            android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".Activities.TournamentSettingsActivity"></activity>
-        <activity android:name=".Activities.PouleActivity"
-            android:windowSoftInputMode="adjustNothing"></activity>
-        <activity android:name=".Activities.PouleSettingsActivity"></activity>
-        <activity android:name=".Activities.EditTeamActivity"></activity>
-        <activity android:name=".Activities.EditMatchActivity"></activity>
-        <activity android:name=".Activities.SchemeRankingActivity"
-            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".Activities.SelectTournamentActivity" />
+        <activity
+            android:name=".Activities.TournamentActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".Activities.TournamentSettingsActivity" />
+        <activity
+            android:name=".Activities.PouleActivity"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".Activities.PouleSettingsActivity" />
+        <activity android:name=".Activities.EditTeamActivity" />
+        <activity android:name=".Activities.EditMatchActivity" />
+        <activity
+            android:name=".Activities.SchemeRankingActivity"
+            android:theme="@style/AppThemeNoActionBar" />
 
     </application>
 
