@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PouleAppMaster.iml" filepath="$PROJECT_DIR$/PouleAppMaster.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CupAppFirebase.iml" filepath="$PROJECT_DIR$/CupAppFirebase.iml" />
+      <module fileurl="file://D:\Android\AndroidStudioProjects\CupAppFirebase\PouleAppMaster.iml" filepath="D:\Android\AndroidStudioProjects\CupAppFirebase\PouleAppMaster.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

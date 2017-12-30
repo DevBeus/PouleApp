@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.pouleapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by gezamenlijk on 21-5-2017.
@@ -21,9 +23,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
-    public void startTournamentOverviewActivity(View view) {
+    public void startSelectTournamentActivity(View view) {
 
-        Intent intent = new Intent(this, SelectTournamentActivity.class);
+        Intent intent = new Intent(this, AuthUIActivity.class);
 
         startActivity(intent);
     }

@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".Activities.AuthUIActivity" />
         <activity android:name=".Activities.SelectTournamentActivity" />
         <activity
             android:name=".Activities.TournamentActivity"

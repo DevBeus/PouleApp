@@ -5,7 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +55,8 @@ public class SelectTournamentActivity extends AppCompatActivity {
         initListView(tournamentlist);
 
     }
+
+
 
     private void initListView(List<String> list) {
         SwipeMenuListView listView;
@@ -257,5 +264,7 @@ public class SelectTournamentActivity extends AppCompatActivity {
 
         recreate();
     }
+
+
 
 }

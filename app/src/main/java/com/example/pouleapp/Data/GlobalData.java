@@ -1,10 +1,17 @@
 package com.example.pouleapp.Data;
 
+import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.widget.Toast;
 
 import com.example.pouleapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -43,10 +50,15 @@ public class GlobalData extends Application {
     private int mSelectedTournamentIndex;
     private int mNrofTournaments;
 
+
+    private FirebaseDatabase mCupAppDB;
+    private DatabaseReference mTournamentsDBRef;
+
     public Tournament getTournament() { return mTournament; }
     public ArrayList<String> getTournamentIDList() { return mTournamentIDList; }
     public ArrayList<String> getTournamentNameList() { return mTournamentNameList; }
 
+    private static final String KEY_TOURNAMENT_LIST = "Tournaments";
     private static final String KEY_TOURNAMENT_ID = "TournamentID";
     private static final String KEY_NROF_TOURNAMENTS = "nrofTournaments";
     private static final String KEY_SELECTED_TOURNAMENT_ID = "SelectedTournamentID";
@@ -72,10 +84,12 @@ public class GlobalData extends Application {
     public static final String DEFAULT_POULE_NAME = "PouleName";
     public static final String DEFAULT_TEAM_NAME = "Team";
 
-
     public void initApp() {
         SharedPreferences appPrefs = getSharedPreferences(POULE_APP_PREFS, MODE_PRIVATE);
         mNrofTournaments = appPrefs.getInt(KEY_NROF_TOURNAMENTS,0);
+
+        mCupAppDB = FirebaseDatabase.getInstance();
+        mTournamentsDBRef = mCupAppDB.getReference(KEY_TOURNAMENT_LIST);
 
         // In case home action, ID and Name list need to be emptied first and data should be retrieved from preference file
         mTournamentIDList.clear();
@@ -272,14 +286,21 @@ public class GlobalData extends Application {
         for (int i=0; i< mNrofTournaments; i++) {
             editor.putString(KEY_TOURNAMENT_ID+i,mTournamentIDList.get(i));
             editor.putString(KEY_TOURNAMENT_NAME+i,mTournamentNameList.get(i));
+
+            mTournamentsDBRef.child(KEY_TOURNAMENT_ID+i).setValue(mTournamentIDList.get(i));
+            mTournamentsDBRef.child(KEY_TOURNAMENT_NAME+i).setValue(mTournamentNameList.get(i));
         }
 
         if (mNrofTournaments > 0) {
             editor.putString(KEY_SELECTED_TOURNAMENT_ID,mTournamentIDList.get(mSelectedTournamentIndex));
+
+            mTournamentsDBRef.child(KEY_SELECTED_TOURNAMENT_ID).setValue(mTournamentIDList.get(mSelectedTournamentIndex));
         }
         
         editor.putInt(KEY_NROF_TOURNAMENTS,mNrofTournaments);
         editor.apply();
+
+        mTournamentsDBRef.child(KEY_NROF_TOURNAMENTS).setValue(mNrofTournaments);
     }
 
     public void saveTournament() {
@@ -293,8 +314,17 @@ public class GlobalData extends Application {
         editor.putString(KEY_DATE,mTournament.getDate());
         editor.putBoolean(KEY_COMPETITION,mTournament.isFullCompetition());
 
+        DatabaseReference tournamentIDDBRef = mCupAppDB.getReference(mTournament.getTournamentID());
+
+        tournamentIDDBRef.child(KEY_TOURNAMENT_NAME).setValue(mTournament.getTournamentName());
+        tournamentIDDBRef.child(KEY_LOCATION).setValue(mTournament.getLocation());
+        tournamentIDDBRef.child(KEY_DATE).setValue(mTournament.getDate());
+        tournamentIDDBRef.child(KEY_COMPETITION).setValue(mTournament.isFullCompetition());
+
+
         ArrayList<Poule> pouleList = mTournament.getPouleList();
         editor.putInt(KEY_NROF_POULES,pouleList.size());
+        tournamentIDDBRef.child(KEY_NROF_POULES).setValue(pouleList.size());
 
         for (int n=0; n < pouleList.size(); n++) {
             Poule poule = pouleList.get(n);
@@ -312,11 +342,17 @@ public class GlobalData extends Application {
             editor.putString(pouleKey,pouleName);
             editor.putInt(pouleKey+KEY_NROF_TEAMS, teamList.size());
 
+            tournamentIDDBRef.child(pouleKey).setValue(pouleName);
+            tournamentIDDBRef.child(pouleKey+KEY_NROF_TEAMS).setValue(teamList.size());
+
             for (int i = 0; i < teamList.size(); i++) {
                 String teamKey = pouleKey + KEY_TEAM+i;
 
                 editor.putString(teamKey, teamList.get(i).getTeamName());
                 editor.putString(teamKey + KEY_COACH,teamList.get(i).getCoachName());
+
+                tournamentIDDBRef.child(teamKey).setValue(teamList.get(i).getTeamName());
+                tournamentIDDBRef.child(teamKey + KEY_COACH).setValue(teamList.get(i).getCoachName());
             }
 
             int r = poule.getPouleScheme().getNumberOfRounds();
@@ -347,6 +383,9 @@ public class GlobalData extends Application {
                     if ((gf != null) && (ga != null)) {
                         editor.putInt(keystr1, gf);
                         editor.putInt(keystr2, ga);
+
+                        tournamentIDDBRef.child(keystr1).setValue(gf);
+                        tournamentIDDBRef.child(keystr2).setValue(ga);
                     }
 
 
