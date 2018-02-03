@@ -19,7 +19,8 @@
         </activity>
 
         <activity android:name=".Activities.AuthUIActivity" />
-        <activity android:name=".Activities.SelectTournamentActivity" />
+        <activity android:name=".Activities.SelectTournamentActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
         <activity
             android:name=".Activities.TournamentActivity"
             android:windowSoftInputMode="adjustNothing" />
@@ -34,6 +35,14 @@
             android:name=".Activities.SchemeRankingActivity"
             android:theme="@style/AppThemeNoActionBar" />
 
+        <activity android:name=".Activities.FollowTournamentActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/AppThemeNoActionBar"/>
+
+        <activity android:name=".Activities.FollowTournamentInfoActivity" />
+        <activity android:name=".Activities.FollowTournamentResultsActivity" />
+        <activity android:name=".Activities.FollowSchemeRankingActivity"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
 
 </manifest>

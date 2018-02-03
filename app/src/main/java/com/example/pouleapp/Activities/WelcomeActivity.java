@@ -9,6 +9,10 @@ import com.example.pouleapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static com.example.pouleapp.Data.GlobalData.ACTIVITY_FOLLOW_TOURNAMENT;
+import static com.example.pouleapp.Data.GlobalData.ACTIVITY_SELECT_TOURNAMENT;
+import static com.example.pouleapp.Data.GlobalData.NEXT_ACTIVITY;
+
 /**
  * Created by gezamenlijk on 21-5-2017.
  * this class is used for the welcome screen
@@ -26,6 +30,15 @@ public class WelcomeActivity extends AppCompatActivity {
     public void startSelectTournamentActivity(View view) {
 
         Intent intent = new Intent(this, AuthUIActivity.class);
+        intent.putExtra(NEXT_ACTIVITY, ACTIVITY_SELECT_TOURNAMENT);
+
+        startActivity(intent);
+    }
+
+    public void startFollowTournamentActivity(View view) {
+
+        Intent intent = new Intent(this, AuthUIActivity.class);
+        intent.putExtra(NEXT_ACTIVITY, ACTIVITY_FOLLOW_TOURNAMENT);
 
         startActivity(intent);
     }

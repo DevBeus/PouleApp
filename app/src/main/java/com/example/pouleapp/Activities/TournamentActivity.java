@@ -248,18 +248,18 @@ public class TournamentActivity extends AppCompatActivity {
     }
 
     public void addPoule(View view) {
-        // get enter_poule_name_dialog.xml view
+        // get dialog_enter_poule_name.xml view
         LayoutInflater li = LayoutInflater.from(mContext);
         final ViewGroup nullParent = null; // introduced to avoid warning
 
-        View DialogView = li.inflate(R.layout.enter_poule_name_dialog, nullParent);
+        View DialogView = li.inflate(R.layout.dialog_enter_poule_name, nullParent);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
-        // set enter_poule_name_dialog.xml to alertdialog builder
+        // set dialog_enter_poule_name.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText etPouleName = (EditText) DialogView.findViewById(R.id.enter_poule_name_dialog_edit_text_poule_name);
+        final EditText etPouleName = (EditText) DialogView.findViewById(R.id.dialog_enter_poule_name_edit_text_poule_name);
 
         alertDialogBuilder
                 .setCancelable(false)
@@ -327,6 +327,53 @@ public class TournamentActivity extends AppCompatActivity {
         globalVariable.saveTournament();
 
         recreate();
+
+    }
+
+    public void publishTournamentDialog(View view) {
+        // get dialog_enter_poule_name.xml view
+        LayoutInflater li = LayoutInflater.from(mContext);
+        final ViewGroup nullParent = null; // introduced to avoid warning
+
+        View DialogView = li.inflate(R.layout.dialog_publish_tournament, nullParent);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+
+        // set dialog_publish_tournament.xml to alertdialog builder
+        alertDialogBuilder.setView(DialogView);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // publish tournament into firbase database
+                                final GlobalData globalVariable = (GlobalData) getApplicationContext();
+
+                                globalVariable.saveTournament();
+                                globalVariable.publishTournament();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                          // Needed to refresh listView after update
+                                          @Override
+                                          public void onDismiss(DialogInterface dialog) {
+                                              recreate();
+                                          }
+                                      }
+                );
+
+        // create alert enter_tournament_dialog.xml
+        AlertDialog publishTournamentDialog = alertDialogBuilder.create();
+
+        // show it
+        publishTournamentDialog.show();
 
     }
 

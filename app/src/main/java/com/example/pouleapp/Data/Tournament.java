@@ -1,7 +1,5 @@
 package com.example.pouleapp.Data;
 
-import com.example.pouleapp.Data.Poule;
-
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -13,63 +11,90 @@ import static com.example.pouleapp.Data.GlobalData.DEFAULT_POULE_NAME;
  */
 
 public class Tournament {
-    private String mTournamentName;
-    private String mLocation = "";
-    private String mDate = "";
+//    private String mTournamentName;
+//    private String mLocation = "";
+//    private String mDate = "";
+//    private String mTournamentID;
+
+
+    private PublishTournamentSearchInfo mTournamentInfo;
+
+
+    private Boolean mIsPublished = false;
     private Boolean mIsFullCompetition = false;
-    private String mTournamentID;
     private ArrayList<Poule> mPouleList;
 
+    public Tournament() {
+        // empty constructor needed for firebase storage
+    }
+
     public Tournament(String name) {
-        mTournamentID = UUID.randomUUID().toString();
-        mTournamentName = name;
+        mTournamentInfo = new PublishTournamentSearchInfo(UUID.randomUUID().toString(), name, "", "");
+
         mPouleList = new ArrayList<>();
         mPouleList.add(new Poule(0,DEFAULT_POULE_NAME,mIsFullCompetition));
     }
 
     public Tournament(String name, ArrayList<Poule> pouleList) {
-        mTournamentID = UUID.randomUUID().toString();
-        mTournamentName = name;
+        mTournamentInfo = new PublishTournamentSearchInfo(UUID.randomUUID().toString(), name, "", "");
+
         mPouleList = pouleList;
     }
 
     public Tournament(String id, String name, String location, String date, Boolean isFullComp, ArrayList<Poule> pouleList) {
-        mTournamentID = id;
-        mTournamentName = name;
-        mLocation = location;
-        mDate = date;
+        mTournamentInfo = new PublishTournamentSearchInfo(id, name, date, location);
+
         mIsFullCompetition = isFullComp;
         mPouleList = pouleList;
 
         for (int i=0; i < mPouleList.size(); i++) { mPouleList.get(i).getPouleScheme().setFullCompetition(isFullComp); }
     }
 
+    public PublishTournamentSearchInfo getTournamentInfo() {
+        return mTournamentInfo;
+    }
+
     public String getTournamentName() {
-        return mTournamentName;
+        return mTournamentInfo.getTournamentName();
     }
 
     public String getTournamentID() {
-        return mTournamentID;
+
+        return mTournamentInfo.getTournamentID();
+    }
+
+    public void setTournamentID(String x) {
+
+        mTournamentInfo.setTournamentID(x);
     }
 
     public void setTournamentName(String TournamentName) {
-        this.mTournamentName = TournamentName;
+        this.mTournamentInfo.setTournamentName(TournamentName);
     }
 
     public String getLocation() {
-        return mLocation;
+        return mTournamentInfo.getLocation();
     }
 
     public void setLocation(String Location) {
-        this.mLocation = Location;
+        this.mTournamentInfo.setLocation(Location);
     }
 
     public String getDate() {
-        return mDate;
+
+        return mTournamentInfo.getDate();
     }
 
     public void setDate(String Date) {
-        this.mDate = Date;
+        this.mTournamentInfo.setDate(Date);
+    }
+
+    public Boolean isPublished() {
+        return mIsPublished;
+    }
+
+    public void setIsPublished(Boolean mIsPublished) {
+        this.mIsPublished = mIsPublished;
     }
 
     public Boolean isFullCompetition() {

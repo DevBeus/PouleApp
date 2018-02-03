@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/enter_poule_name_dialog_text_view_enter_poule_name"
+        android:id="@+id/dialog_enter_poule_name_text_view_enter_poule_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_poule_name_dialog_text_view_enter_poule_name"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/enter_poule_name_dialog_edit_text_poule_name"
+        android:id="@+id/dialog_enter_poule_name_edit_text_poule_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -28,6 +28,6 @@
         android:inputType="textPersonName"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enter_poule_name_dialog_text_view_enter_poule_name" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_enter_poule_name_text_view_enter_poule_name" />
 
 </android.support.constraint.ConstraintLayout>

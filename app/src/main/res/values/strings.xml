@@ -7,6 +7,9 @@
     <string name="no_internet_connection">No internet connection</string>
     <string name="unknown_error">An unknown error occurred</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="add_poule_button">Add Group</string>
     <string name="edit_button">Edit</string>
     <string name="add_team_button">Add Team</string>
@@ -16,7 +19,9 @@
     <string name="show_scheme_button">Scheme</string>
     <string name="show_ranking_button">Ranking</string>
 
-    <string name="poule_settings_text_view_poule_name">Grop Name:</string>
+    <string name="poule_settings_text_view_poule_name">Group Name:</string>
+
+    <string name="publish_tournament_dialog_text_view_question">Do you want to publish this tournament?</string>
 
     <string name="tab_ranking_text_view_ranking">#</string>
     <string name="tab_ranking_text_view_team">Team</string>
@@ -45,7 +50,7 @@
     <string name="tournament_settings_text_view_tournament_name">Tournament</string>
     <string name="location_text_view">Location</string>
     <string name="welcome_text_view_welcome">Welcome to MyCupApp</string>
-    <string name="welcome_text_view_intro">With this App you can organize your own tournaments and competitions</string>
+    <string name="welcome_text_view_intro">With this App you can organize your own tournaments and competitions or you can follow one and get live updates of the results</string>
     <string name="tournament_text_view_intro">The following groups are part of this tournament</string>
     <string name="tournament_settings_text_view_location">Location:</string>
     <string name="save_tournament_button">Save</string>
@@ -98,5 +103,8 @@
     <string name="poule_text_view_poule_name">Group:</string>
     <string name="round_round_name">Round</string>
     <string name="round_scheme_adapter_text_round">Round</string>
+    <string name="publish_tournament">share</string>
+    <string name="welcome_button_follow">Follow</string>
+    <string name="welcome_button_organize">Organize</string>
 
 </resources>

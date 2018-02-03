@@ -270,18 +270,18 @@ public class PouleActivity extends AppCompatActivity {
     }
 
     public void addTeam(View view) {
-        // get enter_team_name_dialog.xml view
+        // get dialog_enter_team_name.xml view
         LayoutInflater li = LayoutInflater.from(mContext);
         final ViewGroup nullParent = null; // introduced to avoid warning
 
-        View DialogView = li.inflate(R.layout.enter_team_name_dialog, nullParent);
+        View DialogView = li.inflate(R.layout.dialog_enter_team_name, nullParent);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
-        // set enter_team_name_dialog.xml to alertdialog builder
+        // set dialog_enter_team_name.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText inputTeamName = (EditText) DialogView.findViewById(R.id.enter_team_name_dialog_edit_text_team_name);
+        final EditText inputTeamName = (EditText) DialogView.findViewById(R.id.dialog_enter_team_name_edit_text_team_name);
 
         alertDialogBuilder
                 .setCancelable(false)

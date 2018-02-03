@@ -5,14 +5,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,6 +29,11 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.example.pouleapp.Data.GlobalData;
 import com.example.pouleapp.R;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +43,14 @@ import java.util.List;
  * This class is used for the selection of a tournament or creation of a new one
  */
 
-public class SelectTournamentActivity extends AppCompatActivity {
+public class SelectTournamentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     final Context mContext = this;
 
-//    private SwipeMenuListView mListView;
+    private FirebaseAuth mFBAuth;
+    private FirebaseUser mFBUser;
+    private String mUserName, mUserEmail;
+
+    //    private SwipeMenuListView mListView;
     private ArrayList<String> mArrayList=new ArrayList<>();
     private ListDataAdapter mListDataAdapter;
 
@@ -46,6 +58,39 @@ public class SelectTournamentActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_tournament);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        toolbar.setTitle(getResources().getString(R.string.app_name));
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        TextView tvUser = (TextView) header.findViewById(R.id.nav_header_select_tournament_text_view_user);
+        TextView tvEmail = (TextView) header.findViewById(R.id.nav_header_select_tournament_text_view_email);
+
+        mFBAuth = FirebaseAuth.getInstance();
+        mFBUser = mFBAuth.getCurrentUser();
+
+        //Now check if this user is null
+        if (mFBUser == null){
+            //send user to the login page
+            startActivity(new Intent(this, AuthUIActivity.class));
+            return;
+        } else {
+            mUserName = mFBUser.getDisplayName();
+            mUserEmail = mFBUser.getEmail();
+        }
+
+        tvUser.setText(mUserName);
+        tvEmail.setText(mUserEmail);
 
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         globalVariable.initApp();
@@ -56,6 +101,79 @@ public class SelectTournamentActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_log_out) {
+            // Handle log out
+            mFBAuth.signOut();
+
+            Intent intent = new Intent(this, AuthUIActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_delete_account) {
+            // handle delete account
+
+            new android.support.v7.app.AlertDialog.Builder(this)
+                    .setMessage("Are you sure you want to delete this account?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            deleteAccount();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void deleteAccount() {
+        AuthUI.getInstance()
+                .delete(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            recreate();
+                        }
+                    }
+                });
+    }
 
 
     private void initListView(List<String> list) {
@@ -212,14 +330,14 @@ public class SelectTournamentActivity extends AppCompatActivity {
         LayoutInflater li = LayoutInflater.from(mContext);
         final ViewGroup nullParent = null; // introduced to avoid warning
 
-        View DialogView = li.inflate(R.layout.enter_tournament_name_dialog, nullParent);
+        View DialogView = li.inflate(R.layout.dialog_enter_tournament_name, nullParent);
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
 
         // set enter_tournament_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText etTournamentName = (EditText) DialogView.findViewById(R.id.enter_tournament_name_dialog_edit_text_tournament_name);
+        final EditText etTournamentName = (EditText) DialogView.findViewById(R.id.dialog_enter_tournament_name_edit_text_tournament_name);
 
         alertDialogBuilder
                 .setCancelable(false)

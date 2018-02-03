@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <LinearLayout
+        android:id="@+id/follow_tab_ranking_linear_layout_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/colorYellow"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_ranking"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_ranking"
+            android:textColor="@color/colorBlue"/>
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_team"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_team"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_matches"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_matches"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_points"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_points"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_matches_won"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_matches_won"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_matches_draw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_matches_draw"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_matches_lost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_matches_lost"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_goals_for"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_goals_for"
+            android:textColor="@color/colorBlue" />
+
+        <TextView
+            android:id = "@+id/follow_tab_ranking_text_view_goals_against"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorYellow"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/tab_ranking_text_view_goals_against"
+            android:textColor="@color/colorBlue" />
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/follow_tab_ranking_list_view_ranking"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:divider="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/follow_tab_ranking_linear_layout_1"
+        tools:layout_conversion_absoluteHeight="361dp"
+        tools:layout_conversion_absoluteWidth="384dp"
+        tools:layout_conversion_absoluteX="0dp"
+        tools:layout_conversion_absoluteY="43dp"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

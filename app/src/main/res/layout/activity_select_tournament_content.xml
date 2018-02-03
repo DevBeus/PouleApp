@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.pouleapp.Activities.SelectTournamentActivity"
+    tools:showIn="@layout/app_bar_select_tournament">
+
+    <TextView
+        android:id="@+id/select_tournament_text_view_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_tournament_text_view_intro"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp" />
+
+    <TextView
+        android:id="@+id/select_tournament_text_view_tournaments_list_view_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="@string/select_tournament_text_view_tournaments_list_view_header"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/select_tournament_guideline_horizontal"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/select_tournament_guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.25"
+        android:orientation="horizontal" />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/select_tournament_list_view_tournaments"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/select_tournament_guideline_horizontal"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:id="@+id/select_tournament_image_button_add_poule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="?android:attr/windowBackground"
+        android:contentDescription="@string/select_tournament_image_button_descr_add_tournament"
+        android:onClick="addTournament"
+        android:tint="@color/colorBlue"
+        app:srcCompat="@drawable/ic_add_circle_48dp"
+        android:layout_marginRight="-5dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/select_tournament_text_view_tournaments_list_view_header"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/select_tournament_text_view_tournaments_list_view_header"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintVertical_bias="0.549" />
+
+</android.support.constraint.ConstraintLayout>

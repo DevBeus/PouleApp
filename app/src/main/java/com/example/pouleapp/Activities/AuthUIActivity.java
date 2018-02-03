@@ -14,6 +14,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 
+import static com.example.pouleapp.Data.GlobalData.ACTIVITY_SELECT_TOURNAMENT;
+import static com.example.pouleapp.Data.GlobalData.NEXT_ACTIVITY;
+
 public class AuthUIActivity extends AppCompatActivity {
 
     private FirebaseAuth mFBAuth;
@@ -33,7 +36,14 @@ public class AuthUIActivity extends AppCompatActivity {
 
 
         if (mFBUser != null){
-            startActivity(new Intent(this, SelectTournamentActivity.class));
+            String activity = getIntent().getStringExtra(NEXT_ACTIVITY);
+
+            if (activity.equals(ACTIVITY_SELECT_TOURNAMENT)){
+                startActivity(new Intent(this, SelectTournamentActivity.class));
+                return;
+            }
+
+            startActivity(new Intent(this, FollowTournamentActivity.class));
             return;
         }
 
@@ -59,7 +69,15 @@ public class AuthUIActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(this, SelectTournamentActivity.class));
+                String activity = getIntent().getStringExtra(NEXT_ACTIVITY);
+
+                if (activity.equals(ACTIVITY_SELECT_TOURNAMENT)){
+                    startActivity(new Intent(this, SelectTournamentActivity.class));
+                    finish();
+                    return;
+                }
+
+                startActivity(new Intent(this, FollowTournamentActivity.class));
                 finish();
                 return;
             } else {
