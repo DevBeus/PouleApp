@@ -75,8 +75,6 @@ public class FollowTournamentInfoActivity extends AppCompatActivity{
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mPouleListNames);
         listView.setAdapter(mAdapter);
 
-        //@TODO: add click event listener to select the one you want to follow
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override

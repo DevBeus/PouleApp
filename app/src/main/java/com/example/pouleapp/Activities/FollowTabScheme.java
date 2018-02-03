@@ -81,26 +81,28 @@ public class FollowTabScheme extends Fragment {
             schemeExpandableListView.expandGroup(i);
         }
 
-        mFBRef = mFBDB.getReference(mPublishTournament.getTournamentInfo().getTournamentID());
-
-        mFBRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                PublishTournament pTournament = dataSnapshot.getValue(PublishTournament.class);
-                globalVariable.setPublishTournament(pTournament);
-                mPublishTournament = globalVariable.getPublishTournament();
-                mPoule.setRoundList(mPublishTournament.getPouleList().get(mPouleIndex).getRoundList());
-
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.e(TAG, "Failed to read app title value.", error.toException());
-            }
-        });
+//        mFBRef = mFBDB.getReference(mPublishTournament.getTournamentInfo().getTournamentID());
+//
+//        mFBRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                PublishTournament pTournament = dataSnapshot.getValue(PublishTournament.class);
+//                globalVariable.setPublishTournament(pTournament);
+//                mPublishTournament = globalVariable.getPublishTournament();
+//                mPoule.setRoundList(mPublishTournament.getPouleList().get(mPouleIndex).getRoundList());
+//
+//                mAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                //Log.e(TAG, "Failed to read app title value.", error.toException());
+//            }
+//        });
 
         return v;
     }
+
+
 }

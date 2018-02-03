@@ -134,8 +134,19 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
                         mSelectedPosition = position;
                         // Toast.makeText(getApplicationContext(), mTournamentListKeys.get(position) + ": " + mTournamentList.get(position), Toast.LENGTH_LONG).show();
 
+                        String tournamentID = mTournamentListKeys.get(position);
+                        PublishTournamentSearchInfo matchInfo = new PublishTournamentSearchInfo("","","","");
+
+                        for (PublishTournamentSearchInfo info: mPublishTournamentSearchInfoList) {
+                            if (info.getTournamentID().equals(tournamentID)) {
+                                matchInfo = info;
+                                break;
+                            }
+                        }
+
                         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-                        globalVariable.setTournamentSearchInfo(mPublishTournamentSearchInfoList.get(position));
+                        // globalVariable.setTournamentSearchInfo(mPublishTournamentSearchInfoList.get(position));
+                        globalVariable.setTournamentSearchInfo(matchInfo);
 
                         Intent intent = new Intent(getApplicationContext(), FollowTournamentInfoActivity.class);
 
@@ -144,78 +155,9 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
                     }
                 });
 
-
-        mQueryValueListener = new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
-                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
-
-                mTournamentList.clear();
-                mTournamentListKeys.clear();
-
-                while (iterator.hasNext()) {
-                    DataSnapshot next = (DataSnapshot) iterator.next();
-
-                    PublishTournamentSearchInfo sInfo = (PublishTournamentSearchInfo) next.getValue(PublishTournamentSearchInfo.class);
-                    String tournamentName = sInfo.getTournamentName();
-                    String key = next.getKey();
-                    mTournamentListKeys.add(key);
-                    mTournamentList.add(tournamentName);
-                }
-
-                mAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
     }
 
     private void addChildEventListener() {
-//        ChildEventListener childListener = new ChildEventListener() {
-//
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                //String tournamentName = (String) dataSnapshot.child(KEY_TOURNAMENT_NAME).getValue();
-//                PublishTournamentSearchInfo sInfo = (PublishTournamentSearchInfo) dataSnapshot.getValue(PublishTournamentSearchInfo.class);
-//                String tournamentName = sInfo.getTournamentName();
-//                mTournamentList.add(tournamentName);
-//                mTournamentListKeys.add(dataSnapshot.getKey());
-//
-//                mAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                String key = dataSnapshot.getKey();
-//                int index = mTournamentListKeys.indexOf(key);
-//
-//                if (index != -1) {
-//                    mTournamentList.remove(index);
-//                    mTournamentListKeys.remove(index);
-//                    mAdapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//            }
-//        };
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
@@ -252,31 +194,44 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
             }
         };
 
-        //mFBRef.addChildEventListener(childListener);
         mFBRef.addListenerForSingleValueEvent(valueEventListener);
     }
 
     public void searchItems(View view) {
 
-        Query query;
-
         if (!mSearchMode) {
             searchButton.setText("Clear");
-            query = mFBRef.orderByChild(KEY_TOURNAMENT_NAME).equalTo(searchText.getText().toString());
+
+            mTournamentList.clear();
+            mTournamentListKeys.clear();
+
+            for (PublishTournamentSearchInfo info: mPublishTournamentSearchInfoList) {
+                String matchStr = searchText.getText().toString().toLowerCase().trim();
+
+                // Alternative could be org.apache.commons.lang3.StringUtils.containsIgnoreCase("AbBaCca", "bac");
+                if (info.getTournamentName().toLowerCase().contains(matchStr)) {
+                    mTournamentList.add(info.getTournamentName());
+                    mTournamentListKeys.add(info.getTournamentID());
+                }
+            }
+
+//            query = mFBRef.orderByChild(KEY_TOURNAMENT_NAME).equalTo(searchText.getText().toString());
             mSearchMode = true;
         } else {
             mSearchMode = false;
             searchButton.setText("Find");
             searchText.setText("");
-            query = mFBRef.orderByKey();
+
+            mTournamentList.clear();
+            mTournamentListKeys.clear();
+
+            for (PublishTournamentSearchInfo info: mPublishTournamentSearchInfoList) {
+                mTournamentList.add(info.getTournamentName());
+                mTournamentListKeys.add(info.getTournamentID());
+            }
         }
 
-        if (mItemSelected) {
-            //dataListView.setItemChecked(selectedPosition, false);
-            mItemSelected = false;
-        }
-
-        query.addListenerForSingleValueEvent(mQueryValueListener);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

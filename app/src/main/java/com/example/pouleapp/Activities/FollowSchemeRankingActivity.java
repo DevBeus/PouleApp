@@ -13,6 +13,11 @@ import com.example.pouleapp.Data.GlobalData;
 import com.example.pouleapp.Data.PublishTournament;
 import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
 import static com.example.pouleapp.Data.GlobalData.TAB_INDEX;
@@ -20,12 +25,17 @@ import static com.example.pouleapp.Data.GlobalData.TAB_INDEX;
 //Implementing the interface OnTabSelectedListener to our SchemeRankingActivity
 //This interface would help in swiping views
 public class FollowSchemeRankingActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
+    private PublishTournament mPublishTournament;
+    private FirebaseDatabase mFBDB;
+    private DatabaseReference mFBRef;
+
 
     //This is our tablayout
     private TabLayout tabLayout;
 
     //This is our viewPager
     private ViewPager viewPager;
+    private FollowSchemeRankingPager mAdapter;
     private int mSelected_Tab;
 
     @Override
@@ -35,6 +45,11 @@ public class FollowSchemeRankingActivity extends AppCompatActivity implements Ta
 
         Intent intent = getIntent();
         mSelected_Tab = intent.getIntExtra(TAB_INDEX,SCHEME_TAB); // Default tab is Scheme Tab
+
+        final GlobalData globalVariable = (GlobalData) getApplicationContext();
+        mPublishTournament = globalVariable.getPublishTournament();
+        mFBDB = globalVariable.getFirebaseDatabase();
+
 
         //Adding toolbar to the activity
         Toolbar toolbar = (Toolbar) findViewById(R.id.follow_scheme_ranking_toolbar);
@@ -64,10 +79,10 @@ public class FollowSchemeRankingActivity extends AppCompatActivity implements Ta
         viewPager = (ViewPager) findViewById(R.id.follow_scheme_ranking_view_pager);
 
         //Creating our pager adapter
-        FollowSchemeRankingPager adapter = new FollowSchemeRankingPager(getSupportFragmentManager(), tabLayout.getTabCount());
+        mAdapter = new FollowSchemeRankingPager(getSupportFragmentManager(), tabLayout.getTabCount());
 
         //Adding adapter to pager
-        viewPager.setAdapter(adapter);
+        viewPager.setAdapter(mAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         viewPager.setCurrentItem(mSelected_Tab);
 
@@ -76,6 +91,25 @@ public class FollowSchemeRankingActivity extends AppCompatActivity implements Ta
         //Adding onTabSelectedListener to swipe views
         //tabLayout.setOnTabSelectedListener(this);
         tabLayout.addOnTabSelectedListener(this);
+
+        mFBRef = mFBDB.getReference(mPublishTournament.getTournamentInfo().getTournamentID());
+
+        mFBRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                PublishTournament pTournament = dataSnapshot.getValue(PublishTournament.class);
+                globalVariable.setPublishTournament(pTournament);
+
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //Log.e(TAG, "Failed to read app title value.", error.toException());
+            }
+        });
+
 
     }
 

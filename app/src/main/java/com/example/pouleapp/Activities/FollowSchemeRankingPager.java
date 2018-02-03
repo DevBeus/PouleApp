@@ -43,4 +43,8 @@ class FollowSchemeRankingPager extends FragmentStatePagerAdapter {
         return mTabCount;
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }
