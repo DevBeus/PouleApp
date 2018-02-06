@@ -21,7 +21,7 @@
 
     <string name="poule_settings_text_view_poule_name">Group Name:</string>
 
-    <string name="publish_tournament_dialog_text_view_question">Do you want to publish this tournament?</string>
+    <string name="publish_tournament_dialog_text_view_question">Do you want to share this tournament?</string>
 
     <string name="tab_ranking_text_view_ranking">#</string>
     <string name="tab_ranking_text_view_team">Team</string>
@@ -50,7 +50,7 @@
     <string name="tournament_settings_text_view_tournament_name">Tournament</string>
     <string name="location_text_view">Location</string>
     <string name="welcome_text_view_welcome">Welcome to MyCupApp</string>
-    <string name="welcome_text_view_intro">With this App you can organize your own tournaments and competitions or you can follow one and get live updates of the results</string>
+    <string name="welcome_text_view_intro">With this App you can organize your own tournaments and competitions, share live results or follow a tournament</string>
     <string name="tournament_text_view_intro">The following groups are part of this tournament</string>
     <string name="tournament_settings_text_view_location">Location:</string>
     <string name="save_tournament_button">Save</string>

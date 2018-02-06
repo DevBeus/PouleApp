@@ -32,7 +32,7 @@
     <string name="tournament_settings_text_view_tournament_name">Toernooi</string>
     <string name="location_text_view">Plaats</string>
     <string name="welcome_text_view_welcome">Welkom bij MyCupApp</string>
-    <string name="welcome_text_view_intro">Met deze App kun je je eigen toernooien en competities oganizeren of er een volgen en live updates ontvangen</string>
+    <string name="welcome_text_view_intro">Met deze App kun je je eigen toernooien en competities oganizeren, resultaten live delen of een toernooi volgen</string>
     <string name="tournament_text_view_intro">De onderstaande poules zijn onderdeel van dit  toernooi:</string>
     <string name="tournament_settings_text_view_location">"Plaats: "</string>
     <string name="tournament_text_view_poule_list_view_header">Poulelijst: </string>
@@ -81,4 +81,6 @@
     <string name="publish_tournament">share</string>
     <string name="welcome_button_follow">Follow</string>
     <string name="welcome_button_organize">Organize</string>
+    <string name="publish_tournament_dialog_text_view_question">Wil je dit toernooi delen ?</string>
+    <string name="no_internet_connection">Geen internet verbinding</string>
 </resources>

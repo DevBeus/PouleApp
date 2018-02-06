@@ -1,13 +1,19 @@
 package com.example.pouleapp.Activities;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.pouleapp.Data.GlobalData;
 import com.example.pouleapp.Data.Tournament;
@@ -19,6 +25,7 @@ import static com.example.pouleapp.Data.GlobalData.TAB_INDEX;
 //Implementing the interface OnTabSelectedListener to our SchemeRankingActivity
 //This interface would help in swiping views
 public class SchemeRankingActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
+    final Context mContext = this;
 
     //This is our tablayout
     private TabLayout tabLayout;
@@ -113,4 +120,52 @@ public class SchemeRankingActivity extends AppCompatActivity implements TabLayou
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void publishTournamentDialog(View view) {
+        // get dialog_enter_poule_name.xml view
+        LayoutInflater li = LayoutInflater.from(mContext);
+        final ViewGroup nullParent = null; // introduced to avoid warning
+
+        View DialogView = li.inflate(R.layout.dialog_publish_tournament, nullParent);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+
+        // set dialog_publish_tournament.xml to alertdialog builder
+        alertDialogBuilder.setView(DialogView);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // publish tournament into firbase database
+                                final GlobalData globalVariable = (GlobalData) getApplicationContext();
+
+                                globalVariable.saveTournament();
+                                globalVariable.publishTournament();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                          // Needed to refresh listView after update
+                                          @Override
+                                          public void onDismiss(DialogInterface dialog) {
+                                              recreate();
+                                          }
+                                      }
+                );
+
+        // create alert enter_tournament_dialog.xml
+        AlertDialog publishTournamentDialog = alertDialogBuilder.create();
+
+        // show it
+        publishTournamentDialog.show();
+
+    }
+
 }
