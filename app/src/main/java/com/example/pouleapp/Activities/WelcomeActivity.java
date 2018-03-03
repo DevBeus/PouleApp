@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.pouleapp.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.pouleapp.Data.GlobalData.ACTIVITY_FOLLOW_TOURNAMENT;
 import static com.example.pouleapp.Data.GlobalData.ACTIVITY_SELECT_TOURNAMENT;

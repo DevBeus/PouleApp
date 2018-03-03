@@ -251,6 +251,7 @@ public class PouleScheme {
             mRoundScheme[r] = new Round(r,matchList);
         }
 
+
         if (mFullCompetition) {
             // Copy first half of competition with swapping home and opponent team
             for (int r = pSize; r < 2*pSize-1; r++) {

@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pouleapp.Data.GlobalData;
 import com.example.pouleapp.Data.PublishTournamentSearchInfo;
@@ -34,14 +33,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import static com.example.pouleapp.Data.GlobalData.KEY_TOURNAMENT_INFO_LIST;
-import static com.example.pouleapp.Data.GlobalData.KEY_TOURNAMENT_NAME;
 
 /**
  * Created by gezamenlijk on 6-1-2018.
@@ -66,8 +63,8 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
     private int mSelectedPosition = 0;
 
     private ArrayList<PublishTournamentSearchInfo> mPublishTournamentSearchInfoList = new ArrayList<>();
-    private ArrayList<String> mTournamentList = new ArrayList<String>();
-    private ArrayList<String> mTournamentListKeys = new ArrayList<String>();
+    private ArrayList<String> mTournamentList = new ArrayList<>();
+    private ArrayList<String> mTournamentListKeys = new ArrayList<>();
     private ArrayAdapter<String> mAdapter;
     private ValueEventListener mQueryValueListener;
 
@@ -76,22 +73,22 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow_tournament);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        TextView tvUser = (TextView) header.findViewById(R.id.nav_header_select_tournament_text_view_user);
-        TextView tvEmail = (TextView) header.findViewById(R.id.nav_header_select_tournament_text_view_email);
+        TextView tvUser = header.findViewById(R.id.nav_header_select_tournament_text_view_user);
+        TextView tvEmail = header.findViewById(R.id.nav_header_select_tournament_text_view_email);
 
         mFBAuth = FirebaseAuth.getInstance();
         mFBUser = mFBAuth.getCurrentUser();
@@ -118,12 +115,12 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
 
         mFBRef = mFBDB.getReference(KEY_TOURNAMENT_INFO_LIST);
 
-        tournamentListView = (ListView) findViewById(R.id.follow_tournament_content_list_view_tournaments);
-        searchText = (EditText) findViewById(R.id.follow_tournament_content_edit_text_search_text);
-        searchButton = (Button) findViewById(R.id.follow_tournament_content_button_find);
+        tournamentListView = findViewById(R.id.follow_tournament_content_list_view_tournaments);
+        searchText = findViewById(R.id.follow_tournament_content_edit_text_search_text);
+        searchButton = findViewById(R.id.follow_tournament_content_button_find);
 
 
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTournamentList);
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mTournamentList);
         tournamentListView.setAdapter(mAdapter);
 
         addChildEventListener();
@@ -171,10 +168,10 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
                 mTournamentListKeys.clear();
 
                 while (iterator.hasNext()) {
-                    DataSnapshot next = (DataSnapshot) iterator.next();
+                    DataSnapshot next = iterator.next();
 
                     //String tournamentName = (String) next.child(KEY_TOURNAMENT_NAME).getValue();
-                    PublishTournamentSearchInfo sInfo = (PublishTournamentSearchInfo) next.getValue(PublishTournamentSearchInfo.class);
+                    PublishTournamentSearchInfo sInfo = next.getValue(PublishTournamentSearchInfo.class);
                     mPublishTournamentSearchInfoList.add(sInfo);
 
                     String tournamentName = sInfo.getTournamentName();
@@ -236,7 +233,7 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -263,7 +260,7 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -290,7 +287,7 @@ public class FollowTournamentActivity extends AppCompatActivity implements Navig
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

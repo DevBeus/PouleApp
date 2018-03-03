@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">MyCupApp</string>
 
-    <string name="unknown_response">Unexpected onActivityResult response code</string>
-    <string name="unknown_sign_in_response">Unknown response from AuthUI sign-in</string>
-    <string name="sign_in_cancelled">Sign in cancelled</string>
+    <string name="unknown_response" translatable="false">Unexpected onActivityResult response code</string>
+    <string name="unknown_sign_in_response" translatable="false">Unknown response from AuthUI sign-in</string>
+    <string name="sign_in_cancelled" translatable="false">Sign in cancelled</string>
     <string name="no_internet_connection">No internet connection</string>
-    <string name="unknown_error">An unknown error occurred</string>
+    <string name="unknown_error" translatable="false">An unknown error occurred</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="add_poule_button">Add Group</string>
     <string name="edit_button">Edit</string>
@@ -56,7 +56,7 @@
     <string name="save_tournament_button">Save</string>
     <string name="tournament_text_view_poule_list_view_header">Group List:</string>
 
-    <string name="poule_text_view_intro">\"The following teams are part of this group\"</string>
+    <string name="poule_text_view_intro">The following teams are part of this group</string>
 
     <string name="home_button">home</string>
     <string name="delete_tournament_button">Delete Tournament</string>
@@ -106,5 +106,6 @@
     <string name="publish_tournament">share</string>
     <string name="welcome_button_follow">Follow</string>
     <string name="welcome_button_organize">Organize</string>
+    <string name="tournament_text_view_tournament_name">Tournament:</string>
 
 </resources>

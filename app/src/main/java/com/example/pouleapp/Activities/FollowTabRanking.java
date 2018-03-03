@@ -10,14 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.pouleapp.Data.GlobalData;
-import com.example.pouleapp.Data.Poule;
 import com.example.pouleapp.Data.PublishMatch;
 import com.example.pouleapp.Data.PublishPoule;
 import com.example.pouleapp.Data.PublishRound;
 import com.example.pouleapp.Data.PublishTeam;
 import com.example.pouleapp.Data.PublishTournament;
 import com.example.pouleapp.Data.Team;
-import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
 
 import java.util.ArrayList;
@@ -90,7 +88,7 @@ public class FollowTabRanking extends Fragment {
 
         Collections.sort(sortedPoule, Team.RankingComparator);
 
-        ListView lview = (ListView) v.findViewById(R.id.follow_tab_ranking_list_view_ranking);
+        ListView lview = v.findViewById(R.id.follow_tab_ranking_list_view_ranking);
         RankingAdapter adapter = new RankingAdapter(getActivity(), sortedPoule);
         lview.setAdapter(adapter);
 

@@ -1,19 +1,15 @@
 package com.example.pouleapp.Activities;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-import com.example.pouleapp.Data.Match;
-import com.example.pouleapp.Data.PouleScheme;
 import com.example.pouleapp.Data.PublishMatch;
 import com.example.pouleapp.Data.PublishPoule;
 import com.example.pouleapp.Data.PublishRound;
-import com.example.pouleapp.Data.Round;
 import com.example.pouleapp.R;
 
 import java.util.ArrayList;
@@ -59,11 +55,11 @@ class FollowRoundSchemeAdapter extends BaseExpandableListAdapter {
             view = infalInflater.inflate(R.layout.child_items, nullParent);
         }
 
-        TextView tvMatch = (TextView) view.findViewById(R.id.child_items_match);
+        TextView tvMatch = view.findViewById(R.id.child_items_match);
         String matchString = match.getHomeTeam()+" - " + match.getOpponent();
         tvMatch.setText(matchString);
 
-        TextView tvResult = (TextView) view.findViewById(R.id.child_items_match_result);
+        TextView tvResult = view.findViewById(R.id.child_items_match_result);
         String gf = ((match.getGoalsFor()!=null)? match.getGoalsFor().toString() : "");
         String ga = ((match.getGoalsAgainst()!=null)? match.getGoalsAgainst().toString() : "");
         String resultString = gf + " - " + ga;
@@ -115,7 +111,7 @@ class FollowRoundSchemeAdapter extends BaseExpandableListAdapter {
             view = inf.inflate(R.layout.group_items, nullParent);
         }
 
-        TextView heading = (TextView) view.findViewById(R.id.group_items_text_view_heading);
+        TextView heading = view.findViewById(R.id.group_items_text_view_heading);
         heading.setText(mContext.getString(R.string.round_scheme_adapter_text_round)+ round.getRound());
 
         return view;

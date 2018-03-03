@@ -43,7 +43,7 @@ public class SchemeRankingActivity extends AppCompatActivity implements TabLayou
         mSelected_Tab = intent.getIntExtra(TAB_INDEX,SCHEME_TAB); // Default tab is Scheme Tab
 
         //Adding toolbar to the activity
-        Toolbar toolbar = (Toolbar) findViewById(R.id.scheme_ranking_toolbar);
+        Toolbar toolbar = findViewById(R.id.scheme_ranking_toolbar);
         setSupportActionBar(toolbar);
         // Show the Up button in the action bar.
 
@@ -55,7 +55,7 @@ public class SchemeRankingActivity extends AppCompatActivity implements TabLayou
 
 
         //Initializing the tablayout
-        tabLayout = (TabLayout) findViewById(R.id.scheme_ranking_tab_layout);
+        tabLayout = findViewById(R.id.scheme_ranking_tab_layout);
 
         //Adding the tabs using addTab() method
         tabLayout.addTab(tabLayout.newTab().setText(R.string.scheme_ranking_activity_text_view_scheme));
@@ -69,7 +69,7 @@ public class SchemeRankingActivity extends AppCompatActivity implements TabLayou
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         //Initializing viewPager
-        viewPager = (ViewPager) findViewById(R.id.scheme_ranking_view_pager);
+        viewPager = findViewById(R.id.scheme_ranking_view_pager);
 
         //Creating our pager adapter
         SchemeRankingPager adapter = new SchemeRankingPager(getSupportFragmentManager(), tabLayout.getTabCount());

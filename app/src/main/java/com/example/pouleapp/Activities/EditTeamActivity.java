@@ -50,21 +50,21 @@ public class EditTeamActivity extends AppCompatActivity {
             mTeam_Index =  poule.getTeamList().size()-1;
         }
 
-        TextView textTeam = (TextView) findViewById(R.id.edit_team_edit_text_team);
+        TextView textTeam = findViewById(R.id.edit_team_edit_text_team);
 
         ArrayList<Team> teamList = poule.getTeamList();
         Team team = teamList.get(mTeam_Index);
 
         textTeam.setText(team.getTeamName());
 
-        TextView textCoach = (TextView) findViewById(R.id.edit_team_edit_text_coach);
+        TextView textCoach = findViewById(R.id.edit_team_edit_text_coach);
         textCoach.setText(team.getCoachName());
 
     }
 
     public void updateTeam(View view) {
-        TextView textTeam = (TextView) findViewById(R.id.edit_team_edit_text_team);
-        TextView textCoach = (TextView) findViewById(R.id.edit_team_edit_text_coach);
+        TextView textTeam = findViewById(R.id.edit_team_edit_text_team);
+        TextView textCoach = findViewById(R.id.edit_team_edit_text_coach);
 
         String teamName = textTeam.getText().toString().trim();
         String teamCoach = textCoach.getText().toString().trim();

@@ -66,15 +66,15 @@ class RankingAdapter extends BaseAdapter {
 
             convertView = inflater.inflate(R.layout.ranking_row, nullParent);
             holder = new ViewHolder();
-            holder.mRanking = (TextView) convertView.findViewById(R.id.ranking_row_text_view_ranking);
-            holder.mTeam = (TextView) convertView.findViewById(R.id.ranking_row_text_view_team);
-            holder.mMatches = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches);
-            holder.mPoints = (TextView) convertView.findViewById(R.id.ranking_row_text_view_points);
-            holder.mMatchesWon = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches_won);
-            holder.mMatchesDraw = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches_draw);
-            holder.mMatchesLost = (TextView) convertView.findViewById(R.id.ranking_row_text_view_matches_lost);
-            holder.mGoalsFor = (TextView) convertView.findViewById(R.id.ranking_row_text_view_goals_for);
-            holder.mGoalsAgainst = (TextView) convertView.findViewById(R.id.ranking_row_text_view_goals_against);
+            holder.mRanking = convertView.findViewById(R.id.ranking_row_text_view_ranking);
+            holder.mTeam = convertView.findViewById(R.id.ranking_row_text_view_team);
+            holder.mMatches = convertView.findViewById(R.id.ranking_row_text_view_matches);
+            holder.mPoints = convertView.findViewById(R.id.ranking_row_text_view_points);
+            holder.mMatchesWon = convertView.findViewById(R.id.ranking_row_text_view_matches_won);
+            holder.mMatchesDraw = convertView.findViewById(R.id.ranking_row_text_view_matches_draw);
+            holder.mMatchesLost = convertView.findViewById(R.id.ranking_row_text_view_matches_lost);
+            holder.mGoalsFor = convertView.findViewById(R.id.ranking_row_text_view_goals_for);
+            holder.mGoalsAgainst = convertView.findViewById(R.id.ranking_row_text_view_goals_against);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();

@@ -51,10 +51,10 @@ class RoundSchemeAdapter extends BaseExpandableListAdapter {
             view = infalInflater.inflate(R.layout.child_items, nullParent);
         }
 
-        TextView tvMatch = (TextView) view.findViewById(R.id.child_items_match);
+        TextView tvMatch = view.findViewById(R.id.child_items_match);
         tvMatch.setText(match.getMatchString());
 
-        TextView tvResult = (TextView) view.findViewById(R.id.child_items_match_result);
+        TextView tvResult = view.findViewById(R.id.child_items_match_result);
         tvResult.setText((match.getResultString()));
 
         return view;
@@ -98,7 +98,7 @@ class RoundSchemeAdapter extends BaseExpandableListAdapter {
             view = inf.inflate(R.layout.group_items, nullParent);
         }
 
-        TextView heading = (TextView) view.findViewById(R.id.group_items_text_view_heading);
+        TextView heading = view.findViewById(R.id.group_items_text_view_heading);
         heading.setText(mContext.getString(R.string.round_scheme_adapter_text_round)+ round.getRoundNumber());
 
         return view;

@@ -2,7 +2,6 @@ package com.example.pouleapp.Activities;
 
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
@@ -63,7 +62,7 @@ public class TabSchemeTable extends Fragment {
 
         //setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 
-        TableLayout tl = (TableLayout) v.findViewById(R.id.tab_scheme_table_layout_table);
+        TableLayout tl = v.findViewById(R.id.tab_scheme_table_layout_table);
 
             for (int i = 0; i < teamList.size() + 1; i++) {
                 TableRow tr = new TableRow(v.getContext());

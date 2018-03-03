@@ -12,11 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.pouleapp.Data.GlobalData;
-import com.example.pouleapp.Data.PublishMatch;
 import com.example.pouleapp.Data.PublishPoule;
 import com.example.pouleapp.Data.PublishTournament;
 import com.example.pouleapp.Data.PublishTournamentSearchInfo;
-import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,17 +60,17 @@ public class FollowTournamentInfoActivity extends AppCompatActivity{
 
         //setTitle(getResources().getString(R.string.menu_tournament_settings_text));
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.follow_tournament_info_text_view_tournament_name_show);
+        TextView tvTournamentName = findViewById(R.id.follow_tournament_info_text_view_tournament_name_show);
         tvTournamentName.setText(info.getTournamentName());
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.follow_tournament_info_text_view_location_show);
+        TextView tvTournamentLocation = findViewById(R.id.follow_tournament_info_text_view_location_show);
         tvTournamentLocation.setText(info.getLocation());
 
-        TextView tvDate = (TextView) findViewById(R.id.follow_tournament_info_text_view_date_show);
+        TextView tvDate = findViewById(R.id.follow_tournament_info_text_view_date_show);
         tvDate.setText(info.getDate());
 
         ListView listView = findViewById(R.id.follow_tournament_info_list_view_poules);
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mPouleListNames);
+        mAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mPouleListNames);
         listView.setAdapter(mAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -100,7 +98,7 @@ public class FollowTournamentInfoActivity extends AppCompatActivity{
 
                 PublishTournament pTournament = dataSnapshot.getValue(PublishTournament.class);
                 globalVariable.setPublishTournament(pTournament);
-                mPouleList = pTournament.getPouleList();
+                mPouleList = pTournament != null ? pTournament.getPouleList() : null; // pTournament could be null
 
                 for(PublishPoule p: mPouleList) { mPouleListNames.add(p.getPouleName()); }
 

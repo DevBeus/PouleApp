@@ -9,27 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.example.pouleapp.Data.GlobalData;
-import com.example.pouleapp.Data.Match;
-import com.example.pouleapp.Data.Poule;
-import com.example.pouleapp.Data.PouleScheme;
 import com.example.pouleapp.Data.PublishPoule;
 import com.example.pouleapp.Data.PublishTournament;
-import com.example.pouleapp.Data.Team;
-import com.example.pouleapp.Data.Tournament;
 import com.example.pouleapp.R;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 import static com.example.pouleapp.Data.GlobalData.POULE_INDEX;
-import static com.example.pouleapp.Data.GlobalData.PREVIOUS_TAB;
-import static com.example.pouleapp.Data.GlobalData.SCHEME_COLUMN;
-import static com.example.pouleapp.Data.GlobalData.SCHEME_ROW;
-import static com.example.pouleapp.Data.GlobalData.SCHEME_TAB;
 
 /**
  * Created by gezamenlijk on 16-8-2017.
@@ -67,7 +53,7 @@ public class FollowTabScheme extends Fragment {
         View v = inflater.inflate(R.layout.follow_tab_scheme, container, false);
 
         //  initiate the expandable list view
-        ExpandableListView schemeExpandableListView = (ExpandableListView) v.findViewById(R.id.follow_tab_scheme_expandable_list_view_scheme);
+        ExpandableListView schemeExpandableListView = v.findViewById(R.id.follow_tab_scheme_expandable_list_view_scheme);
 
 //        RoundSchemeAdapter rsAdapter = new RoundSchemeAdapter(v.getContext(), pouleScheme);
 

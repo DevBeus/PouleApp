@@ -42,17 +42,17 @@ public class TournamentSettingsActivity extends AppCompatActivity {
 
         setTitle(getResources().getString(R.string.menu_tournament_settings_text));
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.tournament_settings_edit_text_tournament_name);
+        TextView tvTournamentName = findViewById(R.id.tournament_settings_edit_text_tournament_name);
         tvTournamentName.setText(tournament.getTournamentName());
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
+        TextView tvTournamentLocation = findViewById(R.id.tournament_settings_edit_text_location);
         tvTournamentLocation.setText(tournament.getLocation());
 
-        selectDateButton = (Button) findViewById(R.id.tournament_settings_button_select_date);
+        selectDateButton = findViewById(R.id.tournament_settings_button_select_date);
 
         if (!tournament.getDate().equals("")) { selectDateButton.setText(tournament.getDate());}
 
-        Switch switchCompetition = (Switch) findViewById(R.id.tournament_settings_switch_competition);
+        Switch switchCompetition = findViewById(R.id.tournament_settings_switch_competition);
         switchCompetition.setChecked(tournament.isFullCompetition());
 
         //hide soft keyboard
@@ -78,16 +78,16 @@ public class TournamentSettingsActivity extends AppCompatActivity {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
 
-        TextView tvTournamentName = (TextView) findViewById(R.id.tournament_settings_edit_text_tournament_name);
+        TextView tvTournamentName = findViewById(R.id.tournament_settings_edit_text_tournament_name);
         String name = tvTournamentName.getText().toString().trim();
 
-        TextView tvTournamentLocation = (TextView) findViewById(R.id.tournament_settings_edit_text_location);
+        TextView tvTournamentLocation = findViewById(R.id.tournament_settings_edit_text_location);
         String location = tvTournamentLocation.getText().toString().trim();
 
-        Button btnTournamentSelectDate = (Button) findViewById(R.id.tournament_settings_button_select_date);
+        Button btnTournamentSelectDate = findViewById(R.id.tournament_settings_button_select_date);
         String date = btnTournamentSelectDate.getText().toString();
 
-        Switch switchCompetition = (Switch) findViewById(R.id.tournament_settings_switch_competition);
+        Switch switchCompetition = findViewById(R.id.tournament_settings_switch_competition);
 
         tournament.setTournamentName(name);
         tournament.setLocation(location);

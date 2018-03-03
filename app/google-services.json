@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "750245720087",
+    "firebase_url": "https://cupappfirebase.firebaseio.com",
+    "project_id": "cupappfirebase",
+    "storage_bucket": "cupappfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750245720087:android:c0f2933eb710b77c",
+        "android_client_info": {
+          "package_name": "com.example.pouleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750245720087-n2e9bbi7oqrh81hictjkfu53gb9qkvbj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pouleapp",
+            "certificate_hash": "1f676655e312175a329ebb5b6804799c80fd318a"
+          }
+        },
+        {
+          "client_id": "750245720087-i500sbt22ite5pk61nr2c5rh8r47cmfj.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "750245720087-lr7gbt15qe47b6cu96ba8nlnkhhso948.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqQ9DfeefK_z4qWJgXMz87cGbOIQfUNzQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750245720087-i500sbt22ite5pk61nr2c5rh8r47cmfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

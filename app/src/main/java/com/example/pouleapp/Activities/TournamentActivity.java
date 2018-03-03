@@ -54,6 +54,9 @@ public class TournamentActivity extends AppCompatActivity {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
         Tournament tournament = globalVariable.getTournament();
 
+
+        TextView tvTournamentName = findViewById(R.id.tournament_text_view_tournament_edit_name);
+        tvTournamentName.setText(tournament.getTournamentName());
         setTitle(getResources().getString(R.string.menu_tournament_name_text) + tournament.getTournamentName());
         //globalVariable.initPouleList();
         pouleList = tournament.getPouleList();
@@ -65,7 +68,7 @@ public class TournamentActivity extends AppCompatActivity {
     }
 
     private void initListView(ArrayList<Poule> list) {
-        SwipeMenuListView listView=(SwipeMenuListView)findViewById(R.id.tournament_list_view_poules);
+        SwipeMenuListView listView= findViewById(R.id.tournament_list_view_poules);
         listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
@@ -198,10 +201,10 @@ public class TournamentActivity extends AppCompatActivity {
 //
 //                startActivity(intent);
 
-            case R.id.action_settings:
-                intent = new Intent(this, TournamentSettingsActivity.class);
-
-                startActivity(intent);
+//            case R.id.action_settings:
+//                intent = new Intent(this, TournamentSettingsActivity.class);
+//
+//                startActivity(intent);
 
         }
         return super.onOptionsItemSelected(item);
@@ -226,7 +229,7 @@ public class TournamentActivity extends AppCompatActivity {
                 final ViewGroup nullParent = null; // introduced to avoid warning
 
                 convertView=getLayoutInflater().inflate(R.layout.list_item, nullParent);
-                holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
+                holder.mTextview= convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
 
@@ -259,7 +262,7 @@ public class TournamentActivity extends AppCompatActivity {
         // set dialog_enter_poule_name.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText etPouleName = (EditText) DialogView.findViewById(R.id.dialog_enter_poule_name_edit_text_poule_name);
+        final EditText etPouleName = DialogView.findViewById(R.id.dialog_enter_poule_name_edit_text_poule_name);
 
         alertDialogBuilder
                 .setCancelable(false)
@@ -377,5 +380,11 @@ public class TournamentActivity extends AppCompatActivity {
 
     }
 
+    public void editTournament(View view) {
+        Intent intent = new Intent(this, TournamentSettingsActivity.class);
+
+        startActivity(intent);
+
+    }
 
 }

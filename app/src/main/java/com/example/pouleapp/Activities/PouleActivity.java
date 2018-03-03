@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -67,8 +66,8 @@ public class PouleActivity extends AppCompatActivity {
 
         setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
 
-        EditText etPouleName = (EditText) findViewById(R.id.poule_edit_text_poule_name);
-        etPouleName.setText(poule.getPouleName());
+        TextView tvPouleName = findViewById(R.id.poule_text_view_edit_poule_name);
+        tvPouleName.setText(poule.getPouleName());
 
         teamList = poule.getTeamList();
 
@@ -84,36 +83,8 @@ public class PouleActivity extends AppCompatActivity {
             case android.R.id.home:
                 navigateUpTo(new Intent(this, TournamentActivity.class));
                 return true;
-            case R.id.action_save:
-                final GlobalData globalVariable = (GlobalData) getApplicationContext();
-                Tournament tournament = globalVariable.getTournament();
-
-                EditText etPouleName = (EditText) findViewById(R.id.poule_edit_text_poule_name);
-                String pouleName = etPouleName.getText().toString().trim();
-
-                ArrayList<Poule> pouleList = tournament.getPouleList();
-                Poule poule = pouleList.get(mPoule_Index);
-
-                //Check whether new poule name already exists
-                boolean found = false;
-
-                for (int i=0; i < pouleList.size(); i++) {
-                    if ((pouleList.get(i).getPouleName().equals(pouleName)) && (mPoule_Index !=i)) { found = true; }
-                }
-
-                if ( !found ) {
-                    poule.setPouleName(pouleName);
-                    globalVariable.saveTournament();
-
-                    InputMethodManager inputManager = (InputMethodManager) getSystemService(this.INPUT_METHOD_SERVICE);
-                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-
-                    setTitle(getResources().getString(R.string.menu_poule_name_text) + poule.getPouleName());
-                } else {
-                    String message = getResources().getString(R.string.toast_message_poule_name_twice);
-                    Toast.makeText(getApplicationContext(), pouleName + message, Toast.LENGTH_LONG).show();
-                }
-
+            case R.id.action_help:
+                Toast.makeText(getApplicationContext(), "Start Help Activity", Toast.LENGTH_LONG).show();
 
         }
         return super.onOptionsItemSelected(item);
@@ -121,14 +92,14 @@ public class PouleActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_save, menu);
+        getMenuInflater().inflate(R.menu.menu_help, menu);
 
         return true;
     }
 
 
     private void initListView(ArrayList<Team> list) {
-        SwipeMenuListView listView=(SwipeMenuListView)findViewById(R.id.poule_list_view_teams);
+        SwipeMenuListView listView= findViewById(R.id.poule_list_view_teams);
         listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
@@ -248,7 +219,7 @@ public class PouleActivity extends AppCompatActivity {
                 final ViewGroup nullParent = null; // introduced to avoid warning
 
                 convertView=getLayoutInflater().inflate(R.layout.list_item, nullParent);
-                holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
+                holder.mTextview= convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
 
@@ -269,6 +240,76 @@ public class PouleActivity extends AppCompatActivity {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,getResources().getDisplayMetrics());
     }
 
+    public void editPouleName(View view) {
+        // get dialog_enter_poule_name.xml view
+        LayoutInflater li = LayoutInflater.from(mContext);
+        final ViewGroup nullParent = null; // introduced to avoid warning
+
+        View DialogView = li.inflate(R.layout.dialog_enter_poule_name, nullParent);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+
+        // set dialog_enter_poule_name.xml to alertdialog builder
+        alertDialogBuilder.setView(DialogView);
+
+        final EditText etPouleName = DialogView.findViewById(R.id.dialog_enter_poule_name_edit_text_poule_name);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and create new poule
+                                final GlobalData globalVariable = (GlobalData) getApplicationContext();
+                                Tournament tournament = globalVariable.getTournament();
+                                ArrayList<Poule> pouleList = tournament.getPouleList();
+
+                                //Check whether new poule name already exists
+                                boolean found = false;
+                                String pouleName = etPouleName.getText().toString().trim();
+
+                                for (int i=0; i < pouleList.size(); i++) {
+                                    if ((pouleList.get(i).getPouleName().equals(pouleName))) { found = true; }
+                                }
+
+                                if ( !found ) {
+                                    pouleList.get(mPoule_Index).setPouleName(pouleName);
+
+                                    globalVariable.saveTournament();
+                                }
+                                else {
+                                    String message = getResources().getString(R.string.toast_message_poule_name_twice);
+                                    Toast.makeText(getApplicationContext(), pouleName + message, Toast.LENGTH_LONG).show();
+                                }
+
+
+                                globalVariable.saveTournament();
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        })
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                          // Needed to refresh listView after update
+                                          @Override
+                                          public void onDismiss(DialogInterface dialog) {
+                                              recreate();
+                                          }
+                                      }
+                );
+
+        // create alert enter_tournament_dialog.xml
+        AlertDialog EnterTournamentNameDialog = alertDialogBuilder.create();
+
+        // show it
+        EnterTournamentNameDialog.show();
+
+    }
+
+
     public void addTeam(View view) {
         // get dialog_enter_team_name.xml view
         LayoutInflater li = LayoutInflater.from(mContext);
@@ -281,7 +322,7 @@ public class PouleActivity extends AppCompatActivity {
         // set dialog_enter_team_name.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText inputTeamName = (EditText) DialogView.findViewById(R.id.dialog_enter_team_name_edit_text_team_name);
+        final EditText inputTeamName = DialogView.findViewById(R.id.dialog_enter_team_name_edit_text_team_name);
 
         alertDialogBuilder
                 .setCancelable(false)
@@ -338,5 +379,6 @@ public class PouleActivity extends AppCompatActivity {
         EnterTournamentNameDialog.show();
 
     }
+
 }
 

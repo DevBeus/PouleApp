@@ -56,7 +56,7 @@ public class TabScheme extends Fragment {
         View v = inflater.inflate(R.layout.tab_scheme, container, false);
 
         //  initiate the expandable list view
-        ExpandableListView schemeExpandableListView = (ExpandableListView) v.findViewById(R.id.tab_scheme_expandable_list_view_scheme);
+        ExpandableListView schemeExpandableListView = v.findViewById(R.id.tab_scheme_expandable_list_view_scheme);
 
         RoundSchemeAdapter rsAdapter = new RoundSchemeAdapter(v.getContext(), pouleScheme);
 

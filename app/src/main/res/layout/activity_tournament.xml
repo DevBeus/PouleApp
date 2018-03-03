@@ -10,18 +10,6 @@
 
     tools:context="com.example.pouleapp.Activities.TournamentActivity">
 
-    <TextView
-        android:id="@+id/tournament_text_view_intro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/tournament_text_view_intro"
-        android:layout_marginStart="8dp"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp" />
-
 
     <TextView
         android:id="@+id/tournament_text_view_poule_list_view_header"
@@ -29,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         android:text="@string/tournament_text_view_poule_list_view_header"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -46,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.24" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/tournament_list_view_poules"
@@ -91,6 +78,42 @@
         android:onClick="publishTournamentDialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_share" />
+        app:srcCompat="@android:drawable/ic_menu_share"
+        android:focusable="true" />
+
+    <TextView
+        android:id="@+id/tournament_text_view_tournament_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/tournament_text_view_tournament_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tournament_text_view_tournament_edit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/cardview_light_background"
+        android:text="Name"
+        app:layout_constraintStart_toEndOf="@+id/tournament_text_view_tournament_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/tournament_image_button_edit_tournament"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:onClick="editTournament"
+        android:tint="@color/colorBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_edit_48dp"
+        android:contentDescription="TODO" />
 
 </android.support.constraint.ConstraintLayout>

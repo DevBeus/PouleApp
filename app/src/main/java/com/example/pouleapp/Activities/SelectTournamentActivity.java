@@ -59,22 +59,22 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_tournament);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
-        TextView tvUser = (TextView) header.findViewById(R.id.nav_header_select_tournament_text_view_user);
-        TextView tvEmail = (TextView) header.findViewById(R.id.nav_header_select_tournament_text_view_email);
+        TextView tvUser = header.findViewById(R.id.nav_header_select_tournament_text_view_user);
+        TextView tvEmail = header.findViewById(R.id.nav_header_select_tournament_text_view_email);
 
         mFBAuth = FirebaseAuth.getInstance();
         mFBUser = mFBAuth.getCurrentUser();
@@ -103,7 +103,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -130,7 +130,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -157,7 +157,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -179,7 +179,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
     private void initListView(List<String> list) {
         SwipeMenuListView listView;
 
-        listView=(SwipeMenuListView)findViewById(R.id.select_tournament_list_view_tournaments);
+        listView= findViewById(R.id.select_tournament_list_view_tournaments);
         listView.setSwipeDirection(SwipeMenuListView.DIRECTION_LEFT);
 
         for (int i=0;i<list.size();i++){
@@ -304,7 +304,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
                 final ViewGroup nullParent = null; // introduced to avoid warning
 
                 convertView=getLayoutInflater().inflate(R.layout.list_item,nullParent);
-                holder.mTextview=(TextView)convertView.findViewById(R.id.list_item_text_view_1);
+                holder.mTextview= convertView.findViewById(R.id.list_item_text_view_1);
 
                 convertView.setTag(holder);
 
@@ -337,7 +337,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
         // set enter_tournament_dialog.xml to alertdialog builder
         alertDialogBuilder.setView(DialogView);
 
-        final EditText etTournamentName = (EditText) DialogView.findViewById(R.id.dialog_enter_tournament_name_edit_text_tournament_name);
+        final EditText etTournamentName = DialogView.findViewById(R.id.dialog_enter_tournament_name_edit_text_tournament_name);
 
         alertDialogBuilder
                 .setCancelable(false)
