@@ -82,7 +82,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
         //Now check if this user is null
         if (mFBUser == null){
             //send user to the login page
-            startActivity(new Intent(this, AuthUIActivity.class));
+            startActivity(new Intent(this, WelcomeActivity.class));
             return;
         } else {
             mUserName = mFBUser.getDisplayName();
@@ -138,7 +138,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
             // Handle log out
             mFBAuth.signOut();
 
-            Intent intent = new Intent(this, AuthUIActivity.class);
+            Intent intent = new Intent(this, WelcomeActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_delete_account) {

@@ -50,13 +50,19 @@ public class AuthUIActivity extends AppCompatActivity {
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
                         .setLogo(R.drawable.welcome)
-                        .setAvailableProviders(
-                                Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-                                        //new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
-                                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+                        .setAvailableProviders(Arrays.asList(
+                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                new AuthUI.IdpConfig.GoogleBuilder().build(),
+                                new AuthUI.IdpConfig.FacebookBuilder().build()))
+
+//                        .setAvailableProviders(
+//                                Arrays.asList(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
+//                                        new AuthUI.IdpConfig.Builder(AuthUI.FACEBOOK_PROVIDER).build(),
+//                                        new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build()))
+
                         .setTosUrl(GOOGLE_TOS_URL)
                         .setIsSmartLockEnabled(true, true)
-                        .setAllowNewEmailAccounts(true)
+//                        .setAllowNewEmailAccounts(true)
                         .build(),
                 RC_SIGN_IN);
 
@@ -88,12 +94,12 @@ public class AuthUIActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
                     showToast(getString(R.string.no_internet_connection));
                     return;
                 }
 
-                if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                if (response.getError().getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
                     showToast(getString(R.string.unknown_error));
                     return;
                 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CupAppFirebase.iml" filepath="$PROJECT_DIR$/CupAppFirebase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CupApp.iml" filepath="$PROJECT_DIR$/CupApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

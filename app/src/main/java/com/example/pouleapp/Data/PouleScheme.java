@@ -251,6 +251,40 @@ public class PouleScheme {
             mRoundScheme[r] = new Round(r,matchList);
         }
 
+        // alternate home and away matches per team, only needed when #rounds > 1
+
+        if (pSize > 2) { //mRoundScheme.length > 1, wrong for full competition
+            boolean[] prev_match_home = new boolean[mPouleSize];
+            prev_match_home[0] = true; // when odd poule size, first team will start with a free game and will not appear in the match list. For better alternation of games, this is considered home game
+
+            int[][] matchList = mRoundScheme[1].getMatchList(); // initialize prev_match_home trough first round
+            int n = 0;
+
+            for (int i = 0; i < matchList.length; i++) {
+                prev_match_home[matchList[i][0]] = true;
+                prev_match_home[matchList[i][1]] = false;
+            }
+
+            for (int r=2; r < pSize; r++) { //was r<mRoundScheme.length, but wrong for full competition
+                matchList = mRoundScheme[r].getMatchList();
+
+                for (int i = 0; i < matchList.length; i++) {
+                    if (prev_match_home[matchList[i][0]]) {
+                        //swap home and opponent
+                        int temp = matchList[i][0];
+                        matchList[i][0] = matchList[i][1];
+                        matchList[i][1] = temp;
+                    }
+
+                    prev_match_home[matchList[i][0]] = true;
+                    prev_match_home[matchList[i][1]] = false;
+
+                }
+            }
+
+        }
+
+
 
         if (mFullCompetition) {
             // Copy first half of competition with swapping home and opponent team
