@@ -42,7 +42,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:inputType="textPersonName"
         android:text="@string/tournament_settings_text_view_location"
         app:layout_constraintBaseline_toBaselineOf="@+id/follow_tournament_info_text_view_location_show"
         app:layout_constraintStart_toStartOf="parent" />
