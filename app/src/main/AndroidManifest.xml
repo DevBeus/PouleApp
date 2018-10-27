@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pouleapp">
 
     <application
-        android:name="com.example.pouleapp.Data.GlobalData"
+        android:name="com.example.pouleapp.data.GlobalData"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/cup_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activities.WelcomeActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,30 +20,30 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activities.AuthUIActivity" />
-        <activity android:name=".Activities.SelectTournamentActivity"
+        <activity android:name=".activities.AuthUIActivity" />
+        <activity android:name=".activities.SelectTournamentActivity"
             android:theme="@style/AppThemeNoActionBar"/>
         <activity
-            android:name=".Activities.TournamentActivity"
+            android:name=".activities.TournamentActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".Activities.TournamentSettingsActivity" />
+        <activity android:name=".activities.TournamentSettingsActivity" />
         <activity
-            android:name=".Activities.PouleActivity"
+            android:name=".activities.PouleActivity"
             android:windowSoftInputMode="adjustNothing" />
-        <activity android:name=".Activities.PouleSettingsActivity" />
-        <activity android:name=".Activities.EditTeamActivity" />
-        <activity android:name=".Activities.EditMatchActivity" />
+        <activity android:name=".activities.PouleSettingsActivity" />
+        <activity android:name=".activities.EditTeamActivity" />
+        <activity android:name=".activities.EditMatchActivity" />
         <activity
-            android:name=".Activities.SchemeRankingActivity"
+            android:name=".activities.SchemeRankingActivity"
             android:theme="@style/AppThemeNoActionBar" />
 
-        <activity android:name=".Activities.FollowTournamentActivity"
+        <activity android:name=".activities.FollowTournamentActivity"
             android:windowSoftInputMode="adjustNothing"
             android:theme="@style/AppThemeNoActionBar"/>
 
-        <activity android:name=".Activities.FollowTournamentInfoActivity" />
-        <activity android:name=".Activities.FollowTournamentResultsActivity" />
-        <activity android:name=".Activities.FollowSchemeRankingActivity"
+        <activity android:name=".activities.FollowTournamentInfoActivity" />
+        <activity android:name=".activities.FollowTournamentResultsActivity" />
+        <activity android:name=".activities.FollowSchemeRankingActivity"
             android:theme="@style/AppThemeNoActionBar" />
     </application>
 

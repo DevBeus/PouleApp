@@ -6,6 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root"
-    tools:context="com.example.pouleapp.Activities.AuthUIActivity">
+    tools:context="com.example.pouleapp.activities.AuthUIActivity">
 
 </android.support.constraint.ConstraintLayout>
