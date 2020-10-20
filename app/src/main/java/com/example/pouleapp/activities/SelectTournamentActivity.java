@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -144,7 +144,7 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
         } else if (id == R.id.nav_delete_account) {
             // handle delete account
 
-            new android.support.v7.app.AlertDialog.Builder(this)
+            new androidx.appcompat.app.AlertDialog.Builder(this)
                     .setMessage("Are you sure you want to delete this account?")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -348,7 +348,6 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
 
                                 final GlobalData globalVariable = (GlobalData) getApplicationContext();
                                 globalVariable.addTournament(etTournamentName.getText().toString().trim());
-                                globalVariable.saveAppData();
                              }
                         })
                 .setNegativeButton("Cancel",
@@ -375,10 +374,8 @@ public class SelectTournamentActivity extends AppCompatActivity implements Navig
 
     public void deleteTournament(int pos) {
         final GlobalData globalVariable = (GlobalData) getApplicationContext();
-//        ArrayList<String> tournamentIDList = globalVariable.getTournamentIDList();
 
         globalVariable.deleteTournament(pos);
-        globalVariable.saveAppData();
 
         recreate();
     }

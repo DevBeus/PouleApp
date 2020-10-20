@@ -2,7 +2,7 @@ package com.example.pouleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -118,7 +118,7 @@ public class EditMatchActivity extends AppCompatActivity {
 
         pouleScheme.updateMatch(teamList,x,y,hs,os);
 
-        globalVariable.savePoule(poule);
+        globalVariable.saveTournament();
 
         Intent intent = new Intent(this, SchemeRankingActivity.class);
         intent.putExtra(POULE_INDEX, mPoule_Index);

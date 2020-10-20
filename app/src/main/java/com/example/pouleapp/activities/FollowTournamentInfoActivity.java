@@ -2,7 +2,7 @@ package com.example.pouleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +48,7 @@ public class FollowTournamentInfoActivity extends AppCompatActivity{
         setContentView(R.layout.activity_follow_tournament_info);
 
         // Show the Up button in the action bar.
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

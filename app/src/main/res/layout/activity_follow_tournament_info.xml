@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +11,7 @@
     tools:context="com.example.pouleapp.activities.FollowTournamentInfoActivity">
 
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/follow_tournament_info_vertical_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="@+id/follow_tournament_info_vertical_guideline"
         app:layout_constraintTop_toBottomOf="@+id/follow_tournament_info_text_view_location_show" />
 
-    <android.support.constraint.Guideline
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/follow_tournament_info_guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,4 +97,4 @@
         app:layout_constraintTop_toTopOf="@+id/follow_tournament_info_guideline" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

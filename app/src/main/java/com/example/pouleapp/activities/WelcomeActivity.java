@@ -2,10 +2,11 @@ package com.example.pouleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.pouleapp.R;
+import com.google.firebase.FirebaseApp;
 
 import static com.example.pouleapp.data.GlobalData.ACTIVITY_FOLLOW_TOURNAMENT;
 import static com.example.pouleapp.data.GlobalData.ACTIVITY_SELECT_TOURNAMENT;
@@ -22,6 +23,8 @@ public class WelcomeActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        FirebaseApp.initializeApp(this);
 
     }
 

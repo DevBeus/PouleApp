@@ -2,7 +2,7 @@ package com.example.pouleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.example.pouleapp.R;
@@ -29,7 +29,6 @@ public class AuthUIActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_ui);
-
 
         mFBAuth = FirebaseAuth.getInstance();
         mFBUser = mFBAuth.getCurrentUser();

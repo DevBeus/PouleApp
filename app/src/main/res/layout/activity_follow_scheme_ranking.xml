@@ -9,7 +9,7 @@
     tools:context=".activities.FollowSchemeRankingActivity">
 
     <!-- our toolbar -->
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/follow_scheme_ranking_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <!-- our tablayout to display tabs  -->
-    <android.support.design.widget.TabLayout
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/follow_scheme_ranking_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <!-- View pager to swipe views -->
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/follow_scheme_ranking_view_pager"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"/>

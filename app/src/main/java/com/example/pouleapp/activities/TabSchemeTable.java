@@ -3,8 +3,8 @@ package com.example.pouleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.core.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;

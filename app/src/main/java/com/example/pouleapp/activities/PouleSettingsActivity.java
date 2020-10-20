@@ -2,7 +2,7 @@ package com.example.pouleapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -34,7 +34,7 @@ public class PouleSettingsActivity extends AppCompatActivity {
         mPoule_Index = intent.getIntExtra(POULE_INDEX,0);
 
         // Show the Up button in the action bar.
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
